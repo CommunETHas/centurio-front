@@ -3,6 +3,7 @@
 ### Prepare project
 
 Run `yarn install`.
+
 Run `yarn prepare`.
 
 ### Development
