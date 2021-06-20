@@ -2,10 +2,10 @@ name: Deploy
 
 on:
   workflow_run:
-    workflows: ['Build']
-    branches: [master]
+    workflows: ['Quality']
     types:
       - completed
+    branches: [master]
 
 jobs:
   build:
@@ -14,6 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build application
+        run: yarn build
 
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
