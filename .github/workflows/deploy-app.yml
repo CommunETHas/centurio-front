@@ -5,7 +5,9 @@ on:
     workflows: ['Quality']
     types:
       - completed
-    branches: [master, develop]
+    branches:
+      - master
+      - develop
 
 jobs:
   build:
