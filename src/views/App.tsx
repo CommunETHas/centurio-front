@@ -1,10 +1,10 @@
-import React, { lazy, ReactElement, Suspense } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import LoadingOrError from "../components/Utils/LoadingOrError";
+import React, { lazy, ReactElement, Suspense } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import LoadingOrError from '../components/Utils/LoadingOrError';
 
-const OnBoardingView = lazy(() => import("./OnBoarding/OnBoardingView"));
-const HomeView = lazy(() => import("./Home/HomeView"));
-const NoMatchView = lazy(() => import("../components/Utils/NoMatchView"));
+const OnBoardingView = lazy(() => import('./OnBoarding/OnBoardingView'));
+const HomeView = lazy(() => import('./Home/HomeView'));
+const NoMatchView = lazy(() => import('../components/Utils/NoMatchView'));
 
 export default function App(): ReactElement {
   return (

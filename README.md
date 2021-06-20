@@ -1,3 +1,7 @@
+![Quality](https://github.com/CenturioHackMoney21/centurio-front/workflows/Quality/badge.svg)
+![Build](https://github.com/CenturioHackMoney21/centurio-front/workflows/Build/badge.svg)
+![Deploy](https://github.com/CenturioHackMoney21/centurio-front/workflows/Deploy/badge.svg)
+
 # Centurio - HackMoney2021
 
 ### Prepare project

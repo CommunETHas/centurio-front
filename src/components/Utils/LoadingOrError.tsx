@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement } from 'react';
 
 interface Properties {
   error?: Error;
@@ -6,7 +6,7 @@ interface Properties {
 export default function LoadingOrError({ error }: Properties): ReactElement {
   return (
     <div className="min-h-screen mx-auto flex items-center justify-center">
-      <h1 className="text-xl">{error ? error.message : "Loading..."}</h1>
+      <h1 className="text-xl">{error ? error.message : 'Loading...'}</h1>
     </div>
   );
 }
