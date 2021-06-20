@@ -1,13 +1,12 @@
-name: Test
+name: Quality
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - '**'
 
 jobs:
-  build:
+  quality-gate:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,8 +32,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build
-        run: yarn build
+      - name: Lint
+        run: yarn lint
 
       - name: Test
         run: yarn test:headless

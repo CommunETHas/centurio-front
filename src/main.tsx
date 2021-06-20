@@ -1,8 +1,8 @@
-import App from "components/App";
-import React from "react";
-import ReactDOM from "react-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import App from 'views/App';
+import './index.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,5 +18,5 @@ ReactDOM.render(
       <App />
     </QueryClientProvider>
   </React.StrictMode>,
-  document.querySelector("#root")
+  document.querySelector('#root'),
 );
