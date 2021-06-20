@@ -5,9 +5,13 @@ on:
     workflows: ['Quality']
     types:
       - completed
+  push:
     branches:
       - master
       - develop
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
