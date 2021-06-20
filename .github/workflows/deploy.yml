@@ -5,7 +5,7 @@ on:
     workflows: ['Quality']
     types:
       - completed
-    branches: [master]
+    branches: [master, develop]
 
 jobs:
   build:
@@ -22,10 +22,7 @@ jobs:
         run: yarn build
 
       - name: Deploy to netlify
-        uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: deploy --dir=build --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+        run: netlify deploy --dir=dist --prod
