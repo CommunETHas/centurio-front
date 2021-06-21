@@ -1,5 +1,5 @@
 import React, { lazy, ReactElement, Suspense } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoadingOrError from '../components/Utils/LoadingOrError';
 
 const OnBoardingView = lazy(() => import('./OnBoarding/OnBoardingView'));
@@ -8,7 +8,7 @@ const NoMatchView = lazy(() => import('../components/Utils/NoMatchView'));
 
 export default function App(): ReactElement {
   return (
-    <HashRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Suspense fallback={<LoadingOrError />}>
         <Switch>
           <Route exact path="/" component={OnBoardingView} />
@@ -16,6 +16,6 @@ export default function App(): ReactElement {
           <Route path="*" component={NoMatchView} />
         </Switch>
       </Suspense>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
