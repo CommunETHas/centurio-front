@@ -14,7 +14,7 @@ on:
       - master
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,10 +27,8 @@ jobs:
       - name: Build application
         run: yarn build
 
-      - name: Deploy to netlify
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          args: deploy --dir=dist
+          branch: gh-pages
+          folder: dist
