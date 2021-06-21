@@ -8,12 +8,12 @@ const NoMatchView = lazy(() => import('../components/Utils/NoMatchView'));
 
 export default function App(): ReactElement {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename="/centurio-front">
       <Suspense fallback={<LoadingOrError />}>
         <Switch>
           <Route exact path="/" component={OnBoardingView} />
           <Route exact path="/home" component={HomeView} />
-          <Route path="*" component={NoMatchView} />
+          <Route component={NoMatchView} />
         </Switch>
       </Suspense>
     </BrowserRouter>
