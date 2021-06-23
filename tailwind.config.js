@@ -18,6 +18,12 @@ module.exports = {
       secondary: '#20252E',
       ternary: '#BE7E7E',
     },
+    borderRadius: {
+      sm: '0.125rem',
+      md: '0.375rem',
+      lg: '2rem',
+      full: '9999px',
+    },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
