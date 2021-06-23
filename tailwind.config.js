@@ -69,6 +69,7 @@ module.exports = {
         divbg: '70rem',
         title: '26rem',
         'button-started': '26rem',
+        '1/3': '33%',
       },
       translate: {
         90: '-20rem',
@@ -76,6 +77,10 @@ module.exports = {
       },
       rotate: {
         60: '-60deg',
+      },
+      gap: {
+        11: '2.75rem',
+        13: '3.25rem',
       },
     },
   },
