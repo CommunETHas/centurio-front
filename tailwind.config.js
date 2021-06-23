@@ -69,7 +69,6 @@ module.exports = {
         divbg: '70rem',
         title: '26rem',
         'button-started': '26rem',
-        '1/3': '33%',
       },
       translate: {
         90: '-20rem',
