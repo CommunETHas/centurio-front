@@ -6,10 +6,10 @@ export default function HomeView() {
       <section className="relative h-full bg-primary grid grid-cols-2">
         <div className="m-auto" />
         <div className="m-auto w-title grid">
-          <span className="text-title-home text-primary font-bold">
+          <span className="text-title-home text-secondary font-bold">
             Find the right covers
           </span>
-          <span className="text-title-home text-primary font-bold ">
+          <span className="text-title-home text-secondary font-bold ">
             considering your
           </span>
           <span className="text-title-home text-ternary mb-10">
@@ -24,11 +24,11 @@ export default function HomeView() {
             <button
               type="button"
               onClick={() => console.log('test')}
-              className="absolute text-button-text font-bold z-10 bg-secondary focus:outline-none h-button-started w-button-started border border-white-500 text-xs text-secondary font-bold rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+              className="absolute text-button-text font-bold z-10 bg-secondary focus:outline-none h-button-started w-button-started border border-white text-xs text-primary font-bold rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
             >
               Get started
             </button>
-            <div className=" bg-transparent focus:outline-none h-button-started w-button-started border border-white-500 rounded-full transform translate-x-3 translate-y-3" />
+            <div className=" bg-transparent focus:outline-none h-button-started w-button-started border border-white rounded-full transform translate-x-3 translate-y-3" />
           </div>
         </div>
         {/* <div className="z-10 absolute transform translate-y-20 translate-x-100 rotate-45 h-divbg w-divbg bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary"></div> */}

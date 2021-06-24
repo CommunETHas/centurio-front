@@ -7,9 +7,14 @@ export default function Dashboard() {
   return (
     <main className="w-screen bg-primary h-screen overflow-auto">
       <div className="w-full flex justify-center my-20">
-        <span className="text-primary font-bold">COVERS RECOMMENDATIONS</span>
+        <div className='flex flex-col'>
+          <span className="text-secondary font-bold text-xl">COVERS RECOMMENDATIONS</span>
+          <div className='mt-3 px-8 w-full flex flex-row'>
+            <div className='w-full h-0.5 bg-secondary' />
+          </div>
+        </div>
       </div>
-      <div className="w-full grid gap-x-32 gap-y-32 grid-cols-3 px-32">
+      <div className="w-full grid gap-x-32 gap-y-32 xl:grid-cols-2 2xl:grid-cols-3 px-20">
         {componentList}
       </div>
     </main>

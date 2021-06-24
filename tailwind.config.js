@@ -9,10 +9,12 @@ module.exports = {
   theme: {
     colors: {
       base: '#1EAB89',
-      gray: colors.coolGray,
-      blue: colors.lightBlue,
-      red: colors.rose,
-      pink: colors.fuchsia,
+      white: '#FFFFFF',
+      primary: '#20252E',
+      secondary: '#20252E',
+      ternary: '#BE7E7E',
+    },
+    borderColor:{
       white: '#FFFFFF',
       primary: '#20252E',
       secondary: '#20252E',
@@ -28,6 +30,13 @@ module.exports = {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
+    textColor: {
+      primary: '#20252E',
+      secondary: '#FFFFFF',
+      ternary: '#BE7E7E',
+      comment: '#A5A5A5',
+    },
+
     extend: {
       backgroundColor: (theme) => ({
         ...theme('colors'),
@@ -40,12 +49,6 @@ module.exports = {
         primary: '#20252E',
         secondary: '#20252E',
         ternary: '#BE7E7E',
-      },
-      textColor: {
-        primary: '#FFFFFF',
-        secondary: '#20252E',
-        ternary: '#BE7E7E',
-        comment: '#A5A5A5',
       },
       fontSize: {
         'title-home': [
