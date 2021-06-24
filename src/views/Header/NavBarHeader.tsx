@@ -16,7 +16,7 @@ export default function NavbarHeader() {
         <div className="h-7 w-40">
           <button
             type="button"
-            onClick={() => console.log('test')}
+            onClick={() => {window.location.replace('/dashboard')}}
             className="absolute z-10 bg-secondary focus:outline-none h-7 w-40 border border-white text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
           >
             Connect your wallet

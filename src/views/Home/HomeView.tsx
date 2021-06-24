@@ -23,7 +23,7 @@ export default function HomeView() {
           <div className="h-button-started w-button-started">
             <button
               type="button"
-              onClick={() => console.log('test')}
+              onClick={() => {window.location.replace('/dashboard')}}
               className="absolute text-button-text font-bold z-10 bg-secondary focus:outline-none h-button-started w-button-started border border-white text-xs text-primary font-bold rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
             >
               Get started
