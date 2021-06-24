@@ -9,7 +9,7 @@ export default function NavbarHeader() {
       <nav className="z-20 flex items-center justify-between flex-wrap bg-teal p-3 bg-primary">
         <div className="flex items-center flex-no-shrink text-primary mr-6">
           <img className="h-20" src={Logo} alt="centurio" />
-          <span className="font-semibold text-3xl tracking-tight p-3">
+          <span className="font-semibold text-3xl text-secondary tracking-tight p-3">
             Centurio
           </span>
         </div>
