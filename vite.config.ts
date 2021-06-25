@@ -7,6 +7,11 @@ export default defineConfig({
   build: {
     brotliSize: false,
   },
+  server: {
+    watch: {
+      usePolling: true
+    }
+  },
   plugins: [
     tsconfigPaths(),
     reactRefresh(),

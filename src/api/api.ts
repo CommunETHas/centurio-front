@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import Quote from './models/quote';
 
 const instance = axios.create({
-  baseURL: `http://localhost:8080/`
+  baseURL: `${import.meta.env.VITE_API_URL}`
 });
 
 const HttpRequest = {
