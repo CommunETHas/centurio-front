@@ -45,7 +45,7 @@
             "devDependencies": ["vite.config.ts"]
           }
         ],
-
+        "unicorn/prevent-abbreviations": "off",
         "unicorn/filename-case": [
           "error",
           {
