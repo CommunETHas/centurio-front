@@ -5,7 +5,7 @@ import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 
 export default function Dashboard() {
-  const { account } = useWeb3React<Web3Provider>();
+  const { account, active } = useWeb3React<Web3Provider>();
   const [recommendations, setRecommendations] = useState([]);
 
   const fethCoverRecommendations = async () => {
@@ -46,7 +46,17 @@ export default function Dashboard() {
             })}
           </>
         ) : (
-          <span className="text-secondary">You have no recommendations</span>
+          <>
+            {active ? (
+              <span className="text-secondary">
+                Sorry ! You have no recommendations based on your asset.
+              </span>
+            ) : (
+              <span className="text-secondary">
+                You must connect your wallet to view recommendations
+              </span>
+            )}
+          </>
         )}
       </div>
     </main>
