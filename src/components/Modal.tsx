@@ -1,57 +1,80 @@
-import React, {useContext} from "react";
+import React, {Fragment, useRef, useContext} from 'react'
+import {Dialog, Transition} from '@headlessui/react'
 import {GlobalContext} from '../context/GlobalContext'
-import Wallet from '../components/Wallet'
+import Wallet from './Wallet'
 
 export default function Modal() {
   const {openModal, setOpenModal} = useContext(GlobalContext);
 
+  const cancelButtonRef = useRef(null)
 
   return (
-      <>
-        {openModal && (
-            <>
+      <Transition.Root show={openModal} as={Fragment}>
+        <Dialog
+            as="div"
+            static
+            className="fixed z-50 inset-0 overflow-y-auto"
+            initialFocus={cancelButtonRef}
+            open={openModal}
+            onClose={setOpenModal}
+        >
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0 bg-primary bg-opacity-75 transition-opacity"/>
+            </Transition.Child>
+
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+            &#8203;
+          </span>
+            <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            >
               <div
-                  className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-              >
-                <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                  {/*content*/}
-                  <div
-                      className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                    {/*header*/}
-                    <div
-                        className="flex items-start justify-between p-5 rounded-t">
-                      <h3 className="text-3xl font-semibold">
+                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div className="sm:flex sm:items-start">
+                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <Dialog.Title as="h3" className="text-3xl leading-6 text-primary mb-10">
                         Select a Wallet
-                      </h3>
-                      <button
-                          className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                          onClick={() => setOpenModal(false)}
-                      >
-                    <span
-                        className="bg-transparent text-ternary h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      ×
-                    </span>
-                      </button>
-                    </div>
-                    <h3 className="text-xl pl-5">
-                      Please select a Wallet:
-                    </h3>
-                    {/*body*/}
-                    <div className="relative p-6 flex-auto">
-                      <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
-                        <Wallet />
-                      </p>
-                    </div>
-                    {/*footer*/}
-                    <div
-                        className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                      </Dialog.Title>
+                      <div className="mt-2">
+                        <p className="text-xl text-primary mb-10">
+                          Please select a wallet:
+                        </p>
+                      </div>
+                      <Wallet />
                     </div>
                   </div>
                 </div>
+                <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                  <button
+                      type="button"
+                      className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                      onClick={() => setOpenModal(false)}
+                      ref={cancelButtonRef}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-              <div className="opacity-25 fixed inset-0 z-40 bg-black"/>
-            </>
-        )}
-      </>
-  );
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition.Root>
+  )
 }
