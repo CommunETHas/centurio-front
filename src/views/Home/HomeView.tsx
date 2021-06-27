@@ -82,7 +82,7 @@ export default function HomeView() {
               src={SocrateLogo}
             />
           </div>
-           <div className="z-20 absolute transform translate-y-10 translate-x-90 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"></div>
+          <div className="z-20 absolute transform translate-y-10 translate-x-90 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"></div>
         </div>
       </section>
     </main>
