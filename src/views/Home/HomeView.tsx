@@ -49,7 +49,7 @@ export default function HomeView() {
 
         <div className="z-10 absolute transform translate-y-20 translate-x-100 rotate-45 h-divbg w-divbg bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary"></div>
       </section>
-      <section className="relative h-full bg-primary ">
+      <section className="relative h-full bg-primary overflow-hidden ">
         <div className="w-full flex justify-center pt-10 pb-12">
           <div className="flex flex-col">
             <span className="text-secondary font-bold text-3xl">
@@ -60,8 +60,8 @@ export default function HomeView() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2">
-          <div className="m-auto z-40 w-para">
+        <div className="grid grid-cols-2 h-full">
+          <div className="m-auto z-40 w-para mt-0">
             <img
               className="h-battle-logo mb-10 m-auto opacity-80"
               src={BattleLogo}
@@ -82,7 +82,7 @@ export default function HomeView() {
               src={SocrateLogo}
             />
           </div>
-          {/* <div className="z-20 absolute transform translate-y-80 translate-x-90 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"></div> */}
+           <div className="z-20 absolute transform translate-y-10 translate-x-90 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"></div>
         </div>
       </section>
     </main>

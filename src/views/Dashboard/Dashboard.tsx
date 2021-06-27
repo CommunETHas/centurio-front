@@ -35,15 +35,13 @@ export default function Dashboard() {
         {/* eslint-disable-next-line react/destructuring-assignment */}
         {recommendations.length > 0 ? (
           <>
-            {recommendations.map(({ cover }) => {
-              return (
-                <QuoteCard
-                  name={cover.name}
-                  logo={`https://app.nexusmutual.io/logos/${cover.logo}`}
-                  type={cover.type}
-                />
-              );
-            })}
+            {recommendations.map(({ cover }) => (
+              <QuoteCard
+                name={cover.name}
+                logo={`https://app.nexusmutual.io/logos/${cover.logo}`}
+                type={cover.type}
+              />
+            ))}
           </>
         ) : (
           <>
