@@ -1,11 +1,13 @@
 import reactRefresh from "@vitejs/plugin-react-refresh";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
+import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   build: {
     brotliSize: false,
+    sourcemap: true
   },
   server: {
     watch: {
@@ -13,6 +15,7 @@ export default defineConfig({
     }
   },
   plugins: [
+    esbuildCommonjs(['@web3-react/abstract-connector']),
     tsconfigPaths(),
     reactRefresh(),
     VitePWA({

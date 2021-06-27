@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useContext} from "react";
+import {GlobalContext} from '../../context/GlobalContext'
 
 export default function HomeView() {
+  const { setOpenModal } = useContext(GlobalContext);
+
   return (
     <main className="mb-auto h-screen overflow-auto">
       <section className="relative h-full bg-primary grid grid-cols-2">
@@ -13,7 +16,6 @@ export default function HomeView() {
             considering your
           </span>
           <span className="text-title-home text-ternary mb-10">
-            {' '}
             personal needs
           </span>
           <span className="text-xl text-comment mb-10">
@@ -23,7 +25,7 @@ export default function HomeView() {
           <div className="h-button-started w-button-started">
             <button
               type="button"
-              onClick={() => {window.location.replace('/dashboard')}}
+              onClick={() => setOpenModal(true)}
               className="absolute text-button-text font-bold z-10 bg-secondary focus:outline-none h-button-started w-button-started border border-white text-xs text-primary font-bold rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
             >
               Get started
