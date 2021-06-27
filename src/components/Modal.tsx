@@ -28,11 +28,14 @@ export default function Modal() {
                           onClick={() => setOpenModal(false)}
                       >
                     <span
-                        className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                        className="bg-transparent text-ternary h-6 w-6 text-2xl block outline-none focus:outline-none">
                       ×
                     </span>
                       </button>
                     </div>
+                    <h3 className="text-xl pl-5">
+                      Please select a Wallet:
+                    </h3>
                     {/*body*/}
                     <div className="relative p-6 flex-auto">
                       <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
@@ -42,13 +45,6 @@ export default function Modal() {
                     {/*footer*/}
                     <div
                         className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                      <button
-                          className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                          type="button"
-                          onClick={() => setOpenModal(false)}
-                      >
-                        Save Changes
-                      </button>
                     </div>
                   </div>
                 </div>

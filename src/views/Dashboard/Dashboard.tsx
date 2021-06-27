@@ -14,8 +14,6 @@ export default class Dashboard extends React.Component<any, any>{
     this.componentList();
   }
 
-
-
   componentList = () => { HttpRequest.getCover()
     .then(({ data }) => {
       this.setState({

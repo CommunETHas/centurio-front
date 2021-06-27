@@ -1,8 +1,13 @@
+import React, {useContext, useEffect} from "react";
+import {Redirect} from "react-router";
+import {
+  Link
+} from "react-router-dom";
 import {useWeb3React} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
-import React, {useContext} from "react";
 import {injectedConnector} from "../views/App";
 import {GlobalContext} from "../context/GlobalContext";
+
 
 export default function Wallet() {
   const {saveUserWallet} = useContext(GlobalContext);
@@ -10,16 +15,29 @@ export default function Wallet() {
 
   const onClick = async () => {
     await activate(injectedConnector)
-
-    saveUserWallet({chainId, address: account, active});
+    // TODO Update async on active
+    await saveUserWallet({chainId, address: account, active});
+    return <Redirect to="/dashboard"/>
   }
+
+/*  useEffect(() => {
+        saveUserWallet({chainId, address: account, active: true});
+      }, []
+  );*/
 
   return (
       <div>
         <div>ChainId: {chainId}</div>
-        <div>Account: {account}</div>
+        <div>Address: {account}</div>
         {active ? (
-            <div>✅ </div>
+            <>
+            <div>Connected </div>
+
+            <Link
+                to="/dashboard"
+            >
+              Dashboard </Link>
+            </>
         ) : (
             <button type="button" onClick={onClick}>
               Connect
