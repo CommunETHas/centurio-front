@@ -10,6 +10,7 @@ const GlobalProvider = ({ children }) => {
   });
 
   const [openModal, setOpenModal] = useState(false);
+  const [popoverShow, setPopoverShow] = useState(false);
 
   const saveUserWallet = (userWallet) => {
     const newUserWallet = {
@@ -21,7 +22,14 @@ const GlobalProvider = ({ children }) => {
   };
   return (
     <GlobalContext.Provider
-      value={{ userWallet, saveUserWallet, openModal, setOpenModal }}
+      value={{
+        userWallet,
+        saveUserWallet,
+        openModal,
+        setOpenModal,
+        popoverShow,
+        setPopoverShow,
+      }}
     >
       {children}
     </GlobalContext.Provider>

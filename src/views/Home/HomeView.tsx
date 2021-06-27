@@ -49,23 +49,41 @@ export default function HomeView() {
 
         <div className="z-10 absolute transform translate-y-20 translate-x-100 rotate-45 h-divbg w-divbg bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary"></div>
       </section>
-      <section className="relative h-full bg-primary grid grid-cols-2">
-        <div className="z-40">
-          <img className="h-battle-logo" src={BattleLogo} />
-          <span className="text-secondary">
-            DeFi can be a brutal world and you can be rekt if you’re not
-            careful. But behold, Nexus Mutual is here to help you and offer a
-            vast offer of covers for your assets.
-          </span>
+      <section className="relative h-full bg-primary ">
+        <div className="w-full flex justify-center pt-10 pb-12">
+          <div className="flex flex-col">
+            <span className="text-secondary font-bold text-3xl">
+              Aave Stranger !
+            </span>
+            <div className="mt-3 px-8 w-full flex flex-row">
+              <div className="w-full h-0.5 bg-secondary" />
+            </div>
+          </div>
         </div>
-        <div>
-          <span className="text-secondary">
-            But DeFi can be complex to navigate and to be fully covered you may
-            need to deep dive into each protocol you invest in.
-          </span>
-          <img className="h-socrate-logo" src={SocrateLogo} />
+        <div className="grid grid-cols-2">
+          <div className="m-auto z-40 w-para">
+            <img
+              className="h-battle-logo mb-10 m-auto opacity-80"
+              src={BattleLogo}
+            />
+            <span className="text-secondary text-2xl">
+              DeFi can be a brutal world and you can be rekt if you’re not
+              careful. But behold, Nexus Mutual is here to help you and offer a
+              vast offer of covers for your assets.
+            </span>
+          </div>
+          <div className="m-auto z-40 h-full w-para overflow-hidden">
+            <span className="text-secondary text-2xl">
+              But DeFi can be complex to navigate and to be fully covered you
+              may need to deep dive into each protocol you invest in.
+            </span>
+            <img
+              className="h-socrate-logo m-auto opacity-80 mt-10 transform translate-y-socrate"
+              src={SocrateLogo}
+            />
+          </div>
+          {/* <div className="z-20 absolute transform translate-y-80 translate-x-90 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"></div> */}
         </div>
-        {/* <div className="z-20 absolute transform translate-y-80 translate-x-90 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"></div> */}
       </section>
     </main>
   );

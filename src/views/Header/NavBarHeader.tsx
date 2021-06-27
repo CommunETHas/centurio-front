@@ -7,10 +7,10 @@ import { Web3Provider } from '@ethersproject/providers';
 import Popover from '../../components/Popover';
 
 export default function NavbarHeader() {
-  const { setOpenModal } = useContext(GlobalContext);
+  const { popoverShow, setOpenModal, setPopoverShow } =
+    useContext(GlobalContext);
   const { account, active } = useWeb3React<Web3Provider>();
   const btnRef = React.createRef();
-  const [popoverShow, setPopoverShow] = useState(false);
 
   const formatWalletAddress = (addressString) => {
     let first = addressString.substring(0, 5);
@@ -45,7 +45,7 @@ export default function NavbarHeader() {
                 {account && formatWalletAddress(account)}
               </button>
               <div className=" bg-transparent focus:outline-none h-7 w-40 border border-ternary rounded-full transform translate-x-1 translate-y-1" />
-              <Popover btnRef={btnRef} popoverShow={popoverShow} />
+              <Popover btnRef={btnRef} />
             </>
           ) : (
             <>

@@ -1,43 +1,54 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import QuoteCard from '../../components/QuoteCard';
 import HttpRequest from '../../api/api';
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
 
 export default function Dashboard() {
-  const [componentList, setComponentList] = useState([])
+  const { account } = useWeb3React<Web3Provider>();
+  const [recommendations, setRecommendations] = useState([]);
 
-  const fetchComponentList = () => {
-    HttpRequest.getCover()
-        .then(({data}) => {
-          const components = data.map((elem) => {
-            const logo: string =
-                'https://app.nexusmutual.io/logos/' + elem.logo;
-            return <QuoteCard name={elem.name} logo={logo} type={elem.type}/>;
-          })
-          setComponentList(components);
-        })
-        .catch(() => setComponentList([]));
+  const fethCoverRecommendations = async () => {
+    const { recommandations } = await HttpRequest.getCoverRecommendations(
+      account,
+    );
+    setRecommendations(recommandations);
   };
 
   useEffect(() => {
-    fetchComponentList()
-  }, [])
+    fethCoverRecommendations();
+  }, []);
 
   return (
-      <main className="w-screen bg-primary h-screen overflow-auto">
-        <div className="w-full flex justify-center my-20">
-          <div className="flex flex-col">
-            <span className="text-secondary font-bold text-xl">
-              COVERS RECOMMENDATIONS
-            </span>
-            <div className="mt-3 px-8 w-full flex flex-row">
-              <div className="w-full h-0.5 bg-secondary"/>
-            </div>
+    <main className="w-screen bg-primary h-screen overflow-auto">
+      <div className="w-full flex justify-center my-20">
+        <div className="flex flex-col">
+          <span className="text-secondary font-bold text-xl">
+            COVERS RECOMMENDATIONS
+          </span>
+          <div className="mt-3 px-8 w-full flex flex-row">
+            <div className="w-full h-0.5 bg-secondary" />
           </div>
         </div>
-        <div className="w-full grid gap-x-32 gap-y-32 xl:grid-cols-2 2xl:grid-cols-3 px-20">
-          {/* eslint-disable-next-line react/destructuring-assignment */}
-          {componentList}
-        </div>
-      </main>
+      </div>
+      <div className="w-full grid gap-x-32 gap-y-32 xl:grid-cols-2 2xl:grid-cols-3 px-20">
+        {/* eslint-disable-next-line react/destructuring-assignment */}
+        {recommendations.length > 0 ? (
+          <>
+            {recommendations.map(({ cover }) => {
+              return (
+                <QuoteCard
+                  name={cover.name}
+                  logo={`https://app.nexusmutual.io/logos/${cover.logo}`}
+                  type={cover.type}
+                />
+              );
+            })}
+          </>
+        ) : (
+          <span className="text-secondary">You have no recommendations</span>
+        )}
+      </div>
+    </main>
   );
 }

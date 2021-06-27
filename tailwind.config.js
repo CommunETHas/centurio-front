@@ -82,10 +82,12 @@ module.exports = {
         title: '26rem',
         'button-started': '26rem',
         'modal': '30rem',
+        para: '30rem'
       },
       translate: {
         90: '-20rem',
         100: '-30rem',
+        socrate: '15rem'
       },
       rotate: {
         60: '-60deg',
