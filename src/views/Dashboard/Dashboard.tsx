@@ -32,7 +32,6 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="w-full grid gap-x-32 gap-y-32 xl:grid-cols-2 2xl:grid-cols-3 px-20">
-        {/* eslint-disable-next-line react/destructuring-assignment */}
         {recommendations.length > 0 ? (
           <>
             {recommendations.map(({ cover }) => (

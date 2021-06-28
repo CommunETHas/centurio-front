@@ -12,7 +12,7 @@ const Popover = ({ btnRef }) => {
 
   useEffect(() => {
     createPopper(btnRef.current, popoverRef.current, {
-      placement: 'bottom-start',
+      placement: 'bottom-end',
     });
   }, [btnRef, popoverRef]);
 

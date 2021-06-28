@@ -21,12 +21,12 @@ export default function NavbarHeader() {
 
   return (
     <>
-      <nav className="z-20 flex items-center justify-between flex-wrap bg-teal p-3 bg-primary">
+      <nav className="z-20 flex items-center justify-between flex-wrap bg-teal p-1 bg-primary">
         <Link
           to="/"
           className="flex items-center flex-no-shrink text-primary mr-6"
         >
-          <img className="h-20" src={Logo} alt="centurio" />
+          <img className="h-logo" src={Logo} alt="centurio" />
           <span className="font-semibold text-3xl text-secondary tracking-tight p-3">
             Centurio
           </span>
