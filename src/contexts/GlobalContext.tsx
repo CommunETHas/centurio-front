@@ -20,6 +20,7 @@ const GlobalProvider = ({ children }) => {
     };
     setUserWallet(newUserWallet);
   };
+
   return (
     <GlobalContext.Provider
       value={{

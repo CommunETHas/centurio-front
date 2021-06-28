@@ -1,9 +1,9 @@
 import React, { Fragment, useRef, useContext, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { GlobalContext } from '../context/GlobalContext';
-import Wallet from './Wallet';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
+import { GlobalContext } from '../contexts/GlobalContext';
+import Wallet from './Wallet';
 
 export default function Modal() {
   const { active } = useWeb3React<Web3Provider>();

@@ -7,7 +7,7 @@ import LoadingOrError from '../components/Utils/LoadingOrError';
 import Footer from './Footer/Footer';
 import NavbarHeader from './Header/NavBarHeader';
 import ModalWallet from '../components/Modal';
-import GlobalContext from '../context/GlobalContext';
+import GlobalContext from '../contexts/GlobalContext';
 
 const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
 const HomeView = lazy(() => import('./Home/HomeView'));

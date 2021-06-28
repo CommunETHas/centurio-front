@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import QuoteCard from '../../components/QuoteCard';
-import HttpRequest from '../../api/api';
-import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
+import { useWeb3React } from '@web3-react/core';
+import HttpRequest from '../../api/api';
+import QuoteCard from '../../components/QuoteCard';
 
 export default function Dashboard() {
   const { account, active } = useWeb3React<Web3Provider>();

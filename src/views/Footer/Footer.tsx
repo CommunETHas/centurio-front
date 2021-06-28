@@ -13,7 +13,7 @@ export default function Footer() {
         href="https://github.com/CenturioHackMoney21"
         className="text-secondary p-2"
       >
-        Copyright
+        Github
       </a>
     </footer>
   );

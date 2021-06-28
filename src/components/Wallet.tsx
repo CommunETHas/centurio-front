@@ -4,11 +4,10 @@ import { Web3Provider } from '@ethersproject/providers';
 import { injectedConnector } from '../views/App';
 
 export default function Wallet() {
-  const { chainId, account, activate, active } = useWeb3React<Web3Provider>();
+  const { activate, active } = useWeb3React<Web3Provider>();
 
   const onClick = async () => {
     await activate(injectedConnector);
-    // TODO Update async on active
   };
 
   return (

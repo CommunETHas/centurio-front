@@ -1,14 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createPopper } from '@popperjs/core';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
-import { GlobalContext } from '../context/GlobalContext';
+import { GlobalContext } from '../contexts/GlobalContext';
 
 const Popover = ({ btnRef }) => {
   const { popoverShow, setPopoverShow } = useContext(GlobalContext);
   const { deactivate } = useWeb3React<Web3Provider>();
-  const popoverRef = React.createRef();
+  const popoverRef = createRef();
 
   useEffect(() => {
     createPopper(btnRef.current, popoverRef.current, {

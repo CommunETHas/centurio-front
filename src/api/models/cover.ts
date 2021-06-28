@@ -1,4 +1,4 @@
-export default interface RecommendationsInterface {
+export default interface Cover {
   count: number,
   recommendations: [],
   unsupportedTokens: []

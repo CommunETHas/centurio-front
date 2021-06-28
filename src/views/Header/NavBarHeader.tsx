@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react';
-import Logo from '../../assets/logo.png';
+import React, { useContext, createRef } from 'react';
 import { Link } from 'react-router-dom';
-import { GlobalContext } from '../../context/GlobalContext';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
+import { GlobalContext } from '../../contexts/GlobalContext';
 import Popover from '../../components/Popover';
+import Logo from '../../assets/logo.png';
 
 export default function NavbarHeader() {
   const { popoverShow, setOpenModal, setPopoverShow } =
     useContext(GlobalContext);
   const { account, active } = useWeb3React<Web3Provider>();
-  const btnRef = React.createRef();
+  const btnRef = createRef();
 
   const formatWalletAddress = (addressString) => {
     let first = addressString.substring(0, 5);
