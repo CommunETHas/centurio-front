@@ -7,7 +7,7 @@ import LoadingOrError from '../components/Utils/LoadingOrError';
 import Footer from './Footer/Footer';
 import NavbarHeader from './Header/NavBarHeader';
 import ModalWallet from '../components/Modal';
-import GlobalContext from '../contexts/GlobalContext';
+import { GlobalContext } from '../contexts/GlobalContext';
 
 const HomeView = lazy(() => import('./Home/HomeView'));
 const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
@@ -26,7 +26,7 @@ export const injectedConnector = new InjectedConnector({
 
 function getLibrary(provider: any): Web3Provider {
   const library = new Web3Provider(provider);
-  library.pollingInterval = 12000;
+  library.pollingInterval = 12_000;
   return library;
 }
 

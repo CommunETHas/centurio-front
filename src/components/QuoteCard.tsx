@@ -9,7 +9,7 @@ export default function QuoteCard(props: Quote): ReactElement {
       <div className="absolute -m-7 w-full h-full bg-secondary rounded-lg" />
       <div className="relative z-10">
         <div className="w-full flex flex-row">
-          <img src={logo} className="w-16 h-16 rounded-md" />
+          <img src={logo} className="w-16 h-16 rounded-md" alt="token" />
           <div className="-mt-2 flex flex-col ml-3">
             <span className="font-bold text-2xl">{name}</span>
             <span>{type}</span>

@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 
 export const GlobalContext = createContext();
 
-const GlobalProvider = ({ children }) => {
+export default function GlobalProvider({ children }) {
   const [userWallet, setUserWallet] = useState({
     chainId: '',
     address: '',
@@ -55,6 +55,4 @@ const GlobalProvider = ({ children }) => {
       {children}
     </GlobalContext.Provider>
   );
-};
-
-export default GlobalProvider;
+}

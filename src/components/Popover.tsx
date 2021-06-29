@@ -26,10 +26,9 @@ const Popover = ({ btnRef }) => {
       <div className="flex flex-wrap">
         <div className="w-full text-center">
           <div
-            className={
-              (popoverShow ? '' : 'hidden ') +
-              'bg-ternary border-0 mr-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg'
-            }
+            className={`${
+              popoverShow ? '' : 'hidden '
+            }bg-ternary border-0 mr-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg`}
             ref={popoverRef}
           >
             <div className="p-3">
