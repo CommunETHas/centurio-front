@@ -9,8 +9,9 @@ import NavbarHeader from './Header/NavBarHeader';
 import ModalWallet from '../components/Modal';
 import GlobalContext from '../contexts/GlobalContext';
 
-const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
 const HomeView = lazy(() => import('./Home/HomeView'));
+const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
+const NotificationView = lazy(() => import('./Notification/Notification'));
 const NoMatchView = lazy(() => import('../components/Utils/NoMatchView'));
 
 export const injectedConnector = new InjectedConnector({
@@ -41,6 +42,11 @@ export default function App(): ReactElement {
               <Switch>
                 <Route exact path="/" component={HomeView} />
                 <Route exact path="/dashboard" component={OnBoardingView} />
+                <Route
+                  exact
+                  path="/notification"
+                  component={NotificationView}
+                />
                 <Route component={NoMatchView} />
               </Switch>
             </Suspense>

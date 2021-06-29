@@ -9,8 +9,15 @@ const GlobalProvider = ({ children }) => {
     active: false,
   });
 
+  const [user, setUser] = useState({
+    address: '',
+    nonce: '',
+    email: '',
+  });
+
   const [openModal, setOpenModal] = useState(false);
   const [popoverShow, setPopoverShow] = useState(false);
+  const [isUserCreated, setIsUserCreated] = useState(false);
 
   const saveUserWallet = (userWallet) => {
     const newUserWallet = {
@@ -21,15 +28,28 @@ const GlobalProvider = ({ children }) => {
     setUserWallet(newUserWallet);
   };
 
+  const saveUser = (user) => {
+    const newUser = {
+      address: user.address,
+      nonce: user.nonce,
+      email: user.email,
+    };
+    setUser(newUser);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
+        user,
+        saveUser,
         userWallet,
         saveUserWallet,
         openModal,
         setOpenModal,
         popoverShow,
         setPopoverShow,
+        isUserCreated,
+        setIsUserCreated
       }}
     >
       {children}

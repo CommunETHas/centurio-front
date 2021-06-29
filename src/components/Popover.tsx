@@ -41,6 +41,14 @@ const Popover = ({ btnRef }) => {
                 Go to Dashboard
               </Link>
               <div className="mb-3 bg-transparent focus:outline-none h-7 w-40 border border-white rounded-full transform translate-x-1 translate-y-1" />
+              <Link
+                onClick={() => setPopoverShow(false)}
+                to="/notification"
+                className="text-center absolute z-10 bg-secondary focus:outline-none h-10 w-40 border border-white text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+              >
+                Notification preferences
+              </Link>
+              <div className="mb-3 bg-transparent focus:outline-none h-10 w-40 border border-white rounded-full transform translate-x-1 translate-y-1" />
               <button
                 type="button"
                 onClick={onClose}

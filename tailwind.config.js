@@ -81,7 +81,7 @@ module.exports = {
       width: {
         divbg: '70rem',
         title: '26rem',
-        'button-started': '37rem',
+        'button-started': '26rem',
         'modal': '30rem',
         para: '30rem'
       },

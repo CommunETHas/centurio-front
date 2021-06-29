@@ -9,10 +9,13 @@ export default function Dashboard() {
   const [recommendations, setRecommendations] = useState([]);
 
   const fethCoverRecommendations = async () => {
-    const { recommandations } = await HttpRequest.getCoverRecommendations(
-      account,
-    );
-    setRecommendations(recommandations);
+    const { data } = await HttpRequest.getCoverRecommendations(account);
+
+    if (data.recommendations) {
+      setRecommendations(data.recommendations);
+    } else {
+      setRecommendations([]);
+    }
   };
 
   useEffect(() => {
@@ -32,7 +35,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="w-full grid gap-x-32 gap-y-32 xl:grid-cols-2 2xl:grid-cols-3 px-20">
-        {recommendations.length > 0 ? (
+        {recommendations && recommendations.length > 0 ? (
           <>
             {recommendations.map(({ cover }) => (
               <QuoteCard
