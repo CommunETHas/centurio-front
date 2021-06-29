@@ -11,7 +11,7 @@ const HttpRequest = {
   getCoverRecommendations: (address): Promise<AxiosResponse<Cover[]>> => instance.get<Cover[]>(`cover/recommend/${address}`),
   getUser: (address): Promise<AxiosResponse<any>> => instance.get<any>(`user/${address}`),
   insertUser: (address): Promise<AxiosResponse<any>> => instance.post<any>(`user/${address}`),
-  authenticate: (data): Promise<AxiosResponse<any>> => instance.post<any>(`authentication/`, data),
+  authenticate: (data): Promise<AxiosResponse<any>> => instance.post<any>(`authentication`, data),
   unsubscribeUser: (user): Promise<AxiosResponse<any>> => instance.put<any>(`user`, user)
 }
 

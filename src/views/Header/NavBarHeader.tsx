@@ -1,4 +1,4 @@
-import React, { useContext, createRef } from 'react';
+import React, { useContext, createRef, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
@@ -6,7 +6,7 @@ import { GlobalContext } from '../../contexts/GlobalContext';
 import Popover from '../../components/Popover';
 import Logo from '../../assets/logo.png';
 
-export default function NavbarHeader() {
+export default function NavbarHeader(): ReactElement {
   const { popoverShow, setOpenModal, setPopoverShow } =
     useContext(GlobalContext);
   const { account, active } = useWeb3React<Web3Provider>();

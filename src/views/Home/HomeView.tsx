@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
@@ -7,7 +7,7 @@ import ShieldLogo from '../../assets/logo_shield_variant_ternary.png';
 import SocrateLogo from '../../assets/socrate.png';
 import BattleLogo from '../../assets/battle.png';
 
-export default function HomeView() {
+export default function HomeView(): ReactElement {
   const { setOpenModal } = useContext(GlobalContext);
   const { active } = useWeb3React<Web3Provider>();
 

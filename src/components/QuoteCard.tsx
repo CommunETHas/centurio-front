@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Quote from '../api/models/quote';
 
-export default function QuoteCard(props: Quote) {
+export default function QuoteCard(props: Quote): ReactElement {
   const { name, type, logo } = props;
   return (
     <div className="relative p-7 w-full rounded-lg">

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, createRef } from 'react';
+import React, { useContext, useEffect, createRef, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { createPopper } from '@popperjs/core';
 import { useWeb3React } from '@web3-react/core';
@@ -65,7 +65,7 @@ const Popover = ({ btnRef }) => {
   );
 };
 
-export default function PopoverRender({ btnRef }) {
+export default function PopoverRender({ btnRef }): ReactElement {
   return (
     <>
       <Popover color="amber" btnRef={btnRef} />

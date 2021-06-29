@@ -49,7 +49,7 @@ const GlobalProvider = ({ children }) => {
         popoverShow,
         setPopoverShow,
         isUserCreated,
-        setIsUserCreated
+        setIsUserCreated,
       }}
     >
       {children}

@@ -76,7 +76,8 @@ module.exports = {
         'shield-logo': '17rem',
         'battle-logo': '25rem',
         'socrate-logo': '25rem',
-        'logo': '3rem'
+        'logo': '3rem',
+        'logo-token': '2.5rem'
       },
       width: {
         divbg: '70rem',

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { Web3Provider } from '@ethersproject/providers';
 import { useWeb3React } from '@web3-react/core';
 import HttpRequest from '../../api/api';
 import QuoteCard from '../../components/QuoteCard';
 
-export default function Dashboard() {
+export default function Dashboard(): ReactElement {
   const { account, active } = useWeb3React<Web3Provider>();
   const [recommendations, setRecommendations] = useState([]);
 
