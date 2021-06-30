@@ -11,6 +11,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import HttpRequest from '../../api/api';
+import { ContextType } from '../../api/models/user';
 
 const options = [
   {
@@ -27,14 +28,15 @@ const options = [
   },
 ];
 
-function classNames(...classes) {
+function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function Notification(): ReactElement {
   const { active, account, library } = useWeb3React<Web3Provider>();
-  const { user, saveUser, isUserCreated, setIsUserCreated } =
-    useContext(GlobalContext);
+  const { user, saveUser, setIsUserCreated } = useContext(
+    GlobalContext,
+  ) as ContextType;
   const [selected, setSelected] = useState(options[0]);
 
   const fetchUser = async () => {
@@ -43,7 +45,7 @@ export default function Notification(): ReactElement {
         setIsUserCreated(true);
         saveUser(data);
       })
-      .catch((error) => {
+      .catch(() => {
         setIsUserCreated(false);
       });
   };
@@ -57,22 +59,20 @@ export default function Notification(): ReactElement {
   };
 
   const signMessage = () => {
-    library
-      .getSigner(account)
-      .signMessage(
-        `Welcome to Centurio, sign this message to authenticate ! ${user.nonce}`,
-      )
-      .then(async (signature: any) => {
-        await HttpRequest.authenticate({
-          user: { address: account, email: '' },
-          signature,
+    if (library !== undefined && account !== null && account !== undefined) {
+      library
+        .getSigner(account)
+        .signMessage(`${import.meta.env.SIGN_PASSPHRASE} ${user.nonce}`)
+        .then(async (signature: string) => {
+          await HttpRequest.authenticate({
+            user: { address: account, email: '' },
+            signature,
+          });
+        })
+        .catch((error: any) => {
+          console.log(error && error.message);
         });
-      })
-      .catch((error: any) => {
-        console.log(
-          'Failure!' + (error && error.message ? `\n\n${error.message}` : ''),
-        );
-      });
+    }
   };
 
   useEffect(() => {
@@ -92,11 +92,6 @@ export default function Notification(): ReactElement {
                 <div className="mt-1 relative">
                   <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <span className="flex items-center">
-                      <img
-                        src={selected.avatar}
-                        alt=""
-                        className="flex-shrink-0 h-6 w-6 rounded-full"
-                      />
                       <span className="ml-3 block truncate">
                         {selected.name}
                       </span>
@@ -136,11 +131,6 @@ export default function Notification(): ReactElement {
                           {({ selected, active }) => (
                             <>
                               <div className="flex items-center">
-                                <img
-                                  src={person.avatar}
-                                  alt=""
-                                  className="flex-shrink-0 h-6 w-6 rounded-full"
-                                />
                                 <span
                                   className={classNames(
                                     selected ? 'font-semibold' : 'font-normal',
@@ -151,7 +141,7 @@ export default function Notification(): ReactElement {
                                 </span>
                               </div>
 
-                              {selected ? (
+                              {selected && (
                                 <span
                                   className={classNames(
                                     active ? 'text-white' : 'text-indigo-600',
@@ -163,7 +153,7 @@ export default function Notification(): ReactElement {
                                     aria-hidden="true"
                                   />
                                 </span>
-                              ) : null}
+                              )}
                             </>
                           )}
                         </Listbox.Option>

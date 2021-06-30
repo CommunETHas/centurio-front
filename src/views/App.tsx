@@ -1,13 +1,13 @@
 import React, { lazy, ReactElement, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Web3ReactProvider } from '@web3-react/core';
-import { Web3Provider } from '@ethersproject/providers';
+import { Web3Provider, ExternalProvider } from '@ethersproject/providers';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import LoadingOrError from '../components/Utils/LoadingOrError';
 import Footer from './Footer/Footer';
 import NavbarHeader from './Header/NavBarHeader';
 import ModalWallet from '../components/Modal';
-import { GlobalContext } from '../contexts/GlobalContext';
+import GlobalContext from '../contexts/GlobalContext';
 
 const HomeView = lazy(() => import('./Home/HomeView'));
 const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
@@ -24,7 +24,7 @@ export const injectedConnector = new InjectedConnector({
   ],
 });
 
-function getLibrary(provider: any): Web3Provider {
+function getLibrary(provider: ExternalProvider): Web3Provider {
   const library = new Web3Provider(provider);
   library.pollingInterval = 12_000;
   return library;

@@ -5,19 +5,19 @@ import { Web3Provider } from '@ethersproject/providers';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import Popover from '../../components/Popover';
 import Logo from '../../assets/logo.png';
+import { ContextType } from '../../api/models/user';
+
+const formatWalletAddress = (addressString: string) =>
+  `${addressString.slice(0, 5)}......${addressString.slice(
+    Math.max(0, addressString.length - 5),
+  )}`;
 
 export default function NavbarHeader(): ReactElement {
-  const { popoverShow, setOpenModal, setPopoverShow } =
-    useContext(GlobalContext);
+  const { popoverShow, setOpenModal, setPopoverShow } = useContext(
+    GlobalContext,
+  ) as ContextType;
   const { account, active } = useWeb3React<Web3Provider>();
-  const btnRef = createRef();
-
-  const formatWalletAddress = (addressString) => {
-    let first = addressString.substring(0, 5);
-    let second = addressString.substring(addressString.length - 5);
-
-    return `${first}......${second}`;
-  };
+  const btnRef = createRef<HTMLButtonElement>();
 
   return (
     <>

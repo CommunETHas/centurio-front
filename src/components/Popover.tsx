@@ -1,23 +1,34 @@
-import React, { useContext, useEffect, createRef, ReactElement } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  createRef,
+  ReactElement,
+  RefObject,
+} from 'react';
 import { Link } from 'react-router-dom';
 import { createPopper } from '@popperjs/core';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { GlobalContext } from '../contexts/GlobalContext';
+import { ContextType } from '../api/models/user';
 
-const Popover = ({ btnRef }) => {
-  const { popoverShow, setPopoverShow } = useContext(GlobalContext);
+const Popover = ({ btnRef }: PopoverProps) => {
+  const { popoverShow, setPopoverShow } = useContext(
+    GlobalContext,
+  ) as ContextType;
   const { deactivate } = useWeb3React<Web3Provider>();
-  const popoverRef = createRef();
+  const popoverRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    createPopper(btnRef.current, popoverRef.current, {
-      placement: 'bottom-end',
-    });
+    if (popoverRef.current !== null && btnRef.current !== null) {
+      createPopper(btnRef.current, popoverRef.current, {
+        placement: 'bottom-end',
+      });
+    }
   }, [btnRef, popoverRef]);
 
-  const onClose = async () => {
-    await deactivate();
+  const onClose = () => {
+    deactivate();
     setPopoverShow(false);
   };
 
@@ -64,10 +75,20 @@ const Popover = ({ btnRef }) => {
   );
 };
 
-export default function PopoverRender({ btnRef }): ReactElement {
+export default function PopoverRender({
+  btnRef,
+}: PopoverRenderProps): ReactElement {
   return (
     <>
-      <Popover color="amber" btnRef={btnRef} />
+      <Popover btnRef={btnRef} />
     </>
   );
 }
+
+type PopoverRenderProps = {
+  btnRef: RefObject<HTMLButtonElement>;
+};
+
+type PopoverProps = {
+  btnRef: RefObject<HTMLButtonElement>;
+};

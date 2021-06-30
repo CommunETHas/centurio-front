@@ -10,10 +10,11 @@ import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { GlobalContext } from '../contexts/GlobalContext';
 import Wallet from './Wallet';
+import { ContextType } from '../api/models/user';
 
 export default function Modal(): ReactElement {
   const { active } = useWeb3React<Web3Provider>();
-  const { openModal, setOpenModal } = useContext(GlobalContext);
+  const { openModal, setOpenModal } = useContext(GlobalContext) as ContextType;
 
   const cancelButtonRef = useRef(null);
 

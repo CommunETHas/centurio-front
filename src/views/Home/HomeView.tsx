@@ -1,14 +1,15 @@
 import React, { ReactElement, useContext } from 'react';
-import { GlobalContext } from '../../contexts/GlobalContext';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { motion } from 'framer-motion';
+import { GlobalContext } from '../../contexts/GlobalContext';
 import ShieldLogo from '../../assets/logo_shield_variant_ternary.png';
 import SocrateLogo from '../../assets/socrate.png';
 import BattleLogo from '../../assets/battle.png';
+import { ContextType } from '../../api/models/user';
 
 export default function HomeView(): ReactElement {
-  const { setOpenModal } = useContext(GlobalContext);
+  const { setOpenModal } = useContext(GlobalContext) as ContextType;
   const { active } = useWeb3React<Web3Provider>();
 
   return (
@@ -45,7 +46,7 @@ export default function HomeView(): ReactElement {
               )}
             </div>
           </div>
-          <img className="h-shield-logo ml-6" src={ShieldLogo} />
+          <img className="h-shield-logo ml-6" src={ShieldLogo} alt="shield" />
         </div>
         <motion.div
           className="z-20 absolute h-divbg w-divbg bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary"
@@ -60,10 +61,10 @@ export default function HomeView(): ReactElement {
           transition={{
             duration: 3,
             type: 'spring',
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
           }}
         />
-        <div className="z-10 absolute transform translate-y-20 translate-x-100 rotate-45 h-divbg w-divbg bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary"></div>
+        <div className="z-10 absolute transform translate-y-20 translate-x-100 rotate-45 h-divbg w-divbg bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary" />
       </section>
       <section className="relative h-full bg-primary overflow-hidden ">
         <div className="w-full flex justify-center pt-10 pb-12">
@@ -81,6 +82,7 @@ export default function HomeView(): ReactElement {
             <img
               className="h-battle-logo mb-10 m-auto opacity-90"
               src={BattleLogo}
+              alt="battle"
             />
             <span className="text-secondary text-2xl">
               DeFi can be a brutal world and you can be rekt if you’re not
@@ -96,6 +98,7 @@ export default function HomeView(): ReactElement {
             <img
               className="h-socrate-logo m-auto opacity-90 mt-10 transform translate-y-socrate"
               src={SocrateLogo}
+              alt="socrate"
             />
           </div>
           <motion.div
@@ -111,10 +114,10 @@ export default function HomeView(): ReactElement {
             transition={{
               duration: 4,
               type: 'spring',
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
             }}
           />
-          <div className="z-20 absolute transform translate-y-0 translate-x-90 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"></div>
+          <div className="z-20 absolute transform translate-y-0 translate-x-90 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary" />
         </div>
       </section>
     </main>

@@ -1,35 +1,21 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, FC } from 'react';
+import { User } from '../api/models/user';
 
-export const GlobalContext = createContext();
+export const GlobalContext = createContext({});
 
-export default function GlobalProvider({ children }) {
-  const [userWallet, setUserWallet] = useState({
-    chainId: '',
-    address: '',
-    active: false,
-  });
-
-  const [user, setUser] = useState({
+const GlobalProvider: FC = ({ children }) => {
+  const [user, setUser] = useState<User>({
     address: '',
     nonce: '',
     email: '',
   });
 
-  const [openModal, setOpenModal] = useState(false);
-  const [popoverShow, setPopoverShow] = useState(false);
-  const [isUserCreated, setIsUserCreated] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [popoverShow, setPopoverShow] = useState<boolean>(false);
+  const [isUserCreated, setIsUserCreated] = useState<boolean>(false);
 
-  const saveUserWallet = (userWallet) => {
-    const newUserWallet = {
-      chainId: userWallet.chainId,
-      address: userWallet.address,
-      active: userWallet.active,
-    };
-    setUserWallet(newUserWallet);
-  };
-
-  const saveUser = (user) => {
-    const newUser = {
+  const saveUser = (user: User) => {
+    const newUser: User = {
       address: user.address,
       nonce: user.nonce,
       email: user.email,
@@ -42,8 +28,6 @@ export default function GlobalProvider({ children }) {
       value={{
         user,
         saveUser,
-        userWallet,
-        saveUserWallet,
         openModal,
         setOpenModal,
         popoverShow,
@@ -55,4 +39,6 @@ export default function GlobalProvider({ children }) {
       {children}
     </GlobalContext.Provider>
   );
-}
+};
+
+export default GlobalProvider;

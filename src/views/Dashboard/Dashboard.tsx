@@ -3,12 +3,13 @@ import { Web3Provider } from '@ethersproject/providers';
 import { useWeb3React } from '@web3-react/core';
 import HttpRequest from '../../api/api';
 import QuoteCard from '../../components/QuoteCard';
+import { Recommendations } from '../../api/models/cover';
 
 export default function Dashboard(): ReactElement {
   const { account, active } = useWeb3React<Web3Provider>();
-  const [recommendations, setRecommendations] = useState([]);
+  const [recommendations, setRecommendations] = useState<Recommendations[]>([]);
 
-  const fethCoverRecommendations = async () => {
+  async function fethCoverRecommendations() {
     const { data } = await HttpRequest.getCoverRecommendations(account);
 
     if (data.recommendations) {
@@ -16,7 +17,7 @@ export default function Dashboard(): ReactElement {
     } else {
       setRecommendations([]);
     }
-  };
+  }
 
   useEffect(() => {
     fethCoverRecommendations();
