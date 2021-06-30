@@ -22,7 +22,7 @@ const Popover = ({ btnRef }: PopoverProps) => {
   useEffect(() => {
     if (popoverRef.current !== null && btnRef.current !== null) {
       createPopper(btnRef.current, popoverRef.current, {
-        placement: 'bottom-end',
+        placement: 'bottom-start',
       });
     }
   }, [btnRef, popoverRef]);

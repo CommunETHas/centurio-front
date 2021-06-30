@@ -16,7 +16,7 @@ export default function HomeView(): ReactElement {
     <main className="mb-auto h-screen overflow-auto">
       <section className="relative h-full bg-primary grid grid-cols-2">
         <div />
-        <div className="m-auto flex">
+        <div className="m-auto flex z-40">
           <div className="m-auto w-title grid">
             <span className="text-title-home text-secondary font-bold">
               Find the right covers
@@ -37,7 +37,7 @@ export default function HomeView(): ReactElement {
                   <button
                     type="button"
                     onClick={() => setOpenModal(true)}
-                    className="absolute text-button-text font-bold z-10 bg-secondary focus:outline-none h-button-started w-button-started border border-white text-xs text-primary font-bold rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+                    className="absolute text-button-text font-bold z-10 bg-secondary focus:outline-none h-button-started w-button-started border border-white text-xs text-primary font-bold rounded-full transition duration-500 ease-in-out transform hover:translate-y-3 hover:translate-x-3"
                   >
                     Get started
                   </button>

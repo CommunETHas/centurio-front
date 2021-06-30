@@ -62,7 +62,9 @@ export default function Notification(): ReactElement {
     if (library !== undefined && account !== null && account !== undefined) {
       library
         .getSigner(account)
-        .signMessage(`${import.meta.env.SIGN_PASSPHRASE} ${user.nonce}`)
+        .signMessage(
+          `Welcome to Centurio, sign this message to authenticate ! ${user.nonce}`,
+        )
         .then(async (signature: string) => {
           await HttpRequest.authenticate({
             user: { address: account, email: '' },

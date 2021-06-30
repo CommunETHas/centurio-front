@@ -1,4 +1,3 @@
-const colors = require('tailwindcss/colors');
 const formsPlugin = require('@tailwindcss/forms');
 
 module.exports = {
@@ -14,7 +13,7 @@ module.exports = {
       secondary: '#20252E',
       ternary: '#BE7E7E',
     },
-    borderColor:{
+    borderColor: {
       white: '#FFFFFF',
       primary: '#20252E',
       secondary: '#20252E',
@@ -72,24 +71,26 @@ module.exports = {
       height: {
         divbg: '70rem',
         divbg2: '100rem',
+        divider: '0.05rem',
         'button-started': '4rem',
         'shield-logo': '17rem',
         'battle-logo': '25rem',
         'socrate-logo': '25rem',
-        'logo': '3rem',
-        'logo-token': '2.5rem'
+        logo: '3rem',
+        'logo-token': '2.5rem',
       },
       width: {
         divbg: '70rem',
         title: '26rem',
         'button-started': '26rem',
-        'modal': '30rem',
-        para: '30rem'
+        modal: '30rem',
+        para: '30rem',
       },
       translate: {
+        3: '0.75rem',
         90: '-20rem',
         100: '-30rem',
-        socrate: '18rem'
+        socrate: '18rem',
       },
       rotate: {
         60: '-60deg',

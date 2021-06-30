@@ -65,8 +65,8 @@ export default function Modal(): ReactElement {
           >
             <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <div className="">
+                  <div className="mt-3 text-center p-3 sm:mt-0 sm:text-left">
                     <Dialog.Title
                       as="h3"
                       className="text-3xl leading-6 text-primary mb-10"
@@ -79,6 +79,20 @@ export default function Modal(): ReactElement {
                       </p>
                     </div>
                     <Wallet />
+                    <div className="mt-10 w-full flex-row">
+                      <div className="w-full h-divider bg-primary" />
+                    </div>
+                    <div className="text-center p-3 text-xl">
+                      <span className="font-bold">OR</span> specify your wallet
+                      address:
+                    </div>
+                    <div className="relative w-full">
+                      <input
+                        placeholder="e.g 0xcb613........67a145"
+                        className="w-full h-10 absolute z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full"
+                      />
+                      <div className=" bg-transparent focus:outline-none h-10 border border-primary rounded-full transform translate-x-1 translate-y-1" />
+                    </div>
                   </div>
                 </div>
               </div>
