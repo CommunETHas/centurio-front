@@ -73,15 +73,23 @@ module.exports = {
         divbg: '70rem',
         divbg2: '100rem',
         'button-started': '4rem',
+        'shield-logo': '17rem',
+        'battle-logo': '25rem',
+        'socrate-logo': '25rem',
+        'logo': '3rem',
+        'logo-token': '2.5rem'
       },
       width: {
         divbg: '70rem',
         title: '26rem',
         'button-started': '26rem',
+        'modal': '30rem',
+        para: '30rem'
       },
       translate: {
         90: '-20rem',
         100: '-30rem',
+        socrate: '18rem'
       },
       rotate: {
         60: '-60deg',

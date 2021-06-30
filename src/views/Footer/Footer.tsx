@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-export default function Footer() {
+export default function Footer(): ReactElement {
   return (
     <footer className="footer justify-end h-10 bg-primary flex">
       <a href="http://localhost" className="text-secondary p-2">
@@ -13,7 +13,7 @@ export default function Footer() {
         href="https://github.com/CenturioHackMoney21"
         className="text-secondary p-2"
       >
-        Copyright
+        Github
       </a>
     </footer>
   );
