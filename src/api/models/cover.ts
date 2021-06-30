@@ -1,4 +1,4 @@
-export default interface Cover {
+export default interface DashboardData {
   count: number;
   recommendations: Recommendations[];
   unsupportedTokens: UnsupportedTokens[];
@@ -6,7 +6,7 @@ export default interface Cover {
 
 export interface Recommendations {
   cover: RecommendationCover;
-  reasoning: Reasoning;
+  reasoning: Reasoning[];
 }
 
 export interface UnsupportedTokens {
@@ -21,7 +21,7 @@ export interface RecommendationCover {
   address: string;
   type: string;
   logo: string;
-  supportedChains: [];
+  supportedChains: string[];
 }
 
 export interface Reasoning {

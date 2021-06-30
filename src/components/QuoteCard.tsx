@@ -1,18 +1,19 @@
 import React, { ReactElement } from 'react';
 import Quote from '../api/models/quote';
+import { Recommendations } from '../api/models/cover';
 
-export default function QuoteCard(props: Quote): ReactElement {
-  const { name, type, logo } = props;
+export default function QuoteCard(props: Recommendations): ReactElement {
+  const recommendation: Recommendations= props;
   return (
     <div className="relative p-7 w-full rounded-lg">
       <div className="absolute -m-3 w-full h-full bg-transparent border border-white rounded-lg" />
       <div className="absolute -m-7 w-full h-full bg-secondary rounded-lg" />
       <div className="relative z-10">
         <div className="w-full flex flex-row">
-          <img src={logo} className="w-16 h-16 rounded-md" alt="token" />
+          <img src={recommendation.cover.logo} className="w-16 h-16 rounded-md" alt="token" />
           <div className="-mt-2 flex flex-col ml-3">
-            <span className="font-bold text-2xl">{name}</span>
-            <span>{type}</span>
+            <span className="font-bold text-2xl">{recommendation.cover.name}</span>
+            <span>{recommendation.cover.type}</span>
             <span className="font-bold">Chain: </span>
           </div>
         </div>
@@ -21,6 +22,9 @@ export default function QuoteCard(props: Quote): ReactElement {
         </div>
         <div className="mt-3 w-full flex flex-row">
           <span className="font-bold">Detected token: </span>
+          {recommendation.reasoning.map((reason) => (
+            <img src={reason.logoUrl} className="ml-2 w-6 h-6 rounded-md" alt="assets" />
+          ))}
         </div>
         <div className="mt-3 w-full flex flex-row">
           <span className="font-bold">Why this protocol appears ?</span>
