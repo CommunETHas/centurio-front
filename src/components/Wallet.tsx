@@ -1,4 +1,5 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { injectedConnector } from '../views/App';
@@ -6,10 +7,17 @@ import MetaMaskLogo from '../assets/wallets/logo_metamask.png';
 
 export default function Wallet(): ReactElement {
   const { activate, active } = useWeb3React<Web3Provider>();
+  const history = useHistory();
 
   const onClick = async () => {
     await activate(injectedConnector);
   };
+
+  useEffect(() => {
+    if (active) {
+      history.push('/dashboard');
+    }
+  });
 
   return (
     <div>

@@ -35,7 +35,6 @@ module.exports = {
       ternary: '#BE7E7E',
       comment: '#A5A5A5',
     },
-
     extend: {
       backgroundColor: (theme) => ({
         ...theme('colors'),
@@ -46,7 +45,7 @@ module.exports = {
       colors: {
         white: '#FFFFFF',
         primary: '#20252E',
-        secondary: '#20252E',
+        secondary: '#FFFFFF',
         ternary: '#BE7E7E',
       },
       fontSize: {
@@ -98,6 +97,9 @@ module.exports = {
       gap: {
         11: '2.75rem',
         13: '3.25rem',
+      },
+      gridTemplateRows: {
+        info: 'auto 0fr',
       },
     },
   },

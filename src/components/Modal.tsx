@@ -88,6 +88,7 @@ export default function Modal(): ReactElement {
                     </div>
                     <div className="relative w-full">
                       <input
+                        disabled
                         placeholder="e.g 0xcb613........67a145"
                         className="w-full h-10 absolute z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full"
                       />
