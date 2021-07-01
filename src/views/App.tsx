@@ -1,6 +1,12 @@
-import React, { lazy, ReactElement, Suspense } from 'react';
+import React, {
+  lazy,
+  useEffect,
+  useState,
+  ReactElement,
+  Suspense,
+} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Web3ReactProvider } from '@web3-react/core';
+import { Web3ReactProvider, useWeb3React } from '@web3-react/core';
 import { Web3Provider, ExternalProvider } from '@ethersproject/providers';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import LoadingOrError from '../components/Utils/LoadingOrError';
@@ -8,6 +14,7 @@ import Footer from './Footer/Footer';
 import NavbarHeader from './Header/NavBarHeader';
 import ModalWallet from '../components/Modal';
 import GlobalContext from '../contexts/GlobalContext';
+import { useEagerConnect, useInactiveListener } from '../hooks';
 
 const HomeView = lazy(() => import('./Home/HomeView'));
 const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
@@ -30,30 +37,44 @@ function getLibrary(provider: ExternalProvider): Web3Provider {
   return library;
 }
 
-export default function App(): ReactElement {
+export function App(): ReactElement {
+  const { connector } = useWeb3React<Web3Provider>();
+  const [activatingConnector, setActivatingConnector] = useState<any>();
+
+  useEffect(() => {
+    if (activatingConnector && activatingConnector === connector) {
+      setActivatingConnector();
+    }
+  }, [activatingConnector, connector]);
+
+  const triedEager = useEagerConnect();
+  useInactiveListener(!triedEager || !!activatingConnector);
+
   return (
     <GlobalContext>
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <BrowserRouter>
-          <div className="flex flex-col h-screen">
-            <Suspense fallback={<LoadingOrError />}>
-              <ModalWallet />
-              <NavbarHeader />
-              <Switch>
-                <Route exact path="/" component={HomeView} />
-                <Route exact path="/dashboard" component={OnBoardingView} />
-                <Route
-                  exact
-                  path="/notification"
-                  component={NotificationView}
-                />
-                <Route component={NoMatchView} />
-              </Switch>
-            </Suspense>
-            <Footer />
-          </div>
-        </BrowserRouter>
-      </Web3ReactProvider>
+      <BrowserRouter>
+        <div className="flex flex-col h-screen">
+          <Suspense fallback={<LoadingOrError />}>
+            <ModalWallet />
+            <NavbarHeader />
+            <Switch>
+              <Route exact path="/" component={HomeView} />
+              <Route exact path="/dashboard" component={OnBoardingView} />
+              <Route exact path="/notification" component={NotificationView} />
+              <Route component={NoMatchView} />
+            </Switch>
+          </Suspense>
+          <Footer />
+        </div>
+      </BrowserRouter>
     </GlobalContext>
+  );
+}
+
+export default function () {
+  return (
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <App />
+    </Web3ReactProvider>
   );
 }
