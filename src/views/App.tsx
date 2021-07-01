@@ -39,11 +39,11 @@ function getLibrary(provider: ExternalProvider): Web3Provider {
 
 export function App(): ReactElement {
   const { connector } = useWeb3React<Web3Provider>();
-  const [activatingConnector, setActivatingConnector] = useState<any>();
+  const [activatingConnector, setActivatingConnector] = useState<any>({});
 
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
-      setActivatingConnector();
+      setActivatingConnector({});
     }
   }, [activatingConnector, connector]);
 
