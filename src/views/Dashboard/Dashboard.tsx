@@ -10,24 +10,28 @@ import ShieldLogo from '../../assets/logo_shield_variant_ternary.png';
 export default function Dashboard(): ReactElement {
   const { account, active } = useWeb3React<Web3Provider>();
   const [recommendations, setRecommendations] = useState<Recommendations[]>([]);
-  const [unsupportedTokens, setUnsupportedTokens] = useState<UnsupportedTokens[]>([]);
+  const [unsupportedTokens, setUnsupportedTokens] = useState<
+    UnsupportedTokens[]
+  >([]);
 
   async function fethCoverRecommendations(accountAddr: string) {
-    console.log("data", data.recommendations);
-      setRecommendations(data.recommendations)
-      setUnsupportedTokens(data.unsupportedTokens)
-      // const { data } = await HttpRequest.getCoverRecommendations(accountAddr);
-      // if (data.recommendations) {
-      //
-      //   setRecommendations(data.recommendations);
-      // } else {
-      //   setRecommendations([]);
-      // }
+    console.log('data', data.recommendations);
+    setRecommendations(data.recommendations);
+    setUnsupportedTokens(data.unsupportedTokens);
+    // const { data } = await HttpRequest.getCoverRecommendations(accountAddr);
+    // if (data.recommendations) {
+    //
+    //   setRecommendations(data.recommendations);
+    // } else {
+    //   setRecommendations([]);
+    // }
   }
 
   useEffect(() => {
-    if(account){
-      fethCoverRecommendations(account).catch(() => console.log("[Error]: fetch cover recommendation"));
+    if (account) {
+      fethCoverRecommendations(account).catch(() =>
+        console.log('[Error]: fetch cover recommendation'),
+      );
     }
   }, []);
 
@@ -38,30 +42,39 @@ export default function Dashboard(): ReactElement {
           {unsupportedTokens && unsupportedTokens.length > 0 ? (
             <>
               <div className="relative w-full rounded-lg">
-                <div className="p-4 rounded-lg bg-ternary relative z-10 text-secondary">
-                  <div className='font-bold'>
-                    Unrecognized assets:
-                  </div>
-                  <div className='mt-2 grid md:grid-cols-5 sm:grid-cols-3 gap-4'>
-                        {unsupportedTokens.map((token) => (
-                          <div className='flex gap-x-2'>
-                            <img src={token.symbol} className="ml-2 w-6 h-6 rounded-md" alt="unreconizedAssets" />
-                            <span>{token.name}</span>
-                          </div>
-                        ))}
+                <div className="absolute rounded-lg w-full h-full -right-2 -bottom-2 bg-transparent border border-ternary" />
+                <div className="relative p-4 rounded-lg bg-ternary z-10 text-secondary">
+                  <div className="font-bold">Unrecognized assets:</div>
+                  <div className="mt-2 grid md:grid-cols-5 sm:grid-cols-3 gap-4">
+                    {unsupportedTokens.map((token) => (
+                      <div className="flex gap-x-2">
+                        <img
+                          src={token.symbol}
+                          className="ml-2 w-6 h-6 rounded-md"
+                          alt="unreconizedAssets"
+                        />
+                        <span>{token.name}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </>
-          ) : (<></>)
-          }
-          <div className='flex flex-row justify-center'>
-            <div className='relative mt-6 flex flex-col'>
+          ) : (
+            <></>
+          )}
+          <div className="flex flex-row justify-center">
+            <div className="relative mt-6 flex flex-col">
               <span className="flex text-secondary font-bold text-xl">
                 COVERS RECOMMENDATIONS
               </span>
-              <img className="absolute -right-9 h-7 w-7" src={Help} alt="help" />
-              <div className='mt-2 w-full px-5'>
+              <div className="absolute bg-ternary top-1 -right-9 h-6 w-6 rounded-full" />
+              <img
+                className="absolute -right-9 h-7 w-7"
+                src={Help}
+                alt="help"
+              />
+              <div className="mt-2 w-full px-5">
                 <div className="w-full h-0.5 bg-secondary" />
               </div>
             </div>
