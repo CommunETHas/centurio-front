@@ -1,7 +1,7 @@
 export default interface DashboardData {
   count: number;
   recommendations: Recommendations[];
-  unsupportedTokens: UnsupportedTokens[];
+  unsuportedTokens: UnsuportedTokens[];
 }
 
 export interface Recommendations {
@@ -9,11 +9,12 @@ export interface Recommendations {
   reasoning: Reasoning[];
 }
 
-export interface UnsupportedTokens {
+export interface UnsuportedTokens {
   name: string;
   address: string;
   symbol: string;
   owner: string;
+  logoUrl: string;
 }
 
 export interface RecommendationCover {

@@ -1,37 +1,42 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { Web3Provider } from '@ethersproject/providers';
 import { useWeb3React } from '@web3-react/core';
 import QuoteCard from '../../components/QuoteCard';
-import { Recommendations, UnsupportedTokens } from '../../api/models/cover';
-import data from '../../api/fakeData/fakeDashBoardData';
+import { Recommendations, UnsuportedTokens } from '../../api/models/cover';
 import Help from '../../assets/icons/help.svg';
-import ShieldLogo from '../../assets/logo_shield_variant_ternary.png';
+import Close from '../../assets/icons/close.svg';
+import HttpRequest from '../../api/api';
 
 export default function Dashboard(): ReactElement {
   const { account, active } = useWeb3React<Web3Provider>();
+  const tooltipBox = useRef(null);
   const [recommendations, setRecommendations] = useState<Recommendations[]>([]);
+  const [tooltipIsDisplay, setTooltipIsDisplay] = useState<boolean>(false);
   const [unsupportedTokens, setUnsupportedTokens] = useState<
-    UnsupportedTokens[]
+    UnsuportedTokens[]
   >([]);
 
-  async function fethCoverRecommendations(accountAddr: string) {
-    console.log('data', data.recommendations);
-    setRecommendations(data.recommendations);
-    setUnsupportedTokens(data.unsupportedTokens);
-    // const { data } = await HttpRequest.getCoverRecommendations(accountAddr);
-    // if (data.recommendations) {
-    //
-    //   setRecommendations(data.recommendations);
-    // } else {
-    //   setRecommendations([]);
-    // }
-  }
+  const fethCoverRecommendations = async (accountAddr: string) => {
+    const { data } = await HttpRequest.getCoverRecommendations(accountAddr);
+    if (data.recommendations) {
+      setRecommendations(data.recommendations);
+    } else {
+      setRecommendations([]);
+    }
+    if (data.unsuportedTokens) {
+      setUnsupportedTokens(data.unsuportedTokens);
+    } else {
+      setUnsupportedTokens([]);
+    }
+  };
+
+  const displayPopup = () => {
+    setTooltipIsDisplay(!tooltipIsDisplay);
+  };
 
   useEffect(() => {
     if (account) {
-      fethCoverRecommendations(account).catch(() =>
-        console.log('[Error]: fetch cover recommendation'),
-      );
+      fethCoverRecommendations(account).catch(() => {});
     }
   }, []);
 
@@ -49,7 +54,7 @@ export default function Dashboard(): ReactElement {
                     {unsupportedTokens.map((token) => (
                       <div className="flex gap-x-2">
                         <img
-                          src={token.symbol}
+                          src={`https://assets.trustwalletapp.com/blockchains/ethereum/assets/${token.address}/logo.png`}
                           className="ml-2 w-6 h-6 rounded-md"
                           alt="unreconizedAssets"
                         />
@@ -68,11 +73,41 @@ export default function Dashboard(): ReactElement {
               <span className="flex text-secondary font-bold text-xl">
                 COVERS RECOMMENDATIONS
               </span>
-              <div className="absolute bg-ternary top-1 -right-9 h-6 w-6 rounded-full" />
+              <div className="absolute bg-ternary top-1 -right-9 h-6 w-6 rounded-full">
+                <div
+                  ref={tooltipBox}
+                  className={`${
+                    tooltipIsDisplay ? '' : 'hidden '
+                  }'absolute rounded-full'`}
+                >
+                  <div className="absolute w-full h-full -right-10 -bottom-2 bg-transparent border border-white rounded-lg" />
+                  <div className="relative z-50 px-5 pt-2 pb-3 w-60 bg-secondary rounded-lg">
+                    <div className="flex flex-col">
+                      <div className="flex flex-row justify-between">
+                        <span className="font-bold">Info: </span>
+                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+                        <img
+                          className="h-5 w-5 transition duration-500 ease-in-out cursor-pointer"
+                          src={Close}
+                          alt="help"
+                          onClick={() => displayPopup()}
+                        />
+                      </div>
+                      <span className="text-sm">
+                        {'Here you can see which covers is recommended for your\n' +
+                          "                        wallet. Be aware that custodian placement can't be\n" +
+                          '                        detected.'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
               <img
-                className="absolute -right-9 h-7 w-7"
+                className="absolute -right-9 h-7 w-7 transition duration-500 ease-in-out transform hover:translate-y-0.5 hover:translate-x-0.5 cursor-pointer"
                 src={Help}
                 alt="help"
+                onClick={() => displayPopup()}
               />
               <div className="mt-2 w-full px-5">
                 <div className="w-full h-0.5 bg-secondary" />
