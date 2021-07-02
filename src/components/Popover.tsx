@@ -1,76 +1,96 @@
-import React, {
-  useContext,
-  useEffect,
-  createRef,
-  ReactElement,
-  RefObject,
-} from 'react';
-import { Link } from 'react-router-dom';
-import { createPopper } from '@popperjs/core';
+import React, { useContext, ReactElement, RefObject } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
+import { motion } from 'framer-motion';
 import { GlobalContext } from '../contexts/GlobalContext';
 import { ContextType } from '../api/models/user';
+
+const variants = {
+  open: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+  },
+  closed: {
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
+};
+
+const variantsMenu = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 },
+    },
+  },
+  closed: {
+    y: 50,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000 },
+    },
+  },
+};
 
 const Popover = ({ btnRef }: PopoverProps) => {
   const { popoverShow, setPopoverShow } = useContext(
     GlobalContext,
   ) as ContextType;
   const { deactivate } = useWeb3React<Web3Provider>();
-  const popoverRef = createRef<HTMLDivElement>();
-
-  useEffect(() => {
-    if (popoverRef.current !== null && btnRef.current !== null) {
-      createPopper(btnRef.current, popoverRef.current, {
-        placement: 'bottom-end',
-      });
-    }
-  }, [btnRef, popoverRef]);
+  const history = useHistory();
 
   const onClose = () => {
     deactivate();
     setPopoverShow(false);
   };
 
+  const onCloseRedirect = (path: string) => {
+    setPopoverShow(false);
+    history.push(path);
+  };
+
+  const menuItems: MenuItem[] = [
+    { id: 1, text: 'Dashboard', onClick: () => onCloseRedirect('/dashboard') },
+    {
+      id: 2,
+      text: 'Notifications',
+      onClick: () => onCloseRedirect('/notification'),
+    },
+    { id: 3, text: 'Disconnect Wallet', onClick: () => onClose() },
+  ];
+
+  const Navigation = () => (
+    <motion.ul variants={variants} className="pt-3">
+      {menuItems.map((menuItem) => (
+        <motion.li
+          key={menuItem.id}
+          variants={variantsMenu}
+          className="relative mt-3"
+        >
+          <button
+            type="button"
+            onClick={menuItem.onClick}
+            className="z-10 bg-secondary absolute focus:outline-none h-7 w-40 border border-secondary text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+          >
+            {menuItem.text}
+          </button>
+          <div className=" bg-transparent focus:outline-none h-7 w-40 border border-ternary rounded-full transform translate-x-1 translate-y-1" />
+        </motion.li>
+      ))}
+    </motion.ul>
+  );
+
   return (
     <>
-      <div className="flex flex-wrap">
-        <div className="w-full text-center">
-          <div
-            className={`${
-              popoverShow ? '' : 'hidden '
-            }bg-ternary border-0 mr-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg`}
-            ref={popoverRef}
-          >
-            <div className="p-3">
-              <Link
-                onClick={() => setPopoverShow(false)}
-                to="/dashboard"
-                className="text-center absolute z-10 bg-secondary focus:outline-none h-7 w-40 border border-white text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
-              >
-                Go to Dashboard
-              </Link>
-              <div className="mb-3 bg-transparent focus:outline-none h-7 w-40 border border-white rounded-full transform translate-x-1 translate-y-1" />
-              <Link
-                onClick={() => setPopoverShow(false)}
-                to="/notification"
-                className="text-center absolute z-10 bg-secondary focus:outline-none h-10 w-40 border border-white text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
-              >
-                Notification preferences
-              </Link>
-              <div className="mb-3 bg-transparent focus:outline-none h-10 w-40 border border-white rounded-full transform translate-x-1 translate-y-1" />
-              <button
-                type="button"
-                onClick={onClose}
-                className="absolute z-10 bg-secondary focus:outline-none h-7 w-40 border border-white text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
-              >
-                Disconnect wallet
-              </button>
-              <div className=" bg-transparent focus:outline-none h-7 w-40 border border-white rounded-full transform translate-x-1 translate-y-1" />
-            </div>
-          </div>
-        </div>
-      </div>
+      <motion.nav
+        initial={false}
+        animate={popoverShow ? 'open' : 'closed'}
+        // @ts-ignore
+        ref={btnRef.current}
+      >
+        <motion.div className="background" />
+        <Navigation />
+      </motion.nav>
     </>
   );
 };
@@ -91,4 +111,10 @@ type PopoverRenderProps = {
 
 type PopoverProps = {
   btnRef: RefObject<HTMLButtonElement>;
+};
+
+type MenuItem = {
+  id: number;
+  text: string;
+  onClick: () => void;
 };
