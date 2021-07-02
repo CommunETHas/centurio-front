@@ -1,4 +1,3 @@
-const colors = require('tailwindcss/colors');
 const formsPlugin = require('@tailwindcss/forms');
 
 module.exports = {
@@ -14,7 +13,7 @@ module.exports = {
       secondary: '#20252E',
       ternary: '#BE7E7E',
     },
-    borderColor:{
+    borderColor: {
       white: '#FFFFFF',
       primary: '#20252E',
       secondary: '#20252E',
@@ -36,7 +35,6 @@ module.exports = {
       ternary: '#BE7E7E',
       comment: '#A5A5A5',
     },
-
     extend: {
       backgroundColor: (theme) => ({
         ...theme('colors'),
@@ -47,7 +45,7 @@ module.exports = {
       colors: {
         white: '#FFFFFF',
         primary: '#20252E',
-        secondary: '#20252E',
+        secondary: '#FFFFFF',
         ternary: '#BE7E7E',
       },
       fontSize: {
@@ -72,24 +70,26 @@ module.exports = {
       height: {
         divbg: '70rem',
         divbg2: '100rem',
+        divider: '0.05rem',
         'button-started': '4rem',
         'shield-logo': '17rem',
         'battle-logo': '25rem',
         'socrate-logo': '25rem',
-        'logo': '3rem',
-        'logo-token': '2.5rem'
+        logo: '3rem',
+        'logo-token': '2.5rem',
       },
       width: {
         divbg: '70rem',
         title: '26rem',
         'button-started': '26rem',
-        'modal': '30rem',
-        para: '30rem'
+        modal: '30rem',
+        para: '30rem',
       },
       translate: {
+        3: '0.75rem',
         90: '-20rem',
         100: '-30rem',
-        socrate: '18rem'
+        socrate: '18rem',
       },
       rotate: {
         60: '-60deg',
@@ -97,6 +97,9 @@ module.exports = {
       gap: {
         11: '2.75rem',
         13: '3.25rem',
+      },
+      gridTemplateRows: {
+        info: 'auto 0fr',
       },
     },
   },

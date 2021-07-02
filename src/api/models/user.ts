@@ -11,7 +11,7 @@ export interface UserAuthentication {
 
 export type ContextType = {
   user: User;
-  saveUser: (user: User) => void;
+  setUser: (user: User) => void;
   openModal: boolean;
   setOpenModal: (boolean: boolean) => void;
   popoverShow: boolean;
