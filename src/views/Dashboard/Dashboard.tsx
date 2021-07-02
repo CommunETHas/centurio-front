@@ -1,6 +1,6 @@
 import React, {
-  BaseSyntheticEvent,
-  ReactElement,
+  BaseSyntheticEvent, Fragment,
+  ReactElement, useContext,
   useEffect,
   useRef,
   useState,
@@ -12,10 +12,14 @@ import { Recommendations, UnsuportedTokens } from '../../api/models/cover';
 import Help from '../../assets/icons/help.svg';
 import Close from '../../assets/icons/close.svg';
 import HttpRequest from '../../api/api';
+import { Transition, Popover } from '@headlessui/react';
+import { GlobalContext } from '../../contexts/GlobalContext';
+import { ContextType } from '../../api/models/user';
 
 export default function Dashboard(): ReactElement {
   const { account, active } = useWeb3React<Web3Provider>();
   const tooltipBox = useRef(null);
+  const { openInfo, setOpenInfo } = useContext(GlobalContext) as ContextType;
   const [recommendations, setRecommendations] = useState<Recommendations[]>([]);
   const [tooltipIsDisplay, setTooltipIsDisplay] = useState<boolean>(false);
   const [unsupportedTokens, setUnsupportedTokens] = useState<
@@ -84,6 +88,53 @@ export default function Dashboard(): ReactElement {
                 COVERS RECOMMENDATIONS
               </span>
               <div className="absolute bg-ternary top-1 -right-9 h-6 w-6 rounded-full">
+                <Popover className="relative">
+                  {({ open }) => (
+                    <>
+                      <Popover.Button>
+                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+                        <img
+                          className="absolute -right-9 h-7 w-7 transition duration-500 ease-in-out transform hover:translate-y-0.5 hover:translate-x-0.5 cursor-pointer"
+                          src={Help}
+                          alt="help"
+                          onClick={() => displayPopup()}
+                        />
+                        
+                      </Popover.Button>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-200"
+                        enterFrom="opacity-0 translate-y-1"
+                        enterTo="opacity-100 translate-y-0"
+                        leave="transition ease-in duration-150"
+                        leaveFrom="opacity-100 translate-y-0"
+                        leaveTo="opacity-0 translate-y-1"
+                      >
+                        <Popover.Panel className="absolute z-10 w-screen max-w-sm px-4 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0 lg:max-w-3xl">
+                            <div className="overflow-hidden relative z-50 px-5 pt-2 pb-3 w-60 bg-secondary rounded-lg">
+                              <div className="flex flex-col">
+                                <div className="flex flex-row justify-between">
+                                  <span className="font-bold">Info: </span>
+                                  {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+                                  <img
+                                    className="h-5 w-5 transition duration-500 ease-in-out cursor-pointer"
+                                    src={Close}
+                                    alt="help"
+                                    onClick={() => displayPopup()}
+                                  />
+                                </div>
+                                <span className="text-sm">
+                        {'Here you can see which covers is recommended for your\n' +
+                        "                        wallet. Be aware that custodian placement can't be\n" +
+                        '                        detected.'}
+                      </span>
+                            </div>
+                          </div>
+                        </Popover.Panel>
+                      </Transition>
+                    </>
+                  )}
+                </Popover>
                 <div
                   ref={tooltipBox}
                   className={`${
@@ -111,16 +162,6 @@ export default function Dashboard(): ReactElement {
                     </div>
                   </div>
                 </div>
-              </div>
-              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
-              <img
-                className="absolute -right-9 h-7 w-7 transition duration-500 ease-in-out transform hover:translate-y-0.5 hover:translate-x-0.5 cursor-pointer"
-                src={Help}
-                alt="help"
-                onClick={() => displayPopup()}
-              />
-              <div className="mt-2 w-full px-5">
-                <div className="w-full h-0.5 bg-secondary" />
               </div>
             </div>
           </div>
