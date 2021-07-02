@@ -1,4 +1,10 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, {
+  BaseSyntheticEvent,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Web3Provider } from '@ethersproject/providers';
 import { useWeb3React } from '@web3-react/core';
 import QuoteCard from '../../components/QuoteCard';
@@ -17,16 +23,14 @@ export default function Dashboard(): ReactElement {
   >([]);
 
   const fethCoverRecommendations = async (accountAddr: string) => {
-    const { data } = await HttpRequest.getCoverRecommendations(accountAddr);
+    const { data } = await HttpRequest.getCoverRecommendations(
+      '0xef7dfa2a8213cd9814f258ac5e09044f2f3a826c',
+    );
     if (data.recommendations) {
       setRecommendations(data.recommendations);
-    } else {
-      setRecommendations([]);
     }
     if (data.unsuportedTokens) {
       setUnsupportedTokens(data.unsuportedTokens);
-    } else {
-      setUnsupportedTokens([]);
     }
   };
 
@@ -54,7 +58,13 @@ export default function Dashboard(): ReactElement {
                     {unsupportedTokens.map((token) => (
                       <div className="flex gap-x-2">
                         <img
-                          src={`https://assets.trustwalletapp.com/blockchains/ethereum/assets/${token.address}/logo.png`}
+                          src={`https://centurio.azureedge.net/asset${token.logoUrl}`.replace(
+                            '/logo',
+                            '',
+                          )}
+                          onError={(e: BaseSyntheticEvent) => {
+                            e.target.src = '/src/assets/icons/help.svg';
+                          }}
                           className="ml-2 w-6 h-6 rounded-md"
                           alt="unreconizedAssets"
                         />
