@@ -15,20 +15,11 @@ const GlobalProvider: FC = ({ children }) => {
   const [popoverShow, setPopoverShow] = useCycle(false, true);
   const [isUserCreated, setIsUserCreated] = useState<boolean>(false);
 
-  const saveUser = (user: User) => {
-    const newUser: User = {
-      address: user.address,
-      nonce: user.nonce,
-      email: user.email,
-    };
-    setUser(newUser);
-  };
-
   return (
     <GlobalContext.Provider
       value={{
         user,
-        saveUser,
+        setUser,
         openModal,
         setOpenModal,
         popoverShow,

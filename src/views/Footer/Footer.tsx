@@ -1,8 +1,9 @@
 import React, { ReactElement } from 'react';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 export default function Footer(): ReactElement {
   return (
-    <footer className="footer justify-end h-10 bg-primary flex">
+    <footer className="footer justify-end h-10 bg-primary flex items-center">
       <a href="http://localhost" className="text-secondary p-2">
         Privacy policy
       </a>
@@ -11,9 +12,9 @@ export default function Footer(): ReactElement {
       </a>
       <a
         href="https://github.com/CenturioHackMoney21"
-        className="text-secondary p-2"
+        className="text-secondary ml-2 mr-4"
       >
-        Github
+        <GitHubIcon />
       </a>
     </footer>
   );

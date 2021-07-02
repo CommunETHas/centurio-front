@@ -34,7 +34,7 @@ function classNames(...classes: any) {
 
 export default function Notification(): ReactElement {
   const { active, account, library } = useWeb3React<Web3Provider>();
-  const { user, saveUser, setIsUserCreated } = useContext(
+  const { user, setUser, setIsUserCreated } = useContext(
     GlobalContext,
   ) as ContextType;
   const [selected, setSelected] = useState(options[0]);
@@ -43,7 +43,7 @@ export default function Notification(): ReactElement {
     await HttpRequest.getUser(account)
       .then(({ data }) => {
         setIsUserCreated(true);
-        saveUser(data);
+        setUser(data);
       })
       .catch(() => {
         setIsUserCreated(false);
@@ -67,7 +67,7 @@ export default function Notification(): ReactElement {
         )
         .then(async (signature: string) => {
           await HttpRequest.authenticate({
-            user: { address: account, email: '' },
+            user: { address: account, email: '', nonce: user.nonce },
             signature,
           });
         })

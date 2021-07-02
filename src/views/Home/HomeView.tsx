@@ -142,7 +142,7 @@ export default function HomeView(): ReactElement {
               scale: 1,
               opacity: 1,
               rotate: -60,
-              translateY: 10,
+              translateY: -10,
               translateX: -300,
             }}
             animate={{ scale: 1.1, opacity: 0 }}
