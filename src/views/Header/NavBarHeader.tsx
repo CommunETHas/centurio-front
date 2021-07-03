@@ -21,17 +21,18 @@ export default function NavbarHeader(): ReactElement {
 
   return (
     <>
-      <nav className="z-20 flex items-center justify-between flex-wrap bg-teal p-1 bg-primary">
+      <nav className="z-20 bg-primary">
+        <div className='flex flex-row items-center justify-between p-1'>
         <Link
           to="/"
-          className="flex items-center flex-no-shrink text-primary mr-6"
+          className="flex flex-row items-center text-primary"
         >
           <img className="h-logo" src={Logo} alt="centurio" />
           <span className="font-semibold text-3xl text-secondary tracking-tight p-3">
             Centurio
           </span>
         </Link>
-        <div className="h-7 w-40 mr-6">
+        <div className="h-7 w-40 mr-3">
           {active ? (
             <>
               <button
@@ -40,25 +41,31 @@ export default function NavbarHeader(): ReactElement {
                 onClick={() =>
                   popoverShow ? setPopoverShow(false) : setPopoverShow(true)
                 }
-                className="absolute z-10 bg-ternary focus:outline-none h-7 w-40 border border-ternary text-xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+                className="relative z-10 h-full w-full text-xs text-secondary font-bold py-1 rounded-full"
               >
-                {account && formatWalletAddress(account)}
+                <div className="absolute bg-ternary pt-1 h-full w-full bottom-0 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1">
+                  {account && formatWalletAddress(account)}
+                </div>
+                <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-ternary rounded-full transform translate-x-1 translate-y-1"/>
               </button>
-              <div className=" bg-transparent focus:outline-none h-7 w-40 border border-ternary rounded-full transform translate-x-1 translate-y-1" />
               <Popover btnRef={btnRef} />
             </>
           ) : (
             <>
               <button
+                ref={btnRef}
                 type="button"
                 onClick={() => setOpenModal(true)}
-                className="absolute z-10 bg-secondary focus:outline-none h-7 w-40 border border-white text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+                className="relative z-10 h-full w-full py-1 rounded-full"
               >
-                Connect your wallet
+                <div className="absolute text-xs font-bold text-primary bg-secondary pt-1 h-full w-full bottom-0 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1">
+                  Connect your wallet
+                </div>
+                <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-white rounded-full transform translate-x-1 translate-y-1"/>
               </button>
-              <div className=" bg-transparent focus:outline-none h-7 w-40 border border-white rounded-full transform translate-x-1 translate-y-1" />
             </>
           )}
+        </div>
         </div>
       </nav>
     </>

@@ -19,3 +19,7 @@ main::-webkit-scrollbar-thumb {
   background-color: white;
   border-radius: 1rem;
 }
+
+button:focus{
+  outline: none;
+}
