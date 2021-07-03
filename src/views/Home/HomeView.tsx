@@ -29,7 +29,7 @@ export default function HomeView(): ReactElement {
 
   return (
     <main className="mb-auto h-screen w-screen overflow-auto">
-      <section className="relative h-full bg-primary grid md:grid-cols-2 sm:grid-cols-1 overflow-hidden">
+      <section className="relative h-full bg-primary grid md:grid-cols-2 sm:grid-cols-1">
         <div />
         <div className="m-auto flex">
           <div className="px-3 grid">
@@ -63,23 +63,23 @@ export default function HomeView(): ReactElement {
           </div>
           <img className="h-shield-logo ml-12" src={ShieldLogo} alt="shield" />
         </div>
-        {/*<motion.div*/}
-        {/*  className="z-20 absolute h-divbg w-1/2 bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary"*/}
-        {/*  initial={{*/}
-        {/*    scale: 1,*/}
-        {/*    opacity: 1,*/}
-        {/*    rotate: 45,*/}
-        {/*    translateY: 80,*/}
-        {/*    translateX: -480,*/}
-        {/*  }}*/}
-        {/*  animate={{ scale: 1.1, opacity: 0 }}*/}
-        {/*  transition={{*/}
-        {/*    duration: 3,*/}
-        {/*    type: 'spring',*/}
-        {/*    repeat: Number.POSITIVE_INFINITY,*/}
-        {/*  }}*/}
-        {/*/>*/}
-        {/*<div className="z-10 absolute transform translate-y-20 translate-x-100 rotate-45 h-divbg w-1/2 bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary" />*/}
+        <motion.div
+          className="z-20 absolute h-divbg w-1/2 bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary"
+          initial={{
+            scale: 1,
+            opacity: 1,
+            rotate: 45,
+            translateY: 80,
+            translateX: -480,
+          }}
+          animate={{ scale: 1.1, opacity: 0 }}
+          transition={{
+            duration: 3,
+            type: 'spring',
+            repeat: Number.POSITIVE_INFINITY,
+          }}
+        />
+        <div className="z-10 absolute transform translate-y-20 translate-x-100 rotate-45 h-divbg w-1/2 bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary" />
 
         <div className='z-50 absolute bottom-0 w-full bg-transparent flex flex-row justify-center'>
           <motion.div

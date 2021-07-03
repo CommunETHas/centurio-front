@@ -43,10 +43,10 @@ export default function NavbarHeader(): ReactElement {
                 }
                 className="relative z-10 h-full w-full text-xs text-secondary font-bold py-1 rounded-full"
               >
+                <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-ternary rounded-full transform translate-x-1 translate-y-1"/>
                 <div className="absolute bg-ternary pt-1 h-full w-full bottom-0 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1">
                   {account && formatWalletAddress(account)}
                 </div>
-                <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-ternary rounded-full transform translate-x-1 translate-y-1"/>
               </button>
               <Popover btnRef={btnRef} />
             </>
