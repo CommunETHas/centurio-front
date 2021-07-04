@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
-import Quote from '../api/models/quote';
+import React, { BaseSyntheticEvent, ReactElement } from 'react';
 import { Recommandations } from '../api/models/cover';
+import Help from '../assets/icons/help.svg';
 
 export default function QuoteCard(props: Recommandations): ReactElement {
   const recommandation: Recommandations = props;
@@ -30,6 +30,9 @@ export default function QuoteCard(props: Recommandations): ReactElement {
           {recommandation.reasoning.map((reason) => (
             <img
               src={reason.logoUrl}
+              onError={(e: BaseSyntheticEvent) => {
+                e.target.src = Help;
+              }}
               className="ml-2 w-6 h-6 rounded-md"
               alt="assets"
             />
