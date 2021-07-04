@@ -4,19 +4,44 @@ import React, {
   useContext,
   useEffect,
   ReactElement,
+  useState,
+  ChangeEvent,
 } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
+import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../contexts/GlobalContext';
 import Wallet from './Wallet';
 import { ContextType } from '../api/models/user';
+import Search from '../assets/icons/search.svg';
 
 export default function Modal(): ReactElement {
   const { active } = useWeb3React<Web3Provider>();
   const { openModal, setOpenModal } = useContext(GlobalContext) as ContextType;
+  const [walletAddress, setWalletAddress] = useState<string>('');
+  const [walletAddressError, setWalletAddressError] = useState<boolean>(false);
 
   const cancelButtonRef = useRef(null);
+  const history = useHistory();
+
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setWalletAddress(event.target.value);
+  };
+
+  const redirectOnPreviewDashboard = () => {
+    if (walletAddress.length !== 42) {
+      setWalletAddressError(true);
+    } else {
+      setWalletAddressError(false);
+      setOpenModal(false);
+      history.push({
+        pathname: 'dashboard-preview',
+        search: `?address=${walletAddress}`,
+      });
+      setWalletAddress('');
+    }
+  };
 
   useEffect(() => {
     if (active) {
@@ -86,13 +111,37 @@ export default function Modal(): ReactElement {
                       <span className="font-bold">OR</span> Use a wallet
                       address:
                     </div>
-                    <div className="relative h-10 w-full">
+                    <div className="relative h-10 flex flex-row w-full">
                       <input
-                        disabled
                         placeholder="e.g 0xcb613........67a145"
-                        className="relative w-full h-full z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full"
+                        onChange={handleInput}
+                        className="w-11/12 h-full z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold px-4 rounded-tl-full rounded-bl-full"
                       />
+                      <div className="h-full w-1/12 padding-y-1">
+                        <div className="relative bg-primary h-full rounded-tr-full rounded-br-full flex flex-col justify-center">
+                          <button
+                            type="button"
+                            onClick={redirectOnPreviewDashboard}
+                          >
+                            <img
+                              className="h-8 w-8 cursor-pointer"
+                              src={Search}
+                              alt="help"
+                            />
+                          </button>
+                          <div className="z-20 absolute -left-1 h-full bg-primary w-1" />
+                        </div>
+                      </div>
                     </div>
+                    {walletAddressError ? (
+                      <>
+                        <div className="relative h-10 flex flex-row w-full text-xs ml-4 text-negative">
+                          Wallet address must contains 42 characters
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
               </div>

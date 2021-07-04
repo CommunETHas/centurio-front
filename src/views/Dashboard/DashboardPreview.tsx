@@ -1,6 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Web3Provider } from '@ethersproject/providers';
-import { useWeb3React } from '@web3-react/core';
+import { useLocation, useHistory } from 'react-router-dom';
 import DashboardData, {
   Recommandations,
   UnsuportedTokens,
@@ -8,22 +7,27 @@ import DashboardData, {
 import HttpRequest from '../../api/api';
 import DashboardBody from '../../components/Dashboard/DashboardBody';
 
-export default function Dashboard(): ReactElement {
-  const { account, active } = useWeb3React<Web3Provider>();
+export default function DashboardPreview(): ReactElement {
   const [dashboardData, setDashboardData] = useState<DashboardData>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { search } = useLocation();
+  const history = useHistory();
+
   const fethCoverRecommendations = async (accountAddr: string) => {
     setIsLoading(true);
-    const { data } = await HttpRequest.getCoverRecommendations(
-      '0xef7dfa2a8213cd9814f258ac5e09044f2f3a826c',
-    );
+    const { data } = await HttpRequest.getCoverRecommendations(accountAddr);
     setDashboardData(data);
     setIsLoading(false);
   };
-
   useEffect(() => {
-    if (account) {
-      fethCoverRecommendations(account).catch(() => {});
+    history.listen((location) => {
+      fethCoverRecommendations(location.search.replace('?address=', '')).catch(
+        () => {},
+      );
+    });
+    const address = new URLSearchParams(search).get('address');
+    if (address) {
+      fethCoverRecommendations(address).catch(() => {});
     }
   }, []);
 

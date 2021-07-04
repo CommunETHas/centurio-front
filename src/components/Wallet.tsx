@@ -16,9 +16,7 @@ export default function Wallet(): ReactElement {
 
   useEffect(() => {
     if (active && account) {
-      HttpRequest.getUser(account).then(() => {
-
-      });
+      HttpRequest.getUser(account).then(() => {});
       history.push('/dashboard');
     }
   });
@@ -30,19 +28,18 @@ export default function Wallet(): ReactElement {
       ) : (
         <>
           <button
-            type='button'
+            type="button"
             onClick={onClick}
-            className='justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1'
+            className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
           >
             <img
               src={MetaMaskLogo}
-              alt='metamask'
-              className='logo-token h-logo-token pr-2'
+              alt="metamask"
+              className="logo-token h-logo-token pr-2"
             />
-            Connect your wallet
+            Metamask
           </button>
-          <div
-            className=' bg-transparent focus:outline-none h-16 w-60 border border-primary rounded-full transform translate-x-1 translate-y-1' />
+          <div className=" bg-transparent focus:outline-none h-16 w-60 border border-primary rounded-full transform translate-x-1 translate-y-1" />
         </>
       )}
     </div>
