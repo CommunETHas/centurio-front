@@ -86,7 +86,7 @@ export default function ModalAuthentication(): ReactElement {
                       <span className="font-bold">OR</span> specify your wallet
                       address:
                     </div>
-                    <div className="relative w-full">
+                    <div className="relative ">
                       <input
                         disabled
                         placeholder="e.g 0xcb613........67a145"
