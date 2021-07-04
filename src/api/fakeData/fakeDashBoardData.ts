@@ -2,7 +2,7 @@ import DashboardData from '../models/cover';
 
 const data: DashboardData = {
   count: 0,
-  recommendations: [
+  recommandations: [
     {
       cover: {
         name: 'Aave',
