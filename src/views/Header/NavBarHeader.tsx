@@ -21,7 +21,7 @@ export default function NavbarHeader(): ReactElement {
 
   return (
     <>
-      <nav className="z-20 bg-primary">
+      <nav className="nav-header z-20 bg-primary">
         <div className='flex flex-row items-center justify-between p-1'>
         <Link
           to="/"

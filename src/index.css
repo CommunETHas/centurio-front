@@ -23,3 +23,11 @@ main::-webkit-scrollbar-thumb {
 button:focus{
   outline: none;
 }
+
+.nav-header{
+  height: 9vh;
+}
+
+.content-landing{
+  height: 91vh;
+}
