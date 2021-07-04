@@ -70,11 +70,11 @@ const Popover = ({ btnRef }: PopoverProps) => {
           <button
             type="button"
             onClick={menuItem.onClick}
-            className="z-10 bg-secondary absolute focus:outline-none h-7 w-40 border border-secondary text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+            className="z-10 bg-secondary absolute focus:outline-none h-7 w-40 text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
           >
             {menuItem.text}
           </button>
-          <div className=" bg-transparent focus:outline-none h-7 w-40 border border-ternary rounded-full transform translate-x-1 translate-y-1" />
+          <div className=" bg-transparent focus:outline-none h-7 w-40 border border-white rounded-full transform translate-x-1 translate-y-1" />
         </motion.li>
       ))}
     </motion.ul>

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import Quote from './models/quote';
-import Cover from './models/cover';
+import DashboardData from './models/cover';
 import { UserAuthentication } from './models/user';
 
 const instance = axios.create({
@@ -10,10 +10,8 @@ const instance = axios.create({
 const HttpRequest = {
   getCovers: (): Promise<AxiosResponse<Quote[]>> =>
     instance.get<Quote[]>('cover'),
-  getCoverRecommendations: (
-    address: string | null | undefined,
-  ): Promise<AxiosResponse<Cover>> =>
-    instance.get<Cover>(`cover/recommend/${address}`),
+  getCoverRecommendations: (address: string): Promise<AxiosResponse<DashboardData>> =>
+    instance.get<DashboardData>(`cover/recommend/${address}`),
   getUser: (address: string | null | undefined): Promise<AxiosResponse<any>> =>
     instance.get<any>(`user/${address}`),
   insertUser: (

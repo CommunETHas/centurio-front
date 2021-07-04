@@ -1,19 +1,20 @@
-export default interface Cover {
+export default interface DashboardData {
   count: number;
   recommendations: Recommendations[];
-  unsupportedTokens: UnsupportedTokens[];
+  unsuportedTokens: UnsuportedTokens[];
 }
 
 export interface Recommendations {
   cover: RecommendationCover;
-  reasoning: Reasoning;
+  reasoning: Reasoning[];
 }
 
-export interface UnsupportedTokens {
+export interface UnsuportedTokens {
   name: string;
   address: string;
   symbol: string;
   owner: string;
+  logoUrl: string;
 }
 
 export interface RecommendationCover {
@@ -21,7 +22,7 @@ export interface RecommendationCover {
   address: string;
   type: string;
   logo: string;
-  supportedChains: [];
+  supportedChains: string[];
 }
 
 export interface Reasoning {
