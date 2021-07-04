@@ -20,14 +20,19 @@ main::-webkit-scrollbar-thumb {
   border-radius: 1rem;
 }
 
-button:focus{
+button:focus {
   outline: none;
 }
 
-.nav-header{
+.nav-header {
   height: 9vh;
 }
 
-.content-landing{
+.content-landing {
   height: 91vh;
+}
+
+.padding-y-1 {
+  padding-top: 1px;
+  padding-bottom: 1px;
 }

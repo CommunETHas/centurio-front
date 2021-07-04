@@ -56,7 +56,7 @@ export default function NavbarHeader(): ReactElement {
                   className="relative z-10 h-full w-full py-1 rounded-full"
                 >
                   <div className="absolute text-xs font-bold text-primary bg-secondary pt-1 h-full w-full bottom-0 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1">
-                    MetaMask
+                    Connect your wallet
                   </div>
                   <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-white rounded-full transform translate-x-1 translate-y-1" />
                 </button>

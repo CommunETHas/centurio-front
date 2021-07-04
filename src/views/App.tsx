@@ -18,6 +18,7 @@ import { useEagerConnect, useInactiveListener } from '../hooks';
 
 const HomeView = lazy(() => import('./Home/HomeView'));
 const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
+const DashboardPreview = lazy(() => import('./Dashboard/DashboardPreview'));
 const NotificationView = lazy(() => import('./Notification/Notification'));
 const NoMatchView = lazy(() => import('../components/Utils/NoMatchView'));
 
@@ -59,6 +60,11 @@ export function App(): ReactElement {
             <NavbarHeader />
             <Switch>
               <Route exact path="/" component={HomeView} />
+              <Route
+                exact
+                path="/dashboard-preview"
+                component={DashboardPreview}
+              />
               <Route exact path="/dashboard" component={OnBoardingView} />
               <Route exact path="/notification" component={NotificationView} />
               <Route component={NoMatchView} />

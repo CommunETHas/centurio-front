@@ -12,6 +12,7 @@ module.exports = {
       primary: '#20252E',
       secondary: '#20252E',
       ternary: '#BE7E7E',
+      shader: '#797979',
     },
     borderColor: {
       white: '#FFFFFF',
@@ -34,6 +35,7 @@ module.exports = {
       secondary: '#FFFFFF',
       ternary: '#BE7E7E',
       comment: '#A5A5A5',
+      negative: '#b91c1c',
     },
     extend: {
       backgroundColor: (theme) => ({
