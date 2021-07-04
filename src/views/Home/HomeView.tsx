@@ -29,11 +29,11 @@ export default function HomeView(): ReactElement {
 
   return (
     <main className="mb-auto h-screen w-screen overflow-auto">
-      <div className="overflow-hidden">
-        <section className="content-landing relative bg-primary grid md:grid-cols-2 sm:grid-cols-1">
+      <div className="overflow-hidden w-full">
+        <section className={`${windowWidth > 700 ? 'grid grid-cols-2' : 'flex flex-col justify-center'} relative content-landing w-full bg-primary`}>
           <div />
-          <div className="m-auto flex">
-            <div className="px-3 grid">
+          <div className='flex flex-row justify-center'>
+            <div className={`${windowWidth > 700 ? 'justify-center' : 'mb-20 w-full'} flex flex-col px-3`}>
               <span className={`${windowWidth > 700 ? 'text-title-home' : 'text-3xl'} text-secondary font-bold`}>
                 Find the right covers
               </span>
@@ -43,26 +43,33 @@ export default function HomeView(): ReactElement {
               <span className={`${windowWidth > 700 ? 'text-title-home' : 'text-3xl'} text-ternary mb-10`}>
                 personal needs
               </span>
-              <span className={`${windowWidth > 700 ? 'w-title text-xl' : 'w-full text-lg'} text-comment mb-10`}>
-                We’ll help you choose the good covers for your assets based on
-                your wallet.
+              <span className={`${windowWidth > 700 ? 'w-title text-xl' : 'text-lg'} text-comment mb-10`}>
+                We’ll help you choose the good covers for your assets based on your wallet.
               </span>
-              <div className={`${windowWidth > 700 ? 'w-button-started' : 'w-screen'} h-button-started`}>
+              <div className={`${windowWidth > 700 ? 'w-button-started' : 'w-full'} h-button-started`}>
                 {!active && (
                   <>
                     <button
                       type="button"
                       onClick={() => setOpenModal(true)}
-                      className="absolute text-button-text font-bold z-10 bg-secondary focus:outline-none h-button-started w-button-started border border-white text-xs text-primary font-bold rounded-full transition duration-500 ease-in-out transform hover:translate-y-3 hover:translate-x-3"
+                      className="relative h-full w-full text-button-text text-primary font-bold z-10"
                     >
-                      Get started
+                      <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-white rounded-full transform translate-x-1 translate-y-1"/>
+                      <div className="absolute bg-secondary h-full w-full bottom-0 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1">
+                        Get started
+                      </div>
                     </button>
-                    <div className=" bg-transparent focus:outline-none h-button-started w-button-started border border-white rounded-full transform translate-x-3 translate-y-3" />
                   </>
                 )}
               </div>
             </div>
-            <img className="h-shield-logo ml-12" src={ShieldLogo} alt="shield" />
+            {windowWidth > 700 ?
+              (<>
+                <div className='flex flex-col justify-center mb-32'>
+                  <img className="h-shield-logo ml-4" src={ShieldLogo} alt="shield" />
+                </div>
+              </>) :
+              (<></>)}
           </div>
           {windowWidth > 700 ?
             (<>
@@ -149,10 +156,10 @@ export default function HomeView(): ReactElement {
           }
           <div className={`${windowWidth < 700 ? 'w-screen' : ''} mt-10 z-40 flex justify-center items-center`}>
               <div className='flex flex-col w-para'>
-              <span className="px-3 mb-10 text-secondary text-2xl">
-              But DeFi can be complex to navigate and to be fully covered you
-              may need to deep dive into each protocol you invest in.
-              </span>
+                <span className="px-3 mb-10 text-secondary text-2xl">
+                But DeFi can be complex to navigate and to be fully covered you
+                may need to deep dive into each protocol you invest in.
+                </span>
                 <div className='w-full flex justify-center'>
                   <img
                     className={`${windowWidth > 700 ? 'absolute' : ''} h-socrate-logo opacity-90 transform translate-y-20`}
@@ -164,22 +171,22 @@ export default function HomeView(): ReactElement {
           </div>
           {windowWidth > 700 ?
             (<>
-              <motion.div
-                className="z-20 absolute transform translate-y-10 translate-x-90 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"
-                initial={{
-                  scale: 1,
-                  opacity: 1,
-                  rotate: -60,
-                  translateY: -10,
-                  translateX: -200,
-                }}
-                animate={{ scale: 1.1, opacity: 0 }}
-                transition={{
-                  duration: 4,
-                  type: 'spring',
-                  repeat: Number.POSITIVE_INFINITY,
-                }}
-              />
+              {/*<motion.div*/}
+              {/*  className="z-20 absolute transform translate-y-0 translate-x-100 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"*/}
+              {/*  initial={{*/}
+              {/*    scale: 1,*/}
+              {/*    opacity: 1,*/}
+              {/*    rotate: -60,*/}
+              {/*    translateY: -10,*/}
+              {/*    translateX: -100,*/}
+              {/*  }}*/}
+              {/*  animate={{ scale: 1.1, opacity: 0 }}*/}
+              {/*  transition={{*/}
+              {/*    duration: 4,*/}
+              {/*    type: 'spring',*/}
+              {/*    repeat: Number.POSITIVE_INFINITY,*/}
+              {/*  }}*/}
+              {/*/>*/}
               <div className="z-20 absolute transform translate-y-0 translate-x-100 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary" />
             </>) :
             (<></>)

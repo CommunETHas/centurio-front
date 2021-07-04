@@ -86,25 +86,24 @@ export default function Modal(): ReactElement {
                       <span className="font-bold">OR</span> specify your wallet
                       address:
                     </div>
-                    <div className="relative w-full">
+                    <div className="relative h-10 w-full">
                       <input
                         disabled
                         placeholder="e.g 0xcb613........67a145"
-                        className="w-full h-10 absolute z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full"
+                        className="relative w-full h-full z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full"
                       />
-                      <div className=" bg-transparent focus:outline-none h-10 border border-primary rounded-full transform translate-x-1 translate-y-1" />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <div className="flex flex-row justify-center p-3">
                 <button
                   type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="w-40 py-2 justify-center rounded-full bg-white text-base font-medium text-primary border border-primary"
                   onClick={() => setOpenModal(false)}
                   ref={cancelButtonRef}
                 >
-                  Cancel
+                  <span className='font-bold'>Cancel</span>
                 </button>
               </div>
             </div>
