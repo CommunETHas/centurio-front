@@ -21,7 +21,7 @@ export interface RecommandationCover {
   name: string;
   address: string;
   type: string;
-  logo: string;
+  logoUrl: string;
   supportedChains: string[];
 }
 

@@ -10,7 +10,7 @@ export default function QuoteCard(props: Recommandations): ReactElement {
       <div className="p-7 relative rounded-lg bg-secondary">
         <div className="w-full flex flex-row">
           <img
-            src={recommandation.cover.logo}
+            src={recommandation.cover.logoUrl}
             className="w-16 h-16 rounded-md"
             alt="token"
           />
