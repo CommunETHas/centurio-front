@@ -11,13 +11,13 @@ import { Web3Provider } from '@ethersproject/providers';
 import { Transition, Popover } from '@headlessui/react';
 import { useWeb3React } from '@web3-react/core';
 import QuoteCard from '../../components/QuoteCard';
-import { Recommendations, UnsuportedTokens } from '../../api/models/cover';
+import { Recommandations, UnsuportedTokens } from '../../api/models/cover';
 import Help from '../../assets/icons/help.svg';
 import HttpRequest from '../../api/api';
 
 export default function Dashboard(): ReactElement {
   const { account, active } = useWeb3React<Web3Provider>();
-  const [recommendations, setRecommendations] = useState<Recommendations[]>([]);
+  const [recommendations, setRecommendations] = useState<Recommandations[]>([]);
   const [tooltipIsDisplay, setTooltipIsDisplay] = useState<boolean>(false);
   const [unsupportedTokens, setUnsupportedTokens] = useState<
     UnsuportedTokens[]
@@ -27,8 +27,8 @@ export default function Dashboard(): ReactElement {
     const { data } = await HttpRequest.getCoverRecommendations(
       '0xef7dfa2a8213cd9814f258ac5e09044f2f3a826c',
     );
-    if (data.recommendations) {
-      setRecommendations(data.recommendations);
+    if (data.recommandations) {
+      setRecommendations(data.recommandations);
     }
     if (data.unsuportedTokens) {
       setUnsupportedTokens(data.unsuportedTokens);
@@ -54,14 +54,14 @@ export default function Dashboard(): ReactElement {
               <div className="relative w-full rounded-lg">
                 <div className="absolute rounded-lg w-full h-full -right-2 -bottom-2 bg-transparent border border-ternary" />
                 <div className="relative p-4 rounded-lg bg-ternary z-10 text-secondary">
-                  <div className="font-bold">Unrecognized assets:</div>
+                  <div className="font-bold">Unsupported assets:</div>
                   <div className="mt-2 grid xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 gap-4">
                     {unsupportedTokens.map((token) => (
                       <div className="flex gap-x-2">
                         <img
                           src={token.logoUrl}
                           onError={(e: BaseSyntheticEvent) => {
-                            e.target.src = '/src/assets/icons/help.svg';
+                            e.target.src = Help;
                           }}
                           className="ml-2 w-6 h-6 rounded-md"
                           alt="unreconizedAssets"
