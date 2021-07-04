@@ -83,7 +83,7 @@ export default function Modal(): ReactElement {
                       <div className="w-full h-divider bg-primary" />
                     </div>
                     <div className="text-center p-3 text-xl">
-                      <span className="font-bold">OR</span> specify your wallet
+                      <span className="font-bold">OR</span> Use a wallet
                       address:
                     </div>
                     <div className="relative w-full">

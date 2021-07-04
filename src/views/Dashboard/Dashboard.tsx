@@ -133,11 +133,11 @@ export default function Dashboard(): ReactElement {
           <div className="w-full px-20">
             {active ? (
               <span className="text-secondary">
-                Sorry ! You have no recommendations based on your asset.
+                Sorry ! We have no recommendations based on your assets.
               </span>
             ) : (
               <span className="text-secondary">
-                You must connect your wallet to view recommendations
+                You must connect your wallet to view recommendations.
               </span>
             )}
           </div>
