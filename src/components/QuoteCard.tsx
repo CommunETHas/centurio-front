@@ -1,24 +1,24 @@
 import React, { ReactElement } from 'react';
 import Quote from '../api/models/quote';
-import { Recommendations } from '../api/models/cover';
+import { Recommandations } from '../api/models/cover';
 
-export default function QuoteCard(props: Recommendations): ReactElement {
-  const recommendation: Recommendations = props;
+export default function QuoteCard(props: Recommandations): ReactElement {
+  const recommandation: Recommandations = props;
   return (
     <div className="relative w-full">
       <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-white rounded-lg" />
       <div className="p-7 relative rounded-lg bg-secondary">
         <div className="w-full flex flex-row">
           <img
-            src={recommendation.cover.logo}
+            src={recommandation.cover.logo}
             className="w-16 h-16 rounded-md"
             alt="token"
           />
           <div className="-mt-2 flex flex-col ml-3">
             <span className="font-bold text-2xl">
-              {recommendation.cover.name}
+              {recommandation.cover.name}
             </span>
-            <span>{recommendation.cover.type}</span>
+            <span>{recommandation.cover.type}</span>
             <span className="font-bold">Chain: </span>
           </div>
         </div>
@@ -27,7 +27,7 @@ export default function QuoteCard(props: Recommendations): ReactElement {
         </div>
         <div className="mt-3 w-full flex flex-row">
           <span className="font-bold">Detected token: </span>
-          {recommendation.reasoning.map((reason) => (
+          {recommandation.reasoning.map((reason) => (
             <img
               src={reason.logoUrl}
               className="ml-2 w-6 h-6 rounded-md"

@@ -1,11 +1,11 @@
 export default interface DashboardData {
   count: number;
-  recommendations: Recommendations[];
+  recommandations: Recommandations[];
   unsuportedTokens: UnsuportedTokens[];
 }
 
-export interface Recommendations {
-  cover: RecommendationCover;
+export interface Recommandations {
+  cover: RecommandationCover;
   reasoning: Reasoning[];
 }
 
@@ -17,7 +17,7 @@ export interface UnsuportedTokens {
   logoUrl: string;
 }
 
-export interface RecommendationCover {
+export interface RecommandationCover {
   name: string;
   address: string;
   type: string;
