@@ -2,7 +2,7 @@
   "name": "centurio-front",
   "homepage": "https://centurio-front.herokuapp.com",
   "license": "",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "vite --open",
