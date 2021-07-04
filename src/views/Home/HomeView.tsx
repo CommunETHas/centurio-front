@@ -35,16 +35,16 @@ export default function HomeView(): ReactElement {
           <div className="m-auto flex">
             <div className="px-3 grid">
               <span className={`${windowWidth > 700 ? 'text-title-home' : 'text-3xl'} text-secondary font-bold`}>
-                Find the right covers
+                Protect the assets
               </span>
               <span className={`${windowWidth > 700 ? 'text-title-home' : 'text-3xl'} text-secondary font-bold`}>
-                considering your
+                in your wallet.
               </span>
               <span className={`${windowWidth > 700 ? 'text-title-home' : 'text-3xl'} text-ternary mb-10`}>
-                personal needs
+                Take the right cover.
               </span>
               <span className={`${windowWidth > 700 ? 'w-title text-xl' : 'w-full text-lg'} text-comment mb-10`}>
-                We’ll help you choose the good covers for your assets based on
+                We help you find the right covers for your assets based on
                 your wallet.
               </span>
               <div className={`${windowWidth > 700 ? 'w-button-started' : 'w-screen'} h-button-started`}>
@@ -118,7 +118,7 @@ export default function HomeView(): ReactElement {
           <div className={`${windowWidth > 700 ? 'absolute' : ''} w-full flex fex-row justify-center pt-10`}>
             <div>
               <span className="text-secondary font-bold text-2xl">
-                Aave Stranger !
+                Aave DeFi Explorer !
               </span>
               <div className="mt-3 px-8 w-full flex flex-row">
                 <div className="w-full h-0.5 bg-secondary" />
@@ -133,9 +133,10 @@ export default function HomeView(): ReactElement {
                 alt="battle"
               />
               <span className="px-3 text-secondary text-2xl">
-              DeFi can be a brutal world and you can be rekt if you’re not
-              careful. But behold, Nexus Mutual is here to help you and offer a
-              vast offer of covers for your assets.
+              DeFi can be a brutal world: bugs, exploit, etc.
+              You can be rekt if you’re not careful. 
+              But, fear not, you can protect yourself from risks 
+              by getting covers for your assets.
               </span>
             </div>
           </div>
@@ -150,8 +151,11 @@ export default function HomeView(): ReactElement {
           <div className={`${windowWidth < 700 ? 'w-screen' : ''} mt-10 z-40 flex justify-center items-center`}>
               <div className='flex flex-col w-para'>
               <span className="px-3 mb-10 text-secondary text-2xl">
-              But DeFi can be complex to navigate and to be fully covered you
-              may need to deep dive into each protocol you invest in.
+              DeFi can be complex to understand. Composability makes protocol
+              use one another and to know exactly which
+              cover to choose for one specific asset, you
+              may need to deep dive into each protocol. Centurio will be
+              the thread that helps you navigate this maze.
               </span>
                 <div className='w-full flex justify-center'>
                   <img
