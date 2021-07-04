@@ -36,6 +36,7 @@ const data: DashboardData = {
       symbol:
         'https://centurio.blob.core.windows.net/asset/0x00000000008943c65cAf789FFFCF953bE156f6f8.png',
       owner: 'string',
+      logoUrl: 'test'
     },
     {
       name: 'eAAve',
@@ -43,6 +44,7 @@ const data: DashboardData = {
       symbol:
         'https://centurio.blob.core.windows.net/asset/0x00A79FF8fff20331B9DF63fC6f92eb7D9991C223.png',
       owner: 'string',
+      logoUrl: 'test'
     },
     {
       name: 'Chtoken',
@@ -50,6 +52,7 @@ const data: DashboardData = {
       symbol:
         'https://centurio.blob.core.windows.net/asset/0x009a7c8B62Ec98f734FdE06904Def69E95898726.png',
       owner: 'string',
+      logoUrl: 'test'
     },
     {
       name: 'Ikkk',
@@ -57,6 +60,7 @@ const data: DashboardData = {
       symbol:
         'https://centurio.blob.core.windows.net/asset/0x00B7db6B4431e345eee5cc23D21E8dbC1d5cADA3.png',
       owner: 'string',
+      logoUrl: 'test'
     },
     {
       name: 'LTOP',
@@ -64,6 +68,7 @@ const data: DashboardData = {
       symbol:
         'https://centurio.blob.core.windows.net/asset/0x00D270d9A41886A8E6E433911AE2F7D257b60051.png',
       owner: 'string',
+      logoUrl: 'test'
     },
   ],
 };
