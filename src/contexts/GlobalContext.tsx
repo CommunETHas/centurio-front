@@ -12,6 +12,7 @@ const GlobalProvider: FC = ({ children }) => {
   });
 
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openModalAuth, setOpenModalAuth] = useState<boolean>(false);
   const [popoverShow, setPopoverShow] = useCycle(false, true);
   const [isUserCreated, setIsUserCreated] = useState<boolean>(false);
 
@@ -22,6 +23,8 @@ const GlobalProvider: FC = ({ children }) => {
         setUser,
         openModal,
         setOpenModal,
+        openModalAuth,
+        setOpenModalAuth,
         popoverShow,
         setPopoverShow,
         isUserCreated,

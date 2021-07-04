@@ -33,7 +33,7 @@ function classNames(...classes: any) {
 }
 
 export default function Notification(): ReactElement {
-  const { active, account, library } = useWeb3React<Web3Provider>();
+  const { active, account } = useWeb3React<Web3Provider>();
   const { user, setUser, setIsUserCreated } = useContext(
     GlobalContext,
   ) as ContextType;
@@ -41,40 +41,16 @@ export default function Notification(): ReactElement {
 
   const fetchUser = async () => {
     await HttpRequest.getUser(account)
-      .then(({ data }) => {
-        setIsUserCreated(true);
-        setUser(data);
-      })
-      .catch(() => {
-        setIsUserCreated(false);
-      });
-  };
-
-  const createUser = async () => {
-    await HttpRequest.insertUser(account);
+      .then(({ data }) => {})
+      .catch(() => {});
   };
 
   const unscribeUser = async () => {
     await HttpRequest.unsubscribeUser(user);
   };
 
-  const signMessage = () => {
-    if (library !== undefined && account !== null && account !== undefined) {
-      library
-        .getSigner(account)
-        .signMessage(
-          `Welcome to Centurio, sign this message to authenticate ! ${user.nonce}`,
-        )
-        .then(async (signature: string) => {
-          await HttpRequest.authenticate({
-            user: { address: account, email: '', nonce: user.nonce },
-            signature,
-          });
-        })
-        .catch((error: any) => {
-          console.log(error && error.message);
-        });
-    }
+  const updateUser = async () => {
+    await HttpRequest.unsubscribeUser(user);
   };
 
   useEffect(() => {
@@ -84,12 +60,12 @@ export default function Notification(): ReactElement {
   return (
     <main className="w-screen bg-primary h-screen overflow-auto">
       {active ? (
-        <>
+        <div className="">
           <Listbox value={selected} onChange={setSelected}>
             {({ open }) => (
               <>
-                <Listbox.Label className="block text-sm font-medium text-gray-700">
-                  Assigned to
+                <Listbox.Label className="block text-sm font-medium text-secondary">
+                  Frequency of email notification
                 </Listbox.Label>
                 <div className="mt-1 relative">
                   <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -167,15 +143,29 @@ export default function Notification(): ReactElement {
             )}
           </Listbox>
 
+          <div className="relative w-full">
+            <input
+              placeholder="e.g test@gmail.com"
+              className="w-full h-10 absolute z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full"
+            />
+            <div className=" bg-transparent focus:outline-none h-10 border border-primary rounded-full transform translate-x-1 translate-y-1" />
+          </div>
+
           <button
             type="button"
-            onClick={signMessage}
             className="absolute z-10 bg-secondary focus:outline-none h-7 w-40 border border-white text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
           >
-            Subscribe
+            Update preferences
           </button>
           <div className=" bg-transparent focus:outline-none h-7 w-40 border border-white rounded-full transform translate-x-1 translate-y-1" />
-        </>
+          <button
+            type="button"
+            className="absolute z-10 bg-secondary focus:outline-none h-7 w-40 border border-white text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+          >
+            Unsubscribe
+          </button>
+          <div className=" bg-transparent focus:outline-none h-7 w-40 border border-white rounded-full transform translate-x-1 translate-y-1" />
+        </div>
       ) : (
         <div>You must connect your wallet to subscribe to notification.</div>
       )}
