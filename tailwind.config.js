@@ -36,6 +36,7 @@ module.exports = {
       ternary: '#BE7E7E',
       comment: '#A5A5A5',
       negative: '#b91c1c',
+      black: '#000000',
     },
     extend: {
       backgroundColor: (theme) => ({

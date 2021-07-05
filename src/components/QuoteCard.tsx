@@ -1,4 +1,5 @@
-import React, { BaseSyntheticEvent, ReactElement } from 'react';
+import React, { BaseSyntheticEvent, ReactElement, useRef } from 'react';
+import ReactTooltip from 'react-tooltip';
 import { Recommandations } from '../api/models/cover';
 import UnrecognizedAsset from '../assets/icons/unrecognized_asset.svg';
 
@@ -11,11 +12,12 @@ const redirectOnNexus = (address: string) => {
 
 export default function QuoteCard(props: Recommandations): ReactElement {
   const recommandation: Recommandations = props;
+  const assetImage = useRef(null);
 
   return (
     <div className="relative w-full">
       <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-white rounded-lg" />
-      <div className="p-7 relative rounded-lg bg-secondary">
+      <div className="h-full p-7 relative rounded-lg bg-secondary">
         <div className="w-full flex flex-row">
           <img
             src={recommandation.cover.logoUrl}
@@ -36,14 +38,38 @@ export default function QuoteCard(props: Recommandations): ReactElement {
         <div className="mt-3 w-full flex flex-row">
           <span className="font-bold">Detected token: </span>
           {recommandation.reasoning.map((reason) => (
-            <img
-              src={reason.logoUrl}
-              onError={(e: BaseSyntheticEvent) => {
-                e.target.src = UnrecognizedAsset;
-              }}
-              className="ml-2 w-6 h-6 rounded-md"
-              alt="assets"
-            />
+            <>
+              <div
+                onMouseEnter={() => {
+                  const elem = document.querySelector(
+                    `#assetImg${reason.token}`,
+                  );
+                  if (elem !== null) {
+                    ReactTooltip.show(elem);
+                  }
+                }}
+                onMouseLeave={() => {
+                  const elem = document.querySelector(
+                    `#assetImg${reason.token}`,
+                  );
+                  if (elem !== null) {
+                    ReactTooltip.hide(elem);
+                  }
+                }}
+              >
+                <img
+                  id={`assetImg${reason.token}`}
+                  data-tip={reason.token}
+                  src={reason.logoUrl}
+                  onError={(e: BaseSyntheticEvent) => {
+                    e.target.src = UnrecognizedAsset;
+                  }}
+                  className="ml-2 w-6 h-6 rounded-md"
+                  alt="assets"
+                />
+                <ReactTooltip />
+              </div>
+            </>
           ))}
         </div>
         <div className="mt-3 w-full flex flex-row">

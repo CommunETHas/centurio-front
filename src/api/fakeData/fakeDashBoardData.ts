@@ -7,6 +7,81 @@ const data: DashboardData = {
       cover: {
         name: 'Aave',
         address: '0x000',
+        type: 'dd',
+        supportedChains: ['ethereum'],
+        logoUrl: 'https://app.nexusmutual.io/logos/aavev2.svg',
+      },
+      reasoning: [
+        {
+          token: 'Tusd',
+          logoUrl:
+            'https://centurio.blob.core.windows.net/asset/0x0000000000085d4780B73119b644AE5ecd22b376.png',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
+        },
+        {
+          token: 'KAKA',
+          logoUrl:
+            'https://centurio.blob.core.windows.net/asset/0x0000852600CEB001E08e00bC008be620d60031F2.png',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
+        },
+      ],
+    },
+    {
+      cover: {
+        name: 'Aave',
+        address: '0x000',
+        type: 'protocol',
+        supportedChains: ['ethereum'],
+        logoUrl: 'https://app.nexusmutual.io/logos/aavev2.svg',
+      },
+      reasoning: [
+        {
+          token: 'Tusd',
+          logoUrl:
+            'https://centurio.blob.core.windows.net/asset/0x0000000000085d4780B73119b644AE5ecd22b376.png',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
+        },
+        {
+          token: 'KAKA',
+          logoUrl:
+            'https://centurio.blob.core.windows.net/asset/0x0000852600CEB001E08e00bC008be620d60031F2.png',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
+        },
+      ],
+    },
+    {
+      cover: {
+        name: 'Aave',
+        address: '0x000',
+        type: 'protocol',
+        supportedChains: ['ethereum'],
+        logoUrl: 'https://app.nexusmutual.io/logos/aavev2.svg',
+      },
+      reasoning: [
+        {
+          token: 'Tusd',
+          logoUrl:
+            'https://centurio.blob.core.windows.net/asset/0x0000000000085d4780B73119b644AE5ecd22b376.png',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
+        },
+        {
+          token: 'KAKA',
+          logoUrl:
+            'https://centurio.blob.core.windows.net/asset/0x0000852600CEB001E08e00bC008be620d60031F2.png',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
+        },
+      ],
+    },
+    {
+      cover: {
+        name: 'Aave',
+        address: '0x000',
         type: 'protocol',
         supportedChains: ['ethereum'],
         logoUrl: 'https://app.nexusmutual.io/logos/aavev2.svg',
