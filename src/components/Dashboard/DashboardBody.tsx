@@ -82,7 +82,7 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
                       leaveFrom="opacity-100 translate-y-0"
                       leaveTo="opacity-0 translate-y-1"
                     >
-                      <Popover.Panel className="absolute z-10">
+                      <Popover.Panel className="absolute">
                         <div className="overflow-hidden relative z-50 px-5 pt-2 pb-3 w-60 bg-secondary rounded-lg">
                           <div className="flex flex-col">
                             <div className="flex flex-row justify-between">

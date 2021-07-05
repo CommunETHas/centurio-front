@@ -1,9 +1,17 @@
 import React, { BaseSyntheticEvent, ReactElement } from 'react';
 import { Recommandations } from '../api/models/cover';
-import Help from '../assets/icons/help.svg';
+import UnrecognizedAsset from '../assets/icons/unrecognized_asset.svg';
+
+const redirectOnNexus = (address: string) => {
+  window.open(
+    `https://app.nexusmutual.io/cover/buy/get-quote?address=${address}`,
+    '_blank',
+  );
+};
 
 export default function QuoteCard(props: Recommandations): ReactElement {
   const recommandation: Recommandations = props;
+
   return (
     <div className="relative w-full">
       <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-white rounded-lg" />
@@ -31,7 +39,7 @@ export default function QuoteCard(props: Recommandations): ReactElement {
             <img
               src={reason.logoUrl}
               onError={(e: BaseSyntheticEvent) => {
-                e.target.src = Help;
+                e.target.src = UnrecognizedAsset;
               }}
               className="ml-2 w-6 h-6 rounded-md"
               alt="assets"
@@ -50,7 +58,7 @@ export default function QuoteCard(props: Recommandations): ReactElement {
         <div className="mt-3 w-full flex flex-row justify-end">
           <button
             type="button"
-            onClick={() => console.log('test')}
+            onClick={() => redirectOnNexus(recommandation.cover.address)}
             className="absolute z-10 bg-ternary focus:outline-none border border-white text-sm text-secondary font-bold h-7 w-44 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
           >
             See on Nexus Mutual

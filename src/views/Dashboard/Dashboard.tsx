@@ -14,9 +14,7 @@ export default function Dashboard(): ReactElement {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const fethCoverRecommendations = async (accountAddr: string) => {
     setIsLoading(true);
-    const { data } = await HttpRequest.getCoverRecommendations(
-      '0xef7dfa2a8213cd9814f258ac5e09044f2f3a826c',
-    );
+    const { data } = await HttpRequest.getCoverRecommendations(accountAddr);
     setDashboardData(data);
     setIsLoading(false);
   };
