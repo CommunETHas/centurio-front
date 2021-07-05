@@ -7,6 +7,8 @@ import React, {
 } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { GlobalContext } from '../../contexts/GlobalContext';
@@ -32,13 +34,23 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
+const SignupSchema = yup.object().shape({
+  email: yup.string().email(),
+});
+
 export default function Notification(): ReactElement {
   const { active, account } = useWeb3React<Web3Provider>();
   const { user, setUser, setIsUserCreated } = useContext(
     GlobalContext,
   ) as ContextType;
   const [selected, setSelected] = useState(options[0]);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(user.email);
+
+  // @ts-ignore
+  const { register } = useForm({
+    // @ts-ignore
+    validationSchema: SignupSchema,
+  });
 
   const fetchUser = async () => {
     await HttpRequest.getUser(account)
@@ -46,7 +58,7 @@ export default function Notification(): ReactElement {
       .catch(() => {});
   };
 
-  const unscribeUser = async () => {
+  const unsubscribeUser = async () => {
     const userUpdated = {
       address: account,
       nonce: user.nonce,
@@ -60,6 +72,7 @@ export default function Notification(): ReactElement {
       address: account,
       nonce: user.nonce,
       email,
+      frequency: selected.name,
     };
 
     await HttpRequest.updateUser(userUpdated, localStorage.getItem('bearer'));
@@ -82,16 +95,28 @@ export default function Notification(): ReactElement {
         </div>
       </div>
       {active ? (
-        <div className="m-auto w-80 order bg-secondary border-primary p-3">
-          <div className="relative w-full mb-3">
+        <div className="relative m-auto w-80 order bg-secondary border border-white rounded-lg p-4">
+          <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-white rounded-lg" />
+          <div className="relative w-full">
+            <div className="text-sm p-3">Email: </div>
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              // @ts-ignore
+              name="email"
+              placeholder="e.g test@gmail.com"
+              className="mb-3 w-full h-10 z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full"
+            />
+          </div>
+          <div className="relative w-full mb-10">
             <Listbox value={selected} onChange={setSelected}>
               {({ open }) => (
                 <>
-                  <Listbox.Label className="block text-sm font-medium text-primary">
+                  <Listbox.Label className="block text-sm font-medium text-primary p-3">
                     Frequency of email notification:
                   </Listbox.Label>
                   <div className="mt-1 relative">
-                    <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-full shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                       <span className="flex items-center">
                         <span className="ml-3 block truncate">
                           {selected.name}
@@ -169,16 +194,7 @@ export default function Notification(): ReactElement {
             </Listbox>
           </div>
 
-          <div className="relative w-full mb-10">
-            <span className="text-sm">Email: </span>
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="e.g test@gmail.com"
-              className="w-full h-10 z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full"
-            />
-          </div>
-          <div className="relative w-full mb-3">
+          <div className="relative w-full mb-3 mt-3">
             <button
               onClick={updateUser}
               type="button"
@@ -190,7 +206,7 @@ export default function Notification(): ReactElement {
           </div>
           <div className="relative w-full">
             <button
-              onClick={unscribeUser}
+              onClick={unsubscribeUser}
               type="button"
               className="absolute z-10 bg-ternary focus:outline-none h-7 w-full border border-white text-xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
             >
