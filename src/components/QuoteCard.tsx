@@ -50,10 +50,22 @@ export default function QuoteCard(props: Recommandations): ReactElement {
           <span className="font-bold">Why this protocol appears ?</span>
         </div>
         <div className="w-full flex flex-row">
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </span>
+          {recommandation.cover.type === 'protocol' ? (
+            <span>
+              The listed assets are related to this protocol and can be covered
+              by this protocol cover. Note that with this cover, only the
+              protocol will be covered. Always check the specifics on Nexus
+              Mutual.
+            </span>
+          ) : (
+            <span>
+              The listed assets are related to this protocol and can be covered
+              by this yield cover. Note that this cover protects your assets
+              vertically meaning that even if the assets is based on multiple
+              protocols, you will still be covered. Always check the specifics
+              on Nexus Mutual.
+            </span>
+          )}
         </div>
         <div className="mt-3 w-full flex flex-row justify-end">
           <button

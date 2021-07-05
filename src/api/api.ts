@@ -10,7 +10,9 @@ const instance = axios.create({
 const HttpRequest = {
   getCovers: (): Promise<AxiosResponse<Quote[]>> =>
     instance.get<Quote[]>('cover'),
-  getCoverRecommendations: (address: string): Promise<AxiosResponse<DashboardData>> =>
+  getCoverRecommendations: (
+    address: string,
+  ): Promise<AxiosResponse<DashboardData>> =>
     instance.get<DashboardData>(`cover/recommend/${address}`),
   getUser: (address: string | null | undefined): Promise<AxiosResponse<any>> =>
     instance.get<any>(`user/${address}`),
@@ -19,8 +21,10 @@ const HttpRequest = {
   ): Promise<AxiosResponse<any>> => instance.post<any>(`user/${address}`),
   authenticate: (data: UserAuthentication): Promise<AxiosResponse<any>> =>
     instance.post<any>(`authentication`, data),
-  unsubscribeUser: (user: any): Promise<AxiosResponse<any>> =>
-    instance.put<any>(`user`, user),
+  updateUser: (user: any, bearer: string | null): Promise<AxiosResponse<any>> =>
+    instance.put<any>(`user`, user, {
+      headers: { Authorization: `Bearer ${bearer}` },
+    }),
 };
 
 export default HttpRequest;

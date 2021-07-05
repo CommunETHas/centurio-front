@@ -4,7 +4,8 @@ import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { motion } from 'framer-motion';
 import { GlobalContext } from '../contexts/GlobalContext';
-import { ContextType } from '../api/models/user';
+import { ContextType, User } from '../api/models/user';
+import HttpRequest from '../api/api';
 
 const variants = {
   open: {
@@ -33,10 +34,10 @@ const variantsMenu = {
 };
 
 const Popover = ({ btnRef }: PopoverProps) => {
-  const { popoverShow, setPopoverShow } = useContext(
+  const { popoverShow, setPopoverShow, setOpenModalAuth } = useContext(
     GlobalContext,
   ) as ContextType;
-  const { deactivate } = useWeb3React<Web3Provider>();
+  const { deactivate, account, active } = useWeb3React<Web3Provider>();
   const history = useHistory();
 
   const onClose = () => {
@@ -44,9 +45,21 @@ const Popover = ({ btnRef }: PopoverProps) => {
     setPopoverShow(false);
   };
 
+  const onCloseRedirectAuth = async (path: string) => {
+    if (active && account) {
+      try {
+        await HttpRequest.getUser(account);
+        history.push(path);
+      } catch {
+        setOpenModalAuth(true);
+        setPopoverShow(false);
+      }
+    }
+  };
+
   const onCloseRedirect = (path: string) => {
-    setPopoverShow(false);
     history.push(path);
+    setPopoverShow(false);
   };
 
   const menuItems: MenuItem[] = [
@@ -54,7 +67,7 @@ const Popover = ({ btnRef }: PopoverProps) => {
     {
       id: 2,
       text: 'Notifications',
-      onClick: () => onCloseRedirect('/notification'),
+      onClick: () => onCloseRedirectAuth('/notification'),
     },
     { id: 3, text: 'Disconnect Wallet', onClick: () => onClose() },
   ];

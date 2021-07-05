@@ -229,7 +229,7 @@ export default function HomeView(): ReactElement {
                 <img
                   className={`${
                     windowWidth > 700 ? 'absolute' : ''
-                  } h-socrate-logo opacity-90 transform translate-y-20`}
+                  } h-socrate-logo opacity-90 transform translate-y-socrate`}
                   src={SocrateLogo}
                   alt="socrate"
                 />
@@ -238,22 +238,22 @@ export default function HomeView(): ReactElement {
           </div>
           {windowWidth > 700 ? (
             <>
-              {/* <motion.div */}
-              {/*  className="z-20 absolute transform translate-y-0 translate-x-100 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary" */}
-              {/*  initial={{ */}
-              {/*    scale: 1, */}
-              {/*    opacity: 1, */}
-              {/*    rotate: -60, */}
-              {/*    translateY: -10, */}
-              {/*    translateX: -100, */}
-              {/*  }} */}
-              {/*  animate={{ scale: 1.1, opacity: 0 }} */}
-              {/*  transition={{ */}
-              {/*    duration: 4, */}
-              {/*    type: 'spring', */}
-              {/*    repeat: Number.POSITIVE_INFINITY, */}
-              {/*  }} */}
-              {/* /> */}
+              <motion.div
+                className="z-20 absolute transform translate-y-0 translate-x-100 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"
+                initial={{
+                  scale: 1,
+                  opacity: 1,
+                  rotate: -60,
+                  translateY: -5,
+                  translateX: -470,
+                }}
+                animate={{ scale: 1.1, opacity: 0 }}
+                transition={{
+                  duration: 4,
+                  type: 'spring',
+                  repeat: Number.POSITIVE_INFINITY,
+                }}
+              />
               <div className="z-20 absolute transform translate-y-0 translate-x-100 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary" />
             </>
           ) : (

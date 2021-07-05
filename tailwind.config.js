@@ -91,7 +91,7 @@ module.exports = {
         3: '0.75rem',
         90: '-20rem',
         100: '-30rem',
-        socrate: '18rem',
+        socrate: '-1rem',
       },
       rotate: {
         60: '-60deg',
