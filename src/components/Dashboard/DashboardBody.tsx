@@ -155,11 +155,11 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
         </>
       ) : (
         <>
-          {fakeDashBoardData &&
-          fakeDashBoardData.recommandations &&
-          fakeDashBoardData.recommandations.length > 0 ? (
+          {dashboardData &&
+          dashboardData.recommandations &&
+          dashboardData.recommandations.length > 0 ? (
             <div className="w-full grid gap-x-32 gap-y-32 xl:grid-cols-2 2xl:grid-cols-3 px-20">
-              {fakeDashBoardData.recommandations.map((recommendation) => (
+              {dashboardData.recommandations.map((recommendation) => (
                 <QuoteCard
                   cover={recommendation.cover}
                   reasoning={recommendation.reasoning}
