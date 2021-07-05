@@ -4,10 +4,10 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 export default function Footer(): ReactElement {
   return (
     <footer className="footer justify-end h-10 bg-primary flex items-center">
-      <a href="." className="text-secondary p-2">
+      <a href="./privacy-policy" className="text-secondary p-2">
         Privacy policy
       </a>
-      <a href="." className="text-secondary p-2">
+      <a href="./about-us" className="text-secondary p-2">
         About us
       </a>
       <a
