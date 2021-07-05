@@ -9,6 +9,11 @@ export interface UserAuthentication {
   signature: string;
 }
 
+export interface UserAuthenticated {
+  address: string;
+  nonce: string;
+}
+
 export type ContextType = {
   user: User;
   setUser: (user: User) => void;

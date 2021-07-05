@@ -19,8 +19,10 @@ const HttpRequest = {
   ): Promise<AxiosResponse<any>> => instance.post<any>(`user/${address}`),
   authenticate: (data: UserAuthentication): Promise<AxiosResponse<any>> =>
     instance.post<any>(`authentication`, data),
-  unsubscribeUser: (user: any): Promise<AxiosResponse<any>> =>
-    instance.put<any>(`user`, user),
+  updateUser: (user: any, bearer: string): Promise<AxiosResponse<any>> =>
+    instance.put<any>(`user`, user, {
+      headers: { Authorization: `Bearer ${bearer}` },
+    }),
 };
 
 export default HttpRequest;

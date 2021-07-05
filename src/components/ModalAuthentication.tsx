@@ -9,7 +9,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { GlobalContext } from '../contexts/GlobalContext';
-import { ContextType } from '../api/models/user';
+import { ContextType, UserAuthenticated } from '../api/models/user';
 import HttpRequest from '../api/api';
 
 export default function ModalAuthentication(): ReactElement {
@@ -27,10 +27,12 @@ export default function ModalAuthentication(): ReactElement {
           `Welcome to Centurio, sign this message to authenticate ! ${user.nonce}`,
         )
         .then(async (signature: string) => {
-          await HttpRequest.authenticate({
+          const response: UserAuthenticated = await HttpRequest.authenticate({
             user: { address: account, email: '', nonce: user.nonce },
             signature,
           });
+
+          localStorage.setItem('bearer', response.address);
         })
         .catch((error: any) => {
           console.log(error && error.message);
