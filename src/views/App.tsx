@@ -22,6 +22,8 @@ const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
 const DashboardPreview = lazy(() => import('./Dashboard/DashboardPreview'));
 const NotificationView = lazy(() => import('./Notification/Notification'));
 const NoMatchView = lazy(() => import('../components/Utils/NoMatchView'));
+const PrivacyPolicy = lazy(() => import('./Footer/PrivacyPolicy'));
+const AboutUs = lazy(() => import('./Footer/AboutUs'));
 
 export const injectedConnector = new InjectedConnector({
   supportedChainIds: [
@@ -69,6 +71,8 @@ export function App(): ReactElement {
               />
               <Route exact path="/dashboard" component={OnBoardingView} />
               <Route exact path="/notification" component={NotificationView} />
+              <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+              <Route exact path="/about-us" component={AboutUs} />
               <Route component={NoMatchView} />
             </Switch>
           </Suspense>
