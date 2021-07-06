@@ -46,14 +46,11 @@ const Popover = ({ btnRef }: PopoverProps) => {
   };
 
   const onCloseRedirectAuth = async (path: string) => {
-    if (active && account) {
-      try {
-        await HttpRequest.getUser(account);
-        history.push(path);
-      } catch {
-        setOpenModalAuth(true);
-        setPopoverShow(false);
-      }
+    if (active && account && localStorage.getItem('bearer')) {
+      history.push(path);
+    } else {
+      setOpenModalAuth(true);
+      setPopoverShow(false);
     }
   };
 

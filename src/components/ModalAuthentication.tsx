@@ -35,7 +35,6 @@ export default function ModalAuthentication(): ReactElement {
             user: { address: account, email: '', nonce: user.nonce },
             signature,
           });
-          localStorage.removeItem('bearer');
           if (data.accessToken) {
             localStorage.setItem('bearer', data.accessToken);
             setIsAuth(true);
@@ -121,7 +120,7 @@ export default function ModalAuthentication(): ReactElement {
                       Notifications
                     </Dialog.Title>
 
-                    {isAuth ? (
+                    {localStorage.getItem('bearer') && isAuth ? (
                       <>
                         <div className="mt-2">
                           <p className="text-xl text-primary mb-10">
@@ -145,14 +144,16 @@ export default function ModalAuthentication(): ReactElement {
                             message.
                           </p>
                         </div>
-                        <button
-                          onClick={signMessage}
-                          type="button"
-                          className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
-                        >
-                          Sign a message !
-                        </button>
-                        <div className=" bg-transparent focus:outline-none h-16 w-60 border border-primary rounded-full transform translate-x-1 translate-y-1" />
+                        <div className="m-auto">
+                          <button
+                            onClick={signMessage}
+                            type="button"
+                            className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+                          >
+                            Sign a message !
+                          </button>
+                          <div className=" bg-transparent focus:outline-none h-16 w-60 border border-primary rounded-full transform translate-x-1 translate-y-1" />
+                        </div>
                       </>
                     )}
                   </div>
