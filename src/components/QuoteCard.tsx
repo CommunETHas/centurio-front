@@ -12,7 +12,6 @@ const redirectOnNexus = (address: string) => {
 
 export default function QuoteCard(props: Recommandations): ReactElement {
   const recommandation: Recommandations = props;
-  const assetImage = useRef(null);
 
   return (
     <div className="relative w-full">
