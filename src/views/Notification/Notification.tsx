@@ -95,8 +95,8 @@ export default function Notification(): ReactElement {
         </div>
       </div>
       {active ? (
-        <div className="relative m-auto w-80 order bg-secondary border border-white rounded-lg p-4">
-          <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-white rounded-lg" />
+        <div className="relative m-auto w-80 order bg-secondary border border-secondary rounded-lg p-4">
+          <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-secondary rounded-lg" />
           <div className="relative w-full">
             <div className="text-sm p-3">Email: </div>
             <input
@@ -105,7 +105,7 @@ export default function Notification(): ReactElement {
               // @ts-ignore
               name="email"
               placeholder="e.g test@gmail.com"
-              className="mb-3 w-full h-10 z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full"
+              className="mb-3 w-full h-10 z-10 bg-primary focus:outline-none border border-secondary text-2xs text-secondary font-bold py-1 px-4 rounded-full"
             />
           </div>
           <div className="relative w-full mb-10">
@@ -116,7 +116,7 @@ export default function Notification(): ReactElement {
                     Frequency of email notification:
                   </Listbox.Label>
                   <div className="mt-1 relative">
-                    <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-full shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <Listbox.Button className="relative w-full bg-secondary border border-gray-300 rounded-full shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                       <span className="flex items-center">
                         <span className="ml-3 block truncate">
                           {selected.name}
@@ -139,7 +139,7 @@ export default function Notification(): ReactElement {
                     >
                       <Listbox.Options
                         static
-                        className="z-50 absolute mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                        className="z-50 absolute mt-1 w-full bg-secondary shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
                       >
                         {options.map((person) => (
                           <Listbox.Option
@@ -147,7 +147,7 @@ export default function Notification(): ReactElement {
                             className={({ active }) =>
                               classNames(
                                 active
-                                  ? 'text-white bg-indigo-600'
+                                  ? 'text-secondary bg-indigo-600'
                                   : 'text-gray-900',
                                 'cursor-default select-none relative py-2 pl-3 pr-9',
                               )
@@ -172,7 +172,9 @@ export default function Notification(): ReactElement {
                                 {selected && (
                                   <span
                                     className={classNames(
-                                      active ? 'text-white' : 'text-indigo-600',
+                                      active
+                                        ? 'text-secondary'
+                                        : 'text-indigo-600',
                                       'absolute inset-y-0 right-0 flex items-center pr-4',
                                     )}
                                   >
@@ -198,7 +200,7 @@ export default function Notification(): ReactElement {
             <button
               onClick={updateUser}
               type="button"
-              className="absolute z-10 bg-primary focus:outline-none h-7 w-full border border-white text-xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+              className="absolute z-10 bg-primary focus:outline-none h-7 w-full border border-secondary text-xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
             >
               Update preferences
             </button>
@@ -208,7 +210,7 @@ export default function Notification(): ReactElement {
             <button
               onClick={unsubscribeUser}
               type="button"
-              className="absolute z-10 bg-ternary focus:outline-none h-7 w-full border border-white text-xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+              className="absolute z-10 bg-ternary focus:outline-none h-7 w-full border border-secondary text-xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
             >
               Unsubscribe
             </button>

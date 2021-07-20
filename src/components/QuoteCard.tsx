@@ -16,7 +16,7 @@ export default function QuoteCard(props: Recommandations): ReactElement {
 
   return (
     <div className="relative w-full">
-      <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-white rounded-lg" />
+      <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-secondary rounded-lg" />
       <div className="h-full p-7 relative rounded-lg bg-secondary">
         <div className="w-full flex flex-row">
           <img
@@ -97,7 +97,7 @@ export default function QuoteCard(props: Recommandations): ReactElement {
           <button
             type="button"
             onClick={() => redirectOnNexus(recommandation.cover.address)}
-            className="absolute z-10 bg-ternary focus:outline-none border border-white text-sm text-secondary font-bold h-7 w-44 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+            className="absolute z-10 bg-ternary focus:outline-none border border-secondary text-sm text-secondary font-bold h-7 w-44 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
           >
             See on Nexus Mutual
           </button>

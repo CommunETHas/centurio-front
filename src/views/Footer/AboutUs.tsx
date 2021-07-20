@@ -20,7 +20,7 @@ export default function AboutUs(): ReactElement {
         />
         <ProfilPresentation
           img={Marino}
-          job="Web developer & UI Designer"
+          job="Web developer & UI Designer & PR"
           name="Romain Marino"
         />
       </div>

@@ -24,7 +24,7 @@ export default function NavbarHeader(): ReactElement {
       <nav className="nav-header z-20 bg-primary">
         <div className="flex flex-row items-center justify-between p-1">
           <Link to="/" className="flex flex-row items-center text-primary">
-            <img className="h-logo" src={Logo} alt="centurio" />
+            <img className="h-12" src={Logo} alt="centurio" />
             <span className="font-semibold text-3xl text-secondary tracking-tight p-3">
               Centurio
             </span>
@@ -50,16 +50,13 @@ export default function NavbarHeader(): ReactElement {
             ) : (
               <>
                 <button
-                  ref={btnRef}
                   type="button"
                   onClick={() => setOpenModal(true)}
-                  className="relative z-10 h-full w-full py-1 rounded-full"
+                  className="z-10 bg-secondary absolute focus:outline-none h-7 w-40 text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
                 >
-                  <div className="absolute text-xs font-bold text-primary bg-secondary pt-1 h-full w-full bottom-0 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1">
-                    Connect your wallet
-                  </div>
-                  <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-white rounded-full transform translate-x-1 translate-y-1" />
+                  Connect your wallet
                 </button>
+                <div className="bg-transparent focus:outline-none h-7 w-40 border border-secondary rounded-full transform translate-x-1 translate-y-1" />
               </>
             )}
           </div>
