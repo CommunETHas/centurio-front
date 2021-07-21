@@ -15,6 +15,7 @@ import { GlobalContext } from '../contexts/GlobalContext';
 import Wallet from './Wallet';
 import { ContextType } from '../api/models/user';
 import Search from '../assets/icons/search.svg';
+import ShadowButton from './Button/ShadowButton';
 
 export default function Modal(): ReactElement {
   const { active } = useWeb3React<Web3Provider>();
@@ -146,14 +147,13 @@ export default function Modal(): ReactElement {
                 </div>
               </div>
               <div className="flex flex-row justify-center p-3">
-                <button
-                  type="button"
-                  className="w-40 py-2 justify-center rounded-full bg-secondary text-base font-medium text-primary border border-primary"
-                  onClick={() => setOpenModal(false)}
-                  ref={cancelButtonRef}
-                >
-                  <span className="font-bold">Cancel</span>
-                </button>
+                <div className="w-40 h-10">
+                  <ShadowButton
+                    label="Cancel"
+                    filled={false}
+                    textColor="primary"
+                  />
+                </div>
               </div>
             </div>
           </Transition.Child>

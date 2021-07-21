@@ -5,8 +5,8 @@ import { useWeb3React } from '@web3-react/core';
 import { useHistory } from 'react-router-dom';
 import Help from '../../assets/icons/help.svg';
 import DashboardData, { Recommandations } from '../../api/models/cover';
-import QuoteCard from '../QuoteCard';
-import QuoteCardFake from '../QuoteCardFake';
+import QuoteCard from '../Card/QuoteCard';
+import QuoteCardFake from '../Card/QuoteCardFake';
 import fakeDashBoardData from '../../api/fakeData/fakeDashBoardData';
 
 export interface DashboardBodyProps {

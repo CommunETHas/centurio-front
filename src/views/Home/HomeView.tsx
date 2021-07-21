@@ -14,6 +14,7 @@ import SocrateLogo from '../../assets/socrate.png';
 import BattleLogo from '../../assets/battle.png';
 import MoreInfoLogo from '../../assets/icons/more_info.png';
 import { ContextType } from '../../api/models/user';
+import ShadowButton from '../../components/Button/ShadowButton';
 
 export default function HomeView(): ReactElement {
   const { setOpenModal } = useContext(GlobalContext) as ContextType;
@@ -80,16 +81,13 @@ export default function HomeView(): ReactElement {
               <div className={`${windowWidth > 700 ? 'w-100' : 'w-full'} h-16`}>
                 {!active && (
                   <>
-                    <button
-                      type="button"
+                    <ShadowButton
+                      label="Get started"
+                      color="secondary"
+                      textColor="primary"
+                      fontSize="text-4xl"
                       onClick={() => setOpenModal(true)}
-                      className="relative h-full w-full text-4xl text-primary font-bold z-10"
-                    >
-                      <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-secondary rounded-full transform translate-x-1 translate-y-1" />
-                      <div className="absolute bg-secondary h-full w-full bottom-0 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1">
-                        Get started
-                      </div>
-                    </button>
+                    />
                   </>
                 )}
               </div>

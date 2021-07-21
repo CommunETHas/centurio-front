@@ -6,6 +6,7 @@ import { GlobalContext } from '../../contexts/GlobalContext';
 import Popover from '../../components/Popover';
 import Logo from '../../assets/logo.png';
 import { ContextType } from '../../api/models/user';
+import ShadowButton from '../../components/Button/ShadowButton';
 
 const formatWalletAddress = (addressString: string) =>
   `${addressString.slice(0, 5)}......${addressString.slice(
@@ -32,31 +33,26 @@ export default function NavbarHeader(): ReactElement {
           <div className="h-7 w-40 mr-3">
             {active ? (
               <>
-                <button
-                  ref={btnRef}
-                  type="button"
+                <ShadowButton
+                  label={account && formatWalletAddress(account)}
+                  color="ternary"
+                  textColor="secondary"
+                  fontSize="text-xs"
                   onClick={() =>
                     popoverShow ? setPopoverShow(false) : setPopoverShow(true)
                   }
-                  className="relative z-10 h-full w-full text-xs text-secondary font-bold py-1 rounded-full"
-                >
-                  <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-ternary rounded-full transform translate-x-1 translate-y-1" />
-                  <div className="absolute bg-ternary pt-1 h-full w-full bottom-0 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1">
-                    {account && formatWalletAddress(account)}
-                  </div>
-                </button>
+                />
                 <Popover btnRef={btnRef} />
               </>
             ) : (
               <>
-                <button
-                  type="button"
+                <ShadowButton
+                  label="Connect your wallet"
+                  color="secondary"
+                  textColor="primary"
+                  fontSize="text-xs"
                   onClick={() => setOpenModal(true)}
-                  className="z-10 bg-secondary absolute focus:outline-none h-7 w-40 text-xs text-primary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
-                >
-                  Connect your wallet
-                </button>
-                <div className="bg-transparent focus:outline-none h-7 w-40 border border-secondary rounded-full transform translate-x-1 translate-y-1" />
+                />
               </>
             )}
           </div>

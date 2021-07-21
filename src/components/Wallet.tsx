@@ -5,6 +5,7 @@ import { Web3Provider } from '@ethersproject/providers';
 import { injectedConnector } from '../views/App';
 import MetaMaskLogo from '../assets/wallets/logo_metamask.png';
 import HttpRequest from '../api/api';
+import ShadowButton from './Button/ShadowButton';
 
 export default function Wallet(): ReactElement {
   const { activate, active, account } = useWeb3React<Web3Provider>();
@@ -27,19 +28,17 @@ export default function Wallet(): ReactElement {
         <div>Connected </div>
       ) : (
         <>
-          <button
-            type="button"
-            onClick={onClick}
-            className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-secondary text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
-          >
-            <img
-              src={MetaMaskLogo}
-              alt="metamask"
-              className="logo-token h-10 pr-2"
+          <div className="h-16 w-60">
+            <ShadowButton
+              onClick={onClick}
+              content={
+                <div className="flex flex-row w-full h-full justify-center items-center gap-6">
+                  <img src={MetaMaskLogo} alt="metamask" className="w-10" />
+                  <span>Metamask</span>
+                </div>
+              }
             />
-            Metamask
-          </button>
-          <div className=" bg-transparent focus:outline-none h-16 w-60 border border-primary rounded-full transform translate-x-1 translate-y-1" />
+          </div>
         </>
       )}
     </div>
