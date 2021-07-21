@@ -30,7 +30,7 @@ const ShadowButton: React.FC<ShadowButtonProps> = ({
 };
 
 interface ShadowButtonProps extends PropsWithChildren<any> {
-  label?: string;
+  label?: string | undefined | null;
   color?: string;
   textColor?: string;
   fontSize?: FontSize;

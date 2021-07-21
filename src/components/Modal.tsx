@@ -118,7 +118,7 @@ export default function Modal(): ReactElement {
                         onChange={handleInput}
                         className="w-11/12 h-full z-10 bg-primary focus:outline-none border border-secondary text-2xs text-secondary font-bold px-4 rounded-tl-full rounded-bl-full"
                       />
-                      <div className="h-full w-1/12 padding-y-1">
+                      <div className="h-full w-1/12 padding-y-1 z-30">
                         <div className="relative bg-primary h-full rounded-tr-full rounded-br-full flex flex-col justify-center">
                           <button
                             type="button"
@@ -133,6 +133,7 @@ export default function Modal(): ReactElement {
                           <div className="z-20 absolute -left-1 h-full bg-primary w-1" />
                         </div>
                       </div>
+                      <div className="absolute bg-transparent border border-primary w-full h-full rounded-full transform translate-x-1 translate-y-1" />
                     </div>
                     {walletAddressError ? (
                       <>
