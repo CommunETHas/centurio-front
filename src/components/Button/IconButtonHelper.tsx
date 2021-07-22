@@ -9,11 +9,14 @@ const IconButtonHelper: React.FC<IconButtonHelperProps> = ({
     {({ open }) => (
       <>
         <Popover.Button>
-          <img
-            className="h-7 w-7 cursor-pointer transform -translate-y-1"
-            src={Help}
-            alt="help"
-          />
+          <div className="relative h-7 w-7 cursor-pointer">
+            <img
+              className="z-10 absolute h-7 w-7 transition duration-500 ease-in-out transform hover:translate-y-0.5 hover:translate-x-0.5"
+              src={Help}
+              alt="help"
+            />
+            <div className="absolute h-6 w-6 bg-ternary border border-secondary rounded-full transform translate-x-1 translate-y-1" />
+          </div>
         </Popover.Button>
         <Transition
           as={Fragment}

@@ -74,13 +74,15 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
               <span className="flex text-secondary font-bold text-xl">
                 COVERS RECOMMENDATIONS
               </span>
-              <IconButtonHelper
-                textContent={
-                  'Here you can see which covers is recommended for your\n' +
-                  "                        wallet. Be aware that custodian placement can't be\n" +
-                  '                        detected.'
-                }
-              />
+              <div className="absolute right-0 transform translate-x-8">
+                <IconButtonHelper
+                  textContent={
+                    'Here you can see which covers is recommended for your\n' +
+                    "                        wallet. Be aware that custodian placement can't be\n" +
+                    '                        detected.'
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>
