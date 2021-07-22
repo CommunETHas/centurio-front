@@ -105,13 +105,13 @@ export default function HomeView(): ReactElement {
           {windowWidth > 700 ? (
             <>
               <motion.div
-                className="z-20 absolute h-200 w-1/2 bg-secondary ring-1 ring-secondary ring-offset-18 ring-offset-primary"
+                className="z-20 absolute h-200 w-2/3 bg-secondary ring-1 ring-secondary ring-offset-18 ring-offset-primary"
                 initial={{
                   scale: 1,
                   opacity: 1,
                   rotate: 45,
-                  translateY: 80,
-                  translateX: -480,
+                  translateY: 0,
+                  translateX: -620,
                 }}
                 animate={{ scale: 1.1, opacity: 0 }}
                 transition={{
@@ -120,7 +120,7 @@ export default function HomeView(): ReactElement {
                   repeat: Number.POSITIVE_INFINITY,
                 }}
               />
-              <div className="z-10 absolute transform translate-y-20 -translate-x-110 rotate-45 h-200 w-1/2 bg-secondary ring-1 ring-secondary ring-offset-18 ring-offset-primary" />
+              <div className="z-20 absolute transform translate-y-15 -translate-x-150 rotate-45 h-200 w-2/3 bg-secondary ring-1 ring-secondary ring-offset-18 ring-offset-primary" />
             </>
           ) : (
             <></>

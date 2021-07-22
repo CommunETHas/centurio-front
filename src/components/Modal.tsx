@@ -153,6 +153,7 @@ export default function Modal(): ReactElement {
                     label="Cancel"
                     filled={false}
                     textColor="primary"
+                    onClick={() => setOpenModal(false)}
                   />
                 </div>
               </div>
