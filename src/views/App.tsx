@@ -56,7 +56,7 @@ export function App(): ReactElement {
   return (
     <GlobalContext>
       <BrowserRouter>
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col">
           <Suspense fallback={<LoadingOrError />}>
             <ModalWallet />
             <NavbarHeader />

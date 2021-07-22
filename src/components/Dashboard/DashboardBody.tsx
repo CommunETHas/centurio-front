@@ -9,6 +9,7 @@ import QuoteCard from '../Card/QuoteCard';
 import QuoteCardFake from '../Card/QuoteCardFake';
 import fakeDashBoardData from '../../api/fakeData/fakeDashBoardData';
 import Footer from '../../views/Footer/Footer';
+import IconButtonHelper from '../Button/IconButtonHelper';
 
 export interface DashboardBodyProps {
   dashboardData: DashboardData | undefined;
@@ -41,42 +42,10 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
                       <div className="font-bold mr-1">
                         <span>Unsupported assets</span>
                       </div>
-                      <Popover>
-                        {({ open }) => (
-                          <>
-                            <Popover.Button>
-                              <img
-                                className="h-7 w-7 cursor-pointer transform -translate-y-1"
-                                src={Help}
-                                alt="help"
-                              />
-                            </Popover.Button>
-                            <Transition
-                              as={Fragment}
-                              enter="transition ease-out duration-200"
-                              enterFrom="opacity-0 translate-y-1"
-                              enterTo="opacity-100 translate-y-0"
-                              leave="transition ease-in duration-150"
-                              leaveFrom="opacity-100 translate-y-0"
-                              leaveTo="opacity-0 translate-y-1"
-                            >
-                              <Popover.Panel className="absolute">
-                                <div className="overflow-hidden relative px-5 pt-2 pb-3 w-60 bg-secondary rounded-lg border border-ternary text-black">
-                                  <div className="flex flex-col">
-                                    <div className="flex flex-row justify-between">
-                                      <span className="font-bold">Info: </span>
-                                    </div>
-                                    <span className="text-sm">
-                                      Our recommandations are not based on these
-                                      assets as we do not yet support them
-                                    </span>
-                                  </div>
-                                </div>
-                              </Popover.Panel>
-                            </Transition>
-                          </>
-                        )}
-                      </Popover>
+                      <IconButtonHelper
+                        textContent="Our recommandations are not based on these
+                                      assets as we do not yet support them"
+                      />
                     </div>
                     <div className="mt-2 grid xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 gap-4">
                       {dashboardData.unsuportedTokens.map((token) => (
@@ -105,43 +74,13 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
               <span className="flex text-secondary font-bold text-xl">
                 COVERS RECOMMENDATIONS
               </span>
-              <Popover className="absolute right-0 transform translate-x-8">
-                {({ open }) => (
-                  <>
-                    <Popover.Button>
-                      <img
-                        className="h-7 w-7 transform cursor-pointer"
-                        src={Help}
-                        alt="help"
-                      />
-                    </Popover.Button>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute">
-                        <div className="overflow-hidden relative px-5 pt-2 pb-3 w-60 bg-secondary rounded-lg border border-ternary text-black">
-                          <div className="flex flex-col">
-                            <div className="flex flex-row justify-between">
-                              <span className="font-bold">Info: </span>
-                            </div>
-                            <span className="text-sm">
-                              {'Here you can see which covers is recommended for your\n' +
-                                "                        wallet. Be aware that custodian placement can't be\n" +
-                                '                        detected.'}
-                            </span>
-                          </div>
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
+              <IconButtonHelper
+                textContent={
+                  'Here you can see which covers is recommended for your\n' +
+                  "                        wallet. Be aware that custodian placement can't be\n" +
+                  '                        detected.'
+                }
+              />
             </div>
           </div>
         </div>
@@ -182,7 +121,6 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
           )}
         </>
       )}
-      <Footer />
     </main>
   );
 }

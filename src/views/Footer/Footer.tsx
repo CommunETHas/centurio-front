@@ -5,18 +5,18 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 export default function Footer(): ReactElement {
   const history = useHistory();
   return (
-    <div className="fixed bottom-0 w-full flex flex-row justify-end h-10 bg-primary items-center">
+    <div className="relative w-full flex flex-row justify-end centurio-footer bg-primary items-center z-50">
       <button
         type="button"
         onClick={() => history.push('/privacy-policy')}
-        className="text-secondary p-2"
+        className="text-secondary px-2"
       >
         Privacy policy
       </button>
       <button
         type="button"
         onClick={() => history.push('/about-us')}
-        className="text-secondary p-2"
+        className="text-secondary px-2"
       >
         About us
       </button>

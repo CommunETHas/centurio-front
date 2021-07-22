@@ -1,4 +1,4 @@
-import React, { useContext, createRef, ReactElement } from 'react';
+import React, { useContext, createRef, ReactElement, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
