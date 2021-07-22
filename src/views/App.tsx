@@ -73,8 +73,8 @@ export function App(): ReactElement {
               <Route exact path="/about-us" component={AboutUs} />
               <Route component={NoMatchView} />
             </Switch>
+            <Footer />
           </Suspense>
-          <Footer />
         </div>
       </BrowserRouter>
     </GlobalContext>

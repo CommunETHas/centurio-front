@@ -1,14 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 export default function Footer(): ReactElement {
   const history = useHistory();
-  const redirectAboutUs = (path: string) => {
-    history.push(path);
-  };
   return (
-    <footer className="footer justify-end h-10 bg-primary flex items-center">
+    <div className="fixed bottom-0 w-full flex flex-row justify-end h-10 bg-primary items-center">
       <button
         type="button"
         onClick={() => history.push('/privacy-policy')}
@@ -29,6 +26,6 @@ export default function Footer(): ReactElement {
       >
         <GitHubIcon />
       </a>
-    </footer>
+    </div>
   );
 }

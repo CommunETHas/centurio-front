@@ -2,20 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-main {
+body {
   scroll-behavior: smooth;
+  background-color: #20252e;
 }
 
-main::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 0.5em;
   border-radius: 0.5rem;
 }
 
-main::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   background: #20252e;
 }
 
-main::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   background-color: white;
   border-radius: 1rem;
 }

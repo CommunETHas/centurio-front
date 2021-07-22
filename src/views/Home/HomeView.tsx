@@ -15,6 +15,7 @@ import BattleLogo from '../../assets/battle.png';
 import MoreInfoLogo from '../../assets/icons/more_info.png';
 import { ContextType } from '../../api/models/user';
 import ShadowButton from '../../components/Button/ShadowButton';
+import Footer from '../Footer/Footer';
 
 export default function HomeView(): ReactElement {
   const { setOpenModal } = useContext(GlobalContext) as ContextType;
@@ -33,7 +34,7 @@ export default function HomeView(): ReactElement {
   });
 
   return (
-    <main className="mb-auto h-screen w-screen overflow-auto">
+    <main className="mb-auto h-screen w-screen">
       <div className="overflow-hidden w-full">
         <section
           className={`${

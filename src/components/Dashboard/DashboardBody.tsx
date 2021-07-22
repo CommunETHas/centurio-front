@@ -8,6 +8,7 @@ import DashboardData, { Recommandations } from '../../api/models/cover';
 import QuoteCard from '../Card/QuoteCard';
 import QuoteCardFake from '../Card/QuoteCardFake';
 import fakeDashBoardData from '../../api/fakeData/fakeDashBoardData';
+import Footer from '../../views/Footer/Footer';
 
 export interface DashboardBodyProps {
   dashboardData: DashboardData | undefined;
@@ -19,7 +20,7 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
   const { account, active } = useWeb3React<Web3Provider>();
   const history = useHistory();
   return (
-    <main className="w-screen bg-primary h-screen overflow-auto">
+    <main className="w-screen bg-primary">
       <div className="w-full flex justify-center my-10">
         <div className="flex flex-col">
           {dashboardData &&
@@ -181,6 +182,7 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
           )}
         </>
       )}
+      <Footer />
     </main>
   );
 }
