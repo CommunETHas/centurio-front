@@ -12,7 +12,8 @@ import { InjectedConnector } from '@web3-react/injected-connector';
 import LoadingOrError from '../components/Utils/LoadingOrError';
 import Footer from './Footer/Footer';
 import NavbarHeader from './Header/NavBarHeader';
-import ModalWallet from '../components/Modal';
+import ModalWallet from '../components/Modal/Modal';
+import ModalAuthentication from '../components/Modal/ModalAuthentication';
 import GlobalContext from '../contexts/GlobalContext';
 import { useEagerConnect, useInactiveListener } from '../hooks';
 
@@ -56,9 +57,10 @@ export function App(): ReactElement {
   return (
     <GlobalContext>
       <BrowserRouter>
-        <div className="flex flex-col">
+        <div className="flex flex-col h-screen">
           <Suspense fallback={<LoadingOrError />}>
             <ModalWallet />
+            <ModalAuthentication />
             <NavbarHeader />
             <Switch>
               <Route exact path="/" component={HomeView} />

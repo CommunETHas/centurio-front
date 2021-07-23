@@ -22,7 +22,7 @@ export default function Footer(): ReactElement {
       </button>
       <a
         href="https://github.com/CenturioHackMoney21"
-        className="text-secondary ml-2 mr-4"
+        className="text-secondary ml-2 mr-4 py-1"
       >
         <GitHubIcon />
       </a>

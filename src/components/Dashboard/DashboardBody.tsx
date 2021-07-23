@@ -1,14 +1,12 @@
 import React, { BaseSyntheticEvent, Fragment, ReactElement } from 'react';
 import { Web3Provider } from '@ethersproject/providers';
-import { Transition, Popover } from '@headlessui/react';
+import { Transition } from '@headlessui/react';
 import { useWeb3React } from '@web3-react/core';
 import { useHistory } from 'react-router-dom';
 import Help from '../../assets/icons/help.svg';
-import DashboardData, { Recommandations } from '../../api/models/cover';
+import DashboardData from '../../api/models/cover';
 import QuoteCard from '../Card/QuoteCard';
 import QuoteCardFake from '../Card/QuoteCardFake';
-import fakeDashBoardData from '../../api/fakeData/fakeDashBoardData';
-import Footer from '../../views/Footer/Footer';
 import IconButtonHelper from '../Button/IconButtonHelper';
 
 export interface DashboardBodyProps {
@@ -21,9 +19,9 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
   const { account, active } = useWeb3React<Web3Provider>();
   const history = useHistory();
   return (
-    <main className="w-screen bg-primary">
-      <div className="w-full flex justify-center my-10">
-        <div className="flex flex-col">
+    <main className="w-screen bg-primary flex-grow pb-8">
+      <div className="w-screen flex justify-center my-10">
+        <div className="w-full flex flex-col">
           {dashboardData &&
           dashboardData.unsuportedTokens &&
           dashboardData.unsuportedTokens.length > 0 ? (
@@ -69,7 +67,7 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
           ) : (
             <></>
           )}
-          <div className="flex flex-row justify-center z-50">
+          <div className="flex flex-row justify-center z-10">
             <div className="relative mt-6 flex flex-col">
               <span className="flex text-secondary font-bold text-xl">
                 COVERS RECOMMENDATIONS

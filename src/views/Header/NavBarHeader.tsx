@@ -22,7 +22,7 @@ export default function NavbarHeader(): ReactElement {
 
   return (
     <>
-      <nav className="nav-header z-20 bg-primary">
+      <nav className="nav-header z-20 bg-primary h-16">
         <div className="flex flex-row items-center justify-between p-1">
           <Link to="/" className="flex flex-row items-center text-primary">
             <img className="h-12" src={Logo} alt="centurio" />
