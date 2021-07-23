@@ -24,6 +24,9 @@ const NotificationView = lazy(() => import('./Notification/Notification'));
 const NoMatchView = lazy(() => import('../components/Utils/NoMatchView'));
 const PrivacyPolicy = lazy(() => import('./Footer/PrivacyPolicy'));
 const AboutUs = lazy(() => import('./Footer/AboutUs'));
+const CoversAdministration = lazy(
+  () => import('./CoversAdministration/CoversAdministrationView'),
+);
 
 export const injectedConnector = new InjectedConnector({
   supportedChainIds: [
@@ -73,6 +76,11 @@ export function App(): ReactElement {
               <Route exact path="/notification" component={NotificationView} />
               <Route exact path="/privacy-policy" component={PrivacyPolicy} />
               <Route exact path="/about-us" component={AboutUs} />
+              <Route
+                exact
+                path="/covers-administration"
+                component={CoversAdministration}
+              />
               <Route component={NoMatchView} />
             </Switch>
           </Suspense>
