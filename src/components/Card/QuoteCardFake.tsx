@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 export default function QuoteCardFake(): ReactElement {
   return (
     <div className="relative w-full">
-      <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-white rounded-lg" />
+      <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-secondary rounded-lg" />
       <div className="p-7 relative rounded-lg bg-secondary">
         <div className="animate-pulse w-full flex flex-col">
           <div className="flex flex-row">

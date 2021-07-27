@@ -11,10 +11,11 @@ import { Dialog, Transition } from '@headlessui/react';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { useHistory } from 'react-router-dom';
-import { GlobalContext } from '../contexts/GlobalContext';
-import Wallet from './Wallet';
-import { ContextType } from '../api/models/user';
-import Search from '../assets/icons/search.svg';
+import { GlobalContext } from '../../contexts/GlobalContext';
+import { ContextType } from '../../api/models/user';
+import Search from '../../assets/icons/search.svg';
+import ShadowButton from '../Button/ShadowButton';
+import Wallet from '../Wallet';
 
 export default function Modal(): ReactElement {
   const { active } = useWeb3React<Web3Provider>();
@@ -88,8 +89,8 @@ export default function Modal(): ReactElement {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="inline-block align-bottom bg-secondary rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-secondary px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="">
                   <div className="mt-3 text-center p-3 sm:mt-0 sm:text-left">
                     <Dialog.Title
@@ -105,7 +106,7 @@ export default function Modal(): ReactElement {
                     </div>
                     <Wallet />
                     <div className="mt-10 w-full flex-row">
-                      <div className="w-full h-divider bg-primary" />
+                      <div className="w-full h-0.1 bg-primary" />
                     </div>
                     <div className="text-center p-3 text-xl">
                       <span className="font-bold">OR</span> Use a wallet
@@ -115,9 +116,9 @@ export default function Modal(): ReactElement {
                       <input
                         placeholder="e.g 0xcb613........67a145"
                         onChange={handleInput}
-                        className="w-11/12 h-full z-10 bg-primary focus:outline-none border border-white text-2xs text-secondary font-bold px-4 rounded-tl-full rounded-bl-full"
+                        className="w-11/12 h-full z-10 bg-primary focus:outline-none border border-secondary text-2xs text-secondary font-bold px-4 rounded-tl-full rounded-bl-full"
                       />
-                      <div className="h-full w-1/12 padding-y-1">
+                      <div className="h-full w-1/12 padding-y-1 z-30">
                         <div className="relative bg-primary h-full rounded-tr-full rounded-br-full flex flex-col justify-center">
                           <button
                             type="button"
@@ -132,6 +133,7 @@ export default function Modal(): ReactElement {
                           <div className="z-20 absolute -left-1 h-full bg-primary w-1" />
                         </div>
                       </div>
+                      <div className="absolute bg-transparent border border-primary w-full h-full rounded-full transform translate-x-1 translate-y-1" />
                     </div>
                     {walletAddressError ? (
                       <>
@@ -146,14 +148,14 @@ export default function Modal(): ReactElement {
                 </div>
               </div>
               <div className="flex flex-row justify-center p-3">
-                <button
-                  type="button"
-                  className="w-40 py-2 justify-center rounded-full bg-white text-base font-medium text-primary border border-primary"
-                  onClick={() => setOpenModal(false)}
-                  ref={cancelButtonRef}
-                >
-                  <span className="font-bold">Cancel</span>
-                </button>
+                <div className="w-40 h-10">
+                  <ShadowButton
+                    label="Cancel"
+                    filled={false}
+                    textColor="primary"
+                    onClick={() => setOpenModal(false)}
+                  />
+                </div>
               </div>
             </div>
           </Transition.Child>

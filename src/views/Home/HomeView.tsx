@@ -3,7 +3,6 @@ import React, {
   ReactElement,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 import { useWeb3React } from '@web3-react/core';
@@ -15,6 +14,7 @@ import SocrateLogo from '../../assets/socrate.png';
 import BattleLogo from '../../assets/battle.png';
 import MoreInfoLogo from '../../assets/icons/more_info.png';
 import { ContextType } from '../../api/models/user';
+import ShadowButton from '../../components/Button/ShadowButton';
 
 export default function HomeView(): ReactElement {
   const { setOpenModal } = useContext(GlobalContext) as ContextType;
@@ -33,7 +33,7 @@ export default function HomeView(): ReactElement {
   });
 
   return (
-    <main className="mb-auto h-screen w-screen overflow-auto">
+    <main className="mb-auto w-screen">
       <div className="overflow-hidden w-full">
         <section
           className={`${
@@ -47,54 +47,47 @@ export default function HomeView(): ReactElement {
             <div
               className={`${
                 windowWidth > 700 ? 'justify-center' : 'mb-20 w-full'
-              } flex flex-col px-3`}
+              } flex flex-col px-50`}
             >
               <span
                 className={`${
-                  windowWidth > 700 ? 'text-title-home' : 'text-3xl'
+                  windowWidth > 700 ? 'text-5xl' : 'text-3xl'
                 } text-secondary font-bold`}
               >
                 Protect the assets
               </span>
               <span
                 className={`${
-                  windowWidth > 700 ? 'text-title-home' : 'text-3xl'
+                  windowWidth > 700 ? 'text-5xl' : 'text-3xl'
                 } text-secondary font-bold`}
               >
                 in your wallet.
               </span>
               <span
                 className={`${
-                  windowWidth > 700 ? 'text-title-home' : 'text-3xl'
+                  windowWidth > 700 ? 'text-5xl' : 'text-3xl'
                 } text-ternary mb-10`}
               >
                 Take the right cover.
               </span>
               <span
                 className={`${
-                  windowWidth > 700 ? 'w-title text-xl' : 'w-full text-lg'
+                  windowWidth > 700 ? 'w-100 text-xl' : 'w-full text-lg'
                 } text-comment mb-10`}
               >
                 We help you find the right covers for your assets based on your
                 wallet.
               </span>
-              <div
-                className={`${
-                  windowWidth > 700 ? 'w-button-started' : 'w-full'
-                } h-button-started`}
-              >
+              <div className={`${windowWidth > 700 ? 'w-100' : 'w-full'} h-16`}>
                 {!active && (
                   <>
-                    <button
-                      type="button"
+                    <ShadowButton
+                      label="Get started"
+                      color="secondary"
+                      textColor="primary"
+                      fontSize="text-4xl"
                       onClick={() => setOpenModal(true)}
-                      className="relative h-full w-full text-button-text text-primary font-bold z-10"
-                    >
-                      <div className="absolute bg-transparent focus:outline-none h-full w-full bottom-0 border border-white rounded-full transform translate-x-1 translate-y-1" />
-                      <div className="absolute bg-secondary h-full w-full bottom-0 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1">
-                        Get started
-                      </div>
-                    </button>
+                    />
                   </>
                 )}
               </div>
@@ -102,11 +95,7 @@ export default function HomeView(): ReactElement {
             {windowWidth > 700 ? (
               <>
                 <div className="flex flex-col justify-center mb-32">
-                  <img
-                    className="h-shield-logo ml-4"
-                    src={ShieldLogo}
-                    alt="shield"
-                  />
+                  <img className="h-62 ml-4" src={ShieldLogo} alt="shield" />
                 </div>
               </>
             ) : (
@@ -116,13 +105,13 @@ export default function HomeView(): ReactElement {
           {windowWidth > 700 ? (
             <>
               <motion.div
-                className="z-20 absolute h-divbg w-1/2 bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary"
+                className="z-20 absolute h-200 w-2/3 bg-secondary ring-1 ring-secondary ring-offset-18 ring-offset-primary"
                 initial={{
                   scale: 1,
                   opacity: 1,
                   rotate: 45,
-                  translateY: 80,
-                  translateX: -480,
+                  translateY: 0,
+                  translateX: -620,
                 }}
                 animate={{ scale: 1.1, opacity: 0 }}
                 transition={{
@@ -131,13 +120,13 @@ export default function HomeView(): ReactElement {
                   repeat: Number.POSITIVE_INFINITY,
                 }}
               />
-              <div className="z-10 absolute transform translate-y-20 translate-x-100 rotate-45 h-divbg w-1/2 bg-secondary ring-1 ring-white ring-offset-18 ring-offset-primary" />
+              <div className="z-20 absolute transform translate-y-15 -translate-x-150 rotate-45 h-200 w-2/3 bg-secondary ring-1 ring-secondary ring-offset-18 ring-offset-primary" />
             </>
           ) : (
             <></>
           )}
 
-          <div className="z-50 absolute bottom-10 w-full bg-transparent flex flex-row justify-center">
+          <div className="z-40 absolute bottom-10 w-full bg-transparent flex flex-row justify-center">
             <motion.div
               initial={{
                 translateY: -20,
@@ -190,9 +179,9 @@ export default function HomeView(): ReactElement {
               windowWidth < 700 ? 'w-screen' : ''
             } z-40 flex justify-center items-center`}
           >
-            <div className="flex flex-col w-para">
+            <div className="flex flex-col w-110">
               <img
-                className="h-battle-logo mb-10 opacity-90"
+                className="h-65 mb-10 opacity-90"
                 src={BattleLogo}
                 alt="battle"
               />
@@ -217,7 +206,7 @@ export default function HomeView(): ReactElement {
               windowWidth < 700 ? 'w-screen' : ''
             } mt-10 z-40 flex justify-center items-center`}
           >
-            <div className="flex flex-col w-para">
+            <div className="flex flex-col w-110">
               <span className="px-3 mb-10 text-secondary text-2xl">
                 DeFi can be complex to understand. Composability makes protocol
                 use one another and to know exactly which cover to choose for
@@ -229,7 +218,7 @@ export default function HomeView(): ReactElement {
                 <img
                   className={`${
                     windowWidth > 700 ? 'absolute' : ''
-                  } h-socrate-logo opacity-90 transform translate-y-socrate`}
+                  } h-65 opacity-90 transform -translate-y-4`}
                   src={SocrateLogo}
                   alt="socrate"
                 />
@@ -239,7 +228,7 @@ export default function HomeView(): ReactElement {
           {windowWidth > 700 ? (
             <>
               <motion.div
-                className="z-20 absolute transform translate-y-0 translate-x-100 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"
+                className="z-20 absolute transform translate-y-0 -translate-x-110 rotate-60 h-210 w-200 bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary"
                 initial={{
                   scale: 1,
                   opacity: 1,
@@ -254,7 +243,7 @@ export default function HomeView(): ReactElement {
                   repeat: Number.POSITIVE_INFINITY,
                 }}
               />
-              <div className="z-20 absolute transform translate-y-0 translate-x-100 rotate-60 h-divbg2 w-divbg bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary" />
+              <div className="z-20 absolute transform translate-y-0 -translate-x-110 rotate-60 h-210 w-200 bg-ternary ring-1 ring-ternary ring-offset-18 ring-offset-primary" />
             </>
           ) : (
             <></>

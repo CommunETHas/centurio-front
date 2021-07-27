@@ -12,8 +12,8 @@ import { InjectedConnector } from '@web3-react/injected-connector';
 import LoadingOrError from '../components/Utils/LoadingOrError';
 import Footer from './Footer/Footer';
 import NavbarHeader from './Header/NavBarHeader';
-import ModalWallet from '../components/Modal';
-import ModalAuthentication from '../components/ModalAuthentication';
+import ModalWallet from '../components/Modal/Modal';
+import ModalAuthentication from '../components/Modal/ModalAuthentication';
 import GlobalContext from '../contexts/GlobalContext';
 import { useEagerConnect, useInactiveListener } from '../hooks';
 
@@ -75,8 +75,8 @@ export function App(): ReactElement {
               <Route exact path="/about-us" component={AboutUs} />
               <Route component={NoMatchView} />
             </Switch>
+            <Footer />
           </Suspense>
-          <Footer />
         </div>
       </BrowserRouter>
     </GlobalContext>

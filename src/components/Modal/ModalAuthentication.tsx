@@ -10,9 +10,9 @@ import { Dialog, Transition } from '@headlessui/react';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { useHistory } from 'react-router-dom';
-import { GlobalContext } from '../contexts/GlobalContext';
-import { ContextType, UserAuthenticated } from '../api/models/user';
-import HttpRequest from '../api/api';
+import { GlobalContext } from '../../contexts/GlobalContext';
+import { ContextType } from '../../api/models/user';
+import HttpRequest from '../../api/api';
 
 export default function ModalAuthentication(): ReactElement {
   const { active, library, account } = useWeb3React<Web3Provider>();
@@ -110,8 +110,8 @@ export default function ModalAuthentication(): ReactElement {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="inline-block align-bottom bg-secondary rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-secondary px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="">
                   <div className="mt-3 text-center p-3 sm:mt-0 sm:text-left">
                     <Dialog.Title
@@ -131,7 +131,7 @@ export default function ModalAuthentication(): ReactElement {
                         <button
                           onClick={onClickRedictNotification}
                           type="button"
-                          className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+                          className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-secondary text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
                         >
                           Go to notification
                         </button>
@@ -148,7 +148,7 @@ export default function ModalAuthentication(): ReactElement {
                         <button
                           onClick={signMessage}
                           type="button"
-                          className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-white text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
+                          className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-secondary text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
                         >
                           Sign a message !
                         </button>
@@ -161,7 +161,7 @@ export default function ModalAuthentication(): ReactElement {
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-secondary text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={() => setOpenModalAuth(false)}
                   ref={cancelButtonRef}
                 >

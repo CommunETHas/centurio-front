@@ -1,7 +1,8 @@
 import React, { BaseSyntheticEvent, ReactElement, useRef } from 'react';
 import ReactTooltip from 'react-tooltip';
-import { Recommandations } from '../api/models/cover';
-import UnrecognizedAsset from '../assets/icons/unrecognized_asset.svg';
+import { Recommandations } from '../../api/models/cover';
+import UnrecognizedAsset from '../../assets/icons/unrecognized_asset.svg';
+import ShadowButton from '../Button/ShadowButton';
 
 const redirectOnNexus = (address: string) => {
   window.open(
@@ -12,11 +13,10 @@ const redirectOnNexus = (address: string) => {
 
 export default function QuoteCard(props: Recommandations): ReactElement {
   const recommandation: Recommandations = props;
-  const assetImage = useRef(null);
 
   return (
     <div className="relative w-full">
-      <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-white rounded-lg" />
+      <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-secondary rounded-lg" />
       <div className="h-full p-7 relative rounded-lg bg-secondary">
         <div className="w-full flex flex-row">
           <img
@@ -94,14 +94,13 @@ export default function QuoteCard(props: Recommandations): ReactElement {
           )}
         </div>
         <div className="mt-3 w-full flex flex-row justify-end">
-          <button
-            type="button"
-            onClick={() => redirectOnNexus(recommandation.cover.address)}
-            className="absolute z-10 bg-ternary focus:outline-none border border-white text-sm text-secondary font-bold h-7 w-44 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
-          >
-            See on Nexus Mutual
-          </button>
-          <div className="bg-transparent focus:outline-none h-7 w-44 border border-ternary rounded-full transform translate-x-1 translate-y-1" />
+          <div className="h-7 w-44">
+            <ShadowButton
+              label="See on Nexus Mutual"
+              color="ternary"
+              onClick={() => redirectOnNexus(recommandation.cover.address)}
+            />
+          </div>
         </div>
       </div>
     </div>
