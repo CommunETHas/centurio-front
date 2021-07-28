@@ -5,8 +5,6 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { useWeb3React } from '@web3-react/core';
-import { Web3Provider } from '@ethersproject/providers';
 import { motion } from 'framer-motion';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import ShieldLogo from '../../assets/logo_shield_variant_ternary.png';
@@ -18,7 +16,6 @@ import ShadowButton from '../../components/Button/ShadowButton';
 
 export default function HomeView(): ReactElement {
   const { setOpenModal } = useContext(GlobalContext) as ContextType;
-  const { active } = useWeb3React<Web3Provider>();
   const sectionRef = createRef<HTMLElement>();
   const [windowWidth, setwindowWidth] = useState<number>(0);
 
@@ -79,17 +76,13 @@ export default function HomeView(): ReactElement {
                 wallet.
               </span>
               <div className={`${windowWidth > 700 ? 'w-100' : 'w-full'} h-16`}>
-                {!active && (
-                  <>
-                    <ShadowButton
-                      label="Get started"
-                      color="secondary"
-                      textColor="primary"
-                      fontSize="text-4xl"
-                      onClick={() => setOpenModal(true)}
-                    />
-                  </>
-                )}
+                <ShadowButton
+                  label="Get started"
+                  color="secondary"
+                  textColor="primary"
+                  fontSize="text-4xl"
+                  onClick={() => setOpenModal(true)}
+                />
               </div>
             </div>
             {windowWidth > 700 ? (

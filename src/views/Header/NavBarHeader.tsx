@@ -1,9 +1,6 @@
 import React, { useContext, createRef, ReactElement, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useWeb3React } from '@web3-react/core';
-import { Web3Provider } from '@ethersproject/providers';
 import { GlobalContext } from '../../contexts/GlobalContext';
-import Popover from '../../components/Popover';
 import Logo from '../../assets/logo.png';
 import { ContextType } from '../../api/models/user';
 import ShadowButton from '../../components/Button/ShadowButton';
@@ -17,7 +14,6 @@ export default function NavbarHeader(): ReactElement {
   const { popoverShow, setOpenModal, setPopoverShow } = useContext(
     GlobalContext,
   ) as ContextType;
-  const { account, active } = useWeb3React<Web3Provider>();
   const btnRef = createRef<HTMLButtonElement>();
 
   return (
@@ -31,30 +27,13 @@ export default function NavbarHeader(): ReactElement {
             </span>
           </Link>
           <div className="h-7 w-40 mr-3">
-            {active ? (
-              <>
-                <ShadowButton
-                  label={account && formatWalletAddress(account)}
-                  color="ternary"
-                  textColor="secondary"
-                  fontSize="text-xs"
-                  onClick={() =>
-                    popoverShow ? setPopoverShow(false) : setPopoverShow(true)
-                  }
-                />
-                <Popover btnRef={btnRef} />
-              </>
-            ) : (
-              <>
-                <ShadowButton
-                  label="Connect your wallet"
-                  color="secondary"
-                  textColor="primary"
-                  fontSize="text-xs"
-                  onClick={() => setOpenModal(true)}
-                />
-              </>
-            )}
+            <ShadowButton
+              label="Connect your wallet"
+              color="secondary"
+              textColor="primary"
+              fontSize="text-xs"
+              onClick={() => setOpenModal(true)}
+            />
           </div>
         </div>
       </nav>

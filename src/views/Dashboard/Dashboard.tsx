@@ -1,15 +1,9 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Web3Provider } from '@ethersproject/providers';
-import { useWeb3React } from '@web3-react/core';
-import DashboardData, {
-  Recommandations,
-  UnsuportedTokens,
-} from '../../api/models/cover';
 import HttpRequest from '../../api/api';
 import DashboardBody from '../../components/Dashboard/DashboardBody';
+import DashboardData from '../../api/models/cover';
 
 export default function Dashboard(): ReactElement {
-  const { account, active } = useWeb3React<Web3Provider>();
   const [dashboardData, setDashboardData] = useState<DashboardData>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const fethCoverRecommendations = async (accountAddr: string) => {
@@ -20,9 +14,7 @@ export default function Dashboard(): ReactElement {
   };
 
   useEffect(() => {
-    if (account) {
-      fethCoverRecommendations(account).catch(() => {});
-    }
+    fethCoverRecommendations('').catch(() => {});
   }, []);
 
   return <DashboardBody dashboardData={dashboardData} isLoading={isLoading} />;

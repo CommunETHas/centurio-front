@@ -7,69 +7,23 @@ import React, {
   useState,
 } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { useWeb3React } from '@web3-react/core';
-import { Web3Provider } from '@ethersproject/providers';
 import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { ContextType } from '../../api/models/user';
-import HttpRequest from '../../api/api';
 
 export default function ModalAuthentication(): ReactElement {
-  const { active, library, account } = useWeb3React<Web3Provider>();
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const { openModalAuth, setOpenModalAuth, user, setUser, setIsUserCreated } =
-    useContext(GlobalContext) as ContextType;
+  const { openModalAuth, setOpenModalAuth } = useContext(
+    GlobalContext,
+  ) as ContextType;
   const history = useHistory();
 
   const cancelButtonRef = useRef(null);
-
-  const signMessage = () => {
-    if (library !== undefined && account !== null && account !== undefined) {
-      library
-        .getSigner(account)
-        .signMessage(
-          `Welcome to Centurio, sign this message to authenticate ! ${user.nonce}`,
-        )
-        .then(async (signature: string) => {
-          const { data } = await HttpRequest.authenticate({
-            user: { address: account, email: '', nonce: user.nonce },
-            signature,
-          });
-          localStorage.removeItem('bearer');
-          if (data.accessToken) {
-            localStorage.setItem('bearer', data.accessToken);
-            setIsAuth(true);
-          }
-        })
-        .catch((error: any) => {
-          console.log(error && error.message);
-        });
-    }
-  };
-
-  const fetchUser = async () => {
-    await HttpRequest.getUser(account)
-      .then(({ data }) => {
-        setIsUserCreated(true);
-        setUser(data);
-      })
-      .catch(() => {
-        try {
-          HttpRequest.insertUser(account);
-        } catch {
-          setIsUserCreated(false);
-        }
-      });
-  };
 
   const onClickRedictNotification = () => {
     setOpenModalAuth(false);
     history.push('/notification');
   };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
 
   return (
     <Transition.Root show={openModalAuth} as={Fragment}>
@@ -146,7 +100,6 @@ export default function ModalAuthentication(): ReactElement {
                           </p>
                         </div>
                         <button
-                          onClick={signMessage}
                           type="button"
                           className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-secondary text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
                         >

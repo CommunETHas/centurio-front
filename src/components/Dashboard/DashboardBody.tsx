@@ -1,7 +1,5 @@
 import React, { BaseSyntheticEvent, Fragment, ReactElement } from 'react';
-import { Web3Provider } from '@ethersproject/providers';
 import { Transition } from '@headlessui/react';
-import { useWeb3React } from '@web3-react/core';
 import { useHistory } from 'react-router-dom';
 import Help from '../../assets/icons/help.svg';
 import DashboardData from '../../api/models/cover';
@@ -16,7 +14,6 @@ export interface DashboardBodyProps {
 
 export default function DashboardBody(props: DashboardBodyProps): ReactElement {
   const { dashboardData, isLoading } = props;
-  const { account, active } = useWeb3React<Web3Provider>();
   const history = useHistory();
   return (
     <main className="w-screen bg-primary flex-grow pb-8">
@@ -108,7 +105,7 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
             </div>
           ) : (
             <div className="w-full px-20">
-              {active || history.location.pathname === 'dashboard-preview' ? (
+              {history.location.pathname === 'dashboard-preview' ? (
                 <span className="text-secondary">
                   Sorry ! We have no recommendations based on your assets.
                 </span>
