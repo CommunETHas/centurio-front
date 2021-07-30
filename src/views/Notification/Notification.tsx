@@ -9,9 +9,9 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { GlobalContext } from '../../contexts/GlobalContext';
+import { InterfaceContext } from '../../contexts/InterfaceContext';
 import HttpRequest from '../../api/api';
-import { ContextType } from '../../api/models/user';
+import { ContextType, User } from '../../api/models/user';
 
 const options = [
   {
@@ -33,7 +33,7 @@ function classNames(...classes: any) {
 }
 
 export default function Notification(): ReactElement {
-  const { user } = useContext(GlobalContext) as ContextType;
+  const user = new User();
   const [selected, setSelected] = useState(options[0]);
   const [email, setEmail] = useState(user.email);
 

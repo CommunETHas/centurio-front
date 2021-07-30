@@ -22,6 +22,7 @@
     "@originjs/vite-plugin-commonjs": "^1.0.0-beta6",
     "@popperjs/core": "^2.9.2",
     "axios": "^0.21.1",
+    "ethers": "^5.4.3",
     "events": "^3.3.0",
     "framer-motion": "^4.1.17",
     "react": "17.0.2",

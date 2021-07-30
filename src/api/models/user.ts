@@ -1,4 +1,9 @@
-export interface User {
+export class User {
+  constructor() {
+    this.address = '';
+    this.email = '';
+  }
+
   address: string;
   email: string;
   nonce?: string;

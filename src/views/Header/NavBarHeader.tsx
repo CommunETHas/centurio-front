@@ -1,6 +1,6 @@
 import React, { useContext, createRef, ReactElement, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { GlobalContext } from '../../contexts/GlobalContext';
+import { InterfaceContext } from '../../contexts/InterfaceContext';
 import Logo from '../../assets/logo.png';
 import { ContextType } from '../../api/models/user';
 import ShadowButton from '../../components/Button/ShadowButton';
@@ -12,7 +12,7 @@ const formatWalletAddress = (addressString: string) =>
 
 export default function NavbarHeader(): ReactElement {
   const { popoverShow, setOpenModal, setPopoverShow } = useContext(
-    GlobalContext,
+    InterfaceContext,
   ) as ContextType;
   const btnRef = createRef<HTMLButtonElement>();
 

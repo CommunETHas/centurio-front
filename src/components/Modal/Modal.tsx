@@ -9,14 +9,16 @@ import React, {
 } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useHistory } from 'react-router-dom';
-import { GlobalContext } from '../../contexts/GlobalContext';
+import { InterfaceContext } from '../../contexts/InterfaceContext';
 import { ContextType } from '../../api/models/user';
 import Search from '../../assets/icons/search.svg';
 import ShadowButton from '../Button/ShadowButton';
 import Wallet from '../Wallet';
 
 export default function Modal(): ReactElement {
-  const { openModal, setOpenModal } = useContext(GlobalContext) as ContextType;
+  const { openModal, setOpenModal } = useContext(
+    InterfaceContext,
+  ) as ContextType;
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [walletAddressError, setWalletAddressError] = useState<boolean>(false);
 

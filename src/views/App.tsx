@@ -5,7 +5,7 @@ import Footer from './Footer/Footer';
 import NavbarHeader from './Header/NavBarHeader';
 import ModalWallet from '../components/Modal/Modal';
 import ModalAuthentication from '../components/Modal/ModalAuthentication';
-import GlobalContext from '../contexts/GlobalContext';
+import InterfaceContext from '../contexts/InterfaceContext';
 
 const HomeView = lazy(() => import('./Home/HomeView'));
 const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
@@ -17,7 +17,7 @@ const AboutUs = lazy(() => import('./Footer/AboutUs'));
 
 export function App(): ReactElement {
   return (
-    <GlobalContext>
+    <InterfaceContext>
       <BrowserRouter>
         <div className="flex flex-col h-screen">
           <Suspense fallback={<LoadingOrError />}>
@@ -41,7 +41,7 @@ export function App(): ReactElement {
           </Suspense>
         </div>
       </BrowserRouter>
-    </GlobalContext>
+    </InterfaceContext>
   );
 }
 

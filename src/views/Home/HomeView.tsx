@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { motion } from 'framer-motion';
-import { GlobalContext } from '../../contexts/GlobalContext';
+import { InterfaceContext } from '../../contexts/InterfaceContext';
 import ShieldLogo from '../../assets/logo_shield_variant_ternary.png';
 import SocrateLogo from '../../assets/socrate.png';
 import BattleLogo from '../../assets/battle.png';
@@ -15,7 +15,7 @@ import { ContextType } from '../../api/models/user';
 import ShadowButton from '../../components/Button/ShadowButton';
 
 export default function HomeView(): ReactElement {
-  const { setOpenModal } = useContext(GlobalContext) as ContextType;
+  const { setOpenModal } = useContext(InterfaceContext) as ContextType;
   const sectionRef = createRef<HTMLElement>();
   const [windowWidth, setwindowWidth] = useState<number>(0);
 

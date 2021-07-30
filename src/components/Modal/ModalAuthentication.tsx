@@ -8,13 +8,13 @@ import React, {
 } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useHistory } from 'react-router-dom';
-import { GlobalContext } from '../../contexts/GlobalContext';
+import { InterfaceContext } from '../../contexts/InterfaceContext';
 import { ContextType } from '../../api/models/user';
 
 export default function ModalAuthentication(): ReactElement {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const { openModalAuth, setOpenModalAuth } = useContext(
-    GlobalContext,
+    InterfaceContext,
   ) as ContextType;
   const history = useHistory();
 
