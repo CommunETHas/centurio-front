@@ -1,12 +1,22 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement, useContext, useEffect } from 'react';
 import MetaMaskLogo from '../assets/wallets/logo_metamask.png';
 import ShadowButton from './Button/ShadowButton';
-
-const requestAuthent = () => {
-  console.log('etherum', window.ethereum);
-};
+import { useEthService } from '../services/ethService';
+import { EthContextType } from '../api/models/user';
+import { EthContext } from '../contexts/EthContext';
 
 export default function Wallet(): ReactElement {
+  const { ethProvider } = useContext(EthContext) as EthContextType;
+  const { requestEthProvider, getWalletAdressFromProvider } =
+    useEthService(ethProvider);
+
+  const requestAuthent = () => {
+    requestEthProvider().then(() => {
+      getWalletAdressFromProvider().then((account) => {
+        console.log('account', account);
+      });
+    });
+  };
   return (
     <div className="h-16 w-60">
       <ShadowButton

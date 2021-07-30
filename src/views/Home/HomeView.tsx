@@ -11,11 +11,11 @@ import ShieldLogo from '../../assets/logo_shield_variant_ternary.png';
 import SocrateLogo from '../../assets/socrate.png';
 import BattleLogo from '../../assets/battle.png';
 import MoreInfoLogo from '../../assets/icons/more_info.png';
-import { ContextType } from '../../api/models/user';
+import { InterfaceContextType } from '../../api/models/user';
 import ShadowButton from '../../components/Button/ShadowButton';
 
 export default function HomeView(): ReactElement {
-  const { setOpenModal } = useContext(InterfaceContext) as ContextType;
+  const { setOpenModal } = useContext(InterfaceContext) as InterfaceContextType;
   const sectionRef = createRef<HTMLElement>();
   const [windowWidth, setwindowWidth] = useState<number>(0);
 

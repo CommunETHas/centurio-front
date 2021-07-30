@@ -2,7 +2,7 @@ import React, { useContext, ReactElement, RefObject } from 'react';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { InterfaceContext } from '../contexts/InterfaceContext';
-import { ContextType } from '../api/models/user';
+import { InterfaceContextType } from '../api/models/user';
 import HttpRequest from '../api/api';
 import ShadowButton from './Button/ShadowButton';
 
@@ -35,7 +35,7 @@ const variantsMenu = {
 const Popover = ({ btnRef }: PopoverProps) => {
   const { popoverShow, setPopoverShow, setOpenModalAuth } = useContext(
     InterfaceContext,
-  ) as ContextType;
+  ) as InterfaceContextType;
   const history = useHistory();
 
   const onClose = () => {

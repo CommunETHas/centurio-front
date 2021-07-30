@@ -9,13 +9,13 @@ import React, {
 import { Dialog, Transition } from '@headlessui/react';
 import { useHistory } from 'react-router-dom';
 import { InterfaceContext } from '../../contexts/InterfaceContext';
-import { ContextType } from '../../api/models/user';
+import { InterfaceContextType } from '../../api/models/user';
 
 export default function ModalAuthentication(): ReactElement {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const { openModalAuth, setOpenModalAuth } = useContext(
     InterfaceContext,
-  ) as ContextType;
+  ) as InterfaceContextType;
   const history = useHistory();
 
   const cancelButtonRef = useRef(null);

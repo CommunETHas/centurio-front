@@ -1,6 +1,12 @@
 import { ethers } from 'ethers';
 
-const useEthService = (provider: ethers.providers.Web3Provider) => {
+export const getEthProvider = () => {
+  console.log('provider', window.ethereum);
+  // @ts-ignore
+  return new ethers.providers.Web3Provider(window.ethereum);
+};
+
+export const useEthService = (provider: ethers.providers.Web3Provider) => {
   // EIP-1102
   const requestEthProvider = async () => {
     await provider.send('eth_requestAccounts', []);
@@ -14,5 +20,3 @@ const useEthService = (provider: ethers.providers.Web3Provider) => {
 
   return { requestEthProvider, getWalletAdressFromProvider };
 };
-
-export default useEthService;

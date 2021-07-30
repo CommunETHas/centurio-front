@@ -11,7 +11,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { InterfaceContext } from '../../contexts/InterfaceContext';
 import HttpRequest from '../../api/api';
-import { ContextType, User } from '../../api/models/user';
+import { InterfaceContextType, User } from '../../api/models/user';
 
 const options = [
   {

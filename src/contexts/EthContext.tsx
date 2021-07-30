@@ -15,6 +15,8 @@ const EthProvider: FC = ({ children }) => {
       value={{
         walletConnected,
         setWalletConnected,
+        ethProvider,
+        setEthProvider,
       }}
     >
       {children}

@@ -6,6 +6,7 @@ import NavbarHeader from './Header/NavBarHeader';
 import ModalWallet from '../components/Modal/Modal';
 import ModalAuthentication from '../components/Modal/ModalAuthentication';
 import InterfaceContext from '../contexts/InterfaceContext';
+import EthContext from '../contexts/EthContext';
 
 const HomeView = lazy(() => import('./Home/HomeView'));
 const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
@@ -18,29 +19,35 @@ const AboutUs = lazy(() => import('./Footer/AboutUs'));
 export function App(): ReactElement {
   return (
     <InterfaceContext>
-      <BrowserRouter>
-        <div className="flex flex-col h-screen">
-          <Suspense fallback={<LoadingOrError />}>
-            <ModalWallet />
-            <ModalAuthentication />
-            <NavbarHeader />
-            <Switch>
-              <Route exact path="/" component={HomeView} />
-              <Route
-                exact
-                path="/dashboard-preview"
-                component={DashboardPreview}
-              />
-              <Route exact path="/dashboard" component={OnBoardingView} />
-              <Route exact path="/notification" component={NotificationView} />
-              <Route exact path="/privacy-policy" component={PrivacyPolicy} />
-              <Route exact path="/about-us" component={AboutUs} />
-              <Route component={NoMatchView} />
-            </Switch>
-            <Footer />
-          </Suspense>
-        </div>
-      </BrowserRouter>
+      <EthContext>
+        <BrowserRouter>
+          <div className="flex flex-col h-screen">
+            <Suspense fallback={<LoadingOrError />}>
+              <ModalWallet />
+              <ModalAuthentication />
+              <NavbarHeader />
+              <Switch>
+                <Route exact path="/" component={HomeView} />
+                <Route
+                  exact
+                  path="/dashboard-preview"
+                  component={DashboardPreview}
+                />
+                <Route exact path="/dashboard" component={OnBoardingView} />
+                <Route
+                  exact
+                  path="/notification"
+                  component={NotificationView}
+                />
+                <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+                <Route exact path="/about-us" component={AboutUs} />
+                <Route component={NoMatchView} />
+              </Switch>
+              <Footer />
+            </Suspense>
+          </div>
+        </BrowserRouter>
+      </EthContext>
     </InterfaceContext>
   );
 }
