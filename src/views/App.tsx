@@ -7,6 +7,7 @@ import ModalWallet from '../components/Modal/Modal';
 import ModalAuthentication from '../components/Modal/ModalAuthentication';
 import InterfaceContext from '../contexts/InterfaceContext';
 import EthContext from '../contexts/EthContext';
+import NoWeb3Modal from '../components/Modal/NoWeb3Modal';
 
 const HomeView = lazy(() => import('./Home/HomeView'));
 const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
@@ -25,6 +26,7 @@ export function App(): ReactElement {
             <Suspense fallback={<LoadingOrError />}>
               <ModalWallet />
               <ModalAuthentication />
+              <NoWeb3Modal />
               <NavbarHeader />
               <Switch>
                 <Route exact path="/" component={HomeView} />

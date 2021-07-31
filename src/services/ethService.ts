@@ -1,9 +1,11 @@
 import { ethers } from 'ethers';
 
 export const getEthProvider = () => {
-  console.log('provider', window.ethereum);
-  // @ts-ignore
-  return new ethers.providers.Web3Provider(window.ethereum);
+  try {
+    return new ethers.providers.Web3Provider(window.ethereum);
+  } catch {
+    throw new Error('No Web3 detected');
+  }
 };
 
 export const useEthService = (provider: ethers.providers.Web3Provider) => {

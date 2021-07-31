@@ -2,20 +2,29 @@ import React, { ReactElement, useContext, useEffect } from 'react';
 import MetaMaskLogo from '../assets/wallets/logo_metamask.png';
 import ShadowButton from './Button/ShadowButton';
 import { useEthService } from '../services/ethService';
-import { EthContextType } from '../api/models/user';
+import { EthContextType, InterfaceContextType } from '../api/models/user';
 import { EthContext } from '../contexts/EthContext';
+import { InterfaceContext } from '../contexts/InterfaceContext';
 
 export default function Wallet(): ReactElement {
   const { ethProvider } = useContext(EthContext) as EthContextType;
+  const { setNoWeb3Modal } = useContext(
+    InterfaceContext,
+  ) as InterfaceContextType;
   const { requestEthProvider, getWalletAdressFromProvider } =
     useEthService(ethProvider);
+  const { isWeb3Available } = useContext(EthContext) as EthContextType;
 
   const requestAuthent = () => {
-    requestEthProvider().then(() => {
-      getWalletAdressFromProvider().then((account) => {
-        console.log('account', account);
+    if (isWeb3Available) {
+      requestEthProvider().then(() => {
+        getWalletAdressFromProvider().then((account) => {
+          console.log('account', account);
+        });
       });
-    });
+    } else {
+      setNoWeb3Modal(true);
+    }
   };
   return (
     <div className="h-16 w-60">

@@ -1,14 +1,25 @@
-import React, { createContext, useState, FC } from 'react';
+import React, { createContext, useState, FC, Fragment, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { getEthProvider } from '../services/ethService';
 
 export const EthContext = createContext({});
 
 const EthProvider: FC = ({ children }) => {
-  const [walletConnected, setWalletConnected] = useState<string>('');
   const [ethProvider, setEthProvider] = useState<
     ethers.providers.Web3Provider | undefined
-  >(getEthProvider());
+  >();
+  const [walletConnected, setWalletConnected] = useState<string>('');
+  const [isWeb3Available, setIsWeb3Available] = useState(true);
+
+  useEffect(() => {
+    try {
+      const provider = getEthProvider();
+      setEthProvider(provider);
+      setIsWeb3Available(true);
+    } catch {
+      setIsWeb3Available(false);
+    }
+  }, []);
 
   return (
     <EthContext.Provider
@@ -17,6 +28,8 @@ const EthProvider: FC = ({ children }) => {
         setWalletConnected,
         ethProvider,
         setEthProvider,
+        isWeb3Available,
+        setIsWeb3Available,
       }}
     >
       {children}

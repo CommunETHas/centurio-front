@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import { bool } from 'yup';
 
 export class User {
   constructor() {
@@ -28,6 +29,8 @@ export type InterfaceContextType = {
   setOpenModalAuth: (boolean: boolean) => void;
   popoverShow: boolean;
   setPopoverShow: (boolean: boolean) => void;
+  noWeb3Modal: boolean;
+  setNoWeb3Modal: (boolean: boolean) => void;
 };
 
 export type EthContextType = {
@@ -35,4 +38,6 @@ export type EthContextType = {
   setWalletConnected: (wallet: string) => void;
   ethProvider: ethers.providers.Web3Provider;
   setEthProvider: (provider: ethers.providers.Web3Provider) => void;
+  isWeb3Available: boolean;
+  setIsWeb3Available: (isWeb3Available: boolean) => void;
 };
