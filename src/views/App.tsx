@@ -3,11 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoadingOrError from '../components/Utils/LoadingOrError';
 import Footer from './Footer/Footer';
 import NavbarHeader from './Header/NavBarHeader';
-import ModalWallet from '../components/Modal/Modal';
-import ModalAuthentication from '../components/Modal/ModalAuthentication';
+import ModalWallet from '../components/Modal/WalletModal';
+import AuthenticationModal from '../components/Modal/AuthenticationModal';
 import InterfaceContext from '../contexts/InterfaceContext';
 import EthContext from '../contexts/EthContext';
-import NoWeb3Modal from '../components/Modal/NoWeb3Modal';
 
 const HomeView = lazy(() => import('./Home/HomeView'));
 const OnBoardingView = lazy(() => import('./Dashboard/Dashboard'));
@@ -25,8 +24,7 @@ export function App(): ReactElement {
           <div className="flex flex-col h-screen">
             <Suspense fallback={<LoadingOrError />}>
               <ModalWallet />
-              <ModalAuthentication />
-              <NoWeb3Modal />
+              <AuthenticationModal />
               <NavbarHeader />
               <Switch>
                 <Route exact path="/" component={HomeView} />

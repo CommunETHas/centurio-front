@@ -1,4 +1,10 @@
-import React, { Fragment, ReactElement, useContext, useRef } from 'react';
+import React, {
+  Fragment,
+  ReactElement,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { InterfaceContextType } from '../../api/models/user';
 import { InterfaceContext } from '../../contexts/InterfaceContext';
@@ -13,6 +19,7 @@ export default function NoWeb3Modal(): ReactElement {
   const closeModal = () => {
     setNoWeb3Modal(false);
   };
+
   return (
     <Transition.Root show={noWeb3Modal} as={Fragment}>
       <Dialog
@@ -61,18 +68,16 @@ export default function NoWeb3Modal(): ReactElement {
                     >
                       No Web3 detected
                     </Dialog.Title>
-                    <div className="mt-2">
-                      <span className="text-xl text-primary mb-10">
-                        If you choice connecting by browser wallet you need to
-                        have one installed.
-                      </span>
-                      <div className="mt-3 row justify-start">
-                        <div className="h-8 w-44" ref={cancelButtonRef}>
-                          <ShadowButton
-                            label="Got it, thanks"
-                            onClick={() => closeModal()}
-                          />
-                        </div>
+                    <span className="text-xl text-primary mb-10">
+                      If you choice connecting by browser wallet you need to
+                      have one installed.
+                    </span>
+                    <div className="mt-3 row justify-start">
+                      <div className="h-8 w-44" ref={cancelButtonRef}>
+                        <ShadowButton
+                          label="Got it, thanks"
+                          onClick={() => closeModal()}
+                        />
                       </div>
                     </div>
                   </div>

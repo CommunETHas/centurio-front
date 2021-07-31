@@ -2,8 +2,10 @@ import React, { useContext, createRef, ReactElement, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { InterfaceContext } from '../../contexts/InterfaceContext';
 import Logo from '../../assets/logo.png';
-import { InterfaceContextType } from '../../api/models/user';
+import { InterfaceContextType, EthContextType } from '../../api/models/user';
 import ShadowButton from '../../components/Button/ShadowButton';
+import { EthContext } from '../../contexts/EthContext';
+import Popover from '../../components/Popover';
 
 const formatWalletAddress = (addressString: string) =>
   `${addressString.slice(0, 5)}......${addressString.slice(
@@ -11,6 +13,8 @@ const formatWalletAddress = (addressString: string) =>
   )}`;
 
 export default function NavbarHeader(): ReactElement {
+  const { walletConnected } = useContext(EthContext) as EthContextType;
+
   const { popoverShow, setOpenModal, setPopoverShow } = useContext(
     InterfaceContext,
   ) as InterfaceContextType;
@@ -27,13 +31,32 @@ export default function NavbarHeader(): ReactElement {
             </span>
           </Link>
           <div className="h-7 w-40 mr-3">
-            <ShadowButton
-              label="Connect your wallet"
-              color="secondary"
-              textColor="primary"
-              fontSize="text-xs"
-              onClick={() => setOpenModal(true)}
-            />
+            {!walletConnected ? (
+              <>
+                <ShadowButton
+                  label="Connect your wallet"
+                  color="secondary"
+                  textColor="primary"
+                  fontSize="text-xs"
+                  onClick={() => setOpenModal(true)}
+                />
+              </>
+            ) : (
+              <>
+                <ShadowButton
+                  label={
+                    walletConnected && formatWalletAddress(walletConnected)
+                  }
+                  color="ternary"
+                  textColor="secondary"
+                  fontSize="text-xs"
+                  onClick={() =>
+                    popoverShow ? setPopoverShow(false) : setPopoverShow(true)
+                  }
+                />
+                <Popover btnRef={btnRef} />
+              </>
+            )}
           </div>
         </div>
       </nav>

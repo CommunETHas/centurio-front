@@ -1,33 +1,43 @@
-import React, { ReactElement, useContext, useEffect } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import MetaMaskLogo from '../assets/wallets/logo_metamask.png';
 import ShadowButton from './Button/ShadowButton';
 import { useEthService } from '../services/ethService';
 import { EthContextType, InterfaceContextType } from '../api/models/user';
 import { EthContext } from '../contexts/EthContext';
 import { InterfaceContext } from '../contexts/InterfaceContext';
+import NoWeb3Modal from './Modal/NoWeb3Modal';
 
 export default function Wallet(): ReactElement {
-  const { ethProvider } = useContext(EthContext) as EthContextType;
-  const { setNoWeb3Modal } = useContext(
+  const { ethProvider, setWalletConnected } = useContext(
+    EthContext,
+  ) as EthContextType;
+  const { setNoWeb3Modal, setOpenModal } = useContext(
     InterfaceContext,
   ) as InterfaceContextType;
-  const { requestEthProvider, getWalletAdressFromProvider } =
+  const { requestEthProviderSignIn, getWalletAdressFromProvider } =
     useEthService(ethProvider);
-  const { isWeb3Available } = useContext(EthContext) as EthContextType;
+  const { isWeb3Available, walletConnected } = useContext(
+    EthContext,
+  ) as EthContextType;
 
-  const requestAuthent = () => {
+  const requestAuthent = async () => {
     if (isWeb3Available) {
-      requestEthProvider().then(() => {
-        getWalletAdressFromProvider().then((account) => {
-          console.log('account', account);
+      requestEthProviderSignIn()
+        .then(() => {
+          getWalletAdressFromProvider().then((walletAddr) => {
+            setWalletConnected(walletAddr);
+          });
+        })
+        .finally(() => {
+          setOpenModal(false);
         });
-      });
     } else {
       setNoWeb3Modal(true);
     }
   };
   return (
     <div className="h-16 w-60">
+      <NoWeb3Modal />
       <ShadowButton
         onClick={requestAuthent}
         content={

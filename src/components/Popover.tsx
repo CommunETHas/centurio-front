@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { InterfaceContext } from '../contexts/InterfaceContext';
 import { InterfaceContextType } from '../api/models/user';
-import HttpRequest from '../api/api';
 import ShadowButton from './Button/ShadowButton';
 
 const variants = {

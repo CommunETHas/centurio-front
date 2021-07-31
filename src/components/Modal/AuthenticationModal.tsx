@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { InterfaceContext } from '../../contexts/InterfaceContext';
 import { InterfaceContextType } from '../../api/models/user';
 
-export default function ModalAuthentication(): ReactElement {
+export default function AuthenticationModal(): ReactElement {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const { openModalAuth, setOpenModalAuth } = useContext(
     InterfaceContext,

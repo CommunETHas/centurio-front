@@ -1,6 +1,6 @@
 import React, { createContext, useState, FC, Fragment, useEffect } from 'react';
 import { ethers } from 'ethers';
-import { getEthProvider } from '../services/ethService';
+import { getEthProvider, useEthService } from '../services/ethService';
 
 export const EthContext = createContext({});
 
@@ -15,7 +15,13 @@ const EthProvider: FC = ({ children }) => {
     try {
       const provider = getEthProvider();
       setEthProvider(provider);
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { getWalletAdressFromProvider } = useEthService(provider);
       setIsWeb3Available(true);
+      getWalletAdressFromProvider().then((walletAddr) => {
+        console.log('addr:', walletAddr);
+        setWalletConnected(walletAddr);
+      });
     } catch {
       setIsWeb3Available(false);
     }

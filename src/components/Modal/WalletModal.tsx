@@ -15,7 +15,7 @@ import Search from '../../assets/icons/search.svg';
 import ShadowButton from '../Button/ShadowButton';
 import Wallet from '../Wallet';
 
-export default function Modal(): ReactElement {
+export default function WalletModal(): ReactElement {
   const { openModal, setOpenModal } = useContext(
     InterfaceContext,
   ) as InterfaceContextType;
