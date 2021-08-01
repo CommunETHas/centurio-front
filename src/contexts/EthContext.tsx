@@ -1,41 +1,76 @@
-import React, { createContext, useState, FC, Fragment, useEffect } from 'react';
+import React, { createContext, useState, FC, useEffect } from 'react';
 import { ethers } from 'ethers';
-import { getEthProvider, useEthService } from '../services/ethService';
+import {
+  isBrowserProviderInstalled,
+  getBrowserProvider,
+  ethService,
+} from '../services/ethBrowserProvideService';
 
+enum Provider {
+  Browser = 'browser',
+  Hardware = 'Hardware',
+}
 export const EthContext = createContext({});
 
-const EthProvider: FC = ({ children }) => {
-  const [ethProvider, setEthProvider] = useState<
+const EthContextProvider: FC = ({ children }) => {
+  const [walletConnectedAddr, setWalletConnectedAddr] = useState<string>('');
+  const [isWeb3Available, setIsWeb3Available] = useState<boolean>(true);
+  const [browserProvider, setBrowserProvider] = useState<
     ethers.providers.Web3Provider | undefined
   >();
-  const [walletConnected, setWalletConnected] = useState<string>('');
-  const [isWeb3Available, setIsWeb3Available] = useState(true);
 
-  useEffect(() => {
+  const initBrowserProvider = () => {
     try {
-      const provider = getEthProvider();
-      setEthProvider(provider);
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const { getWalletAdressFromProvider } = useEthService(provider);
-      setIsWeb3Available(true);
-      getWalletAdressFromProvider().then((walletAddr) => {
-        console.log('addr:', walletAddr);
-        setWalletConnected(walletAddr);
-      });
+      const provider = getBrowserProvider();
+      if (provider) {
+        setBrowserProvider(provider);
+        setIsWeb3Available(true);
+        const { getWalletAddressFromProvider, requestProviderSignIn } =
+          ethService(provider);
+        requestProviderSignIn().then(() => {
+          getWalletAddressFromProvider().then((walletAddr) => {
+            setWalletConnectedAddr(walletAddr);
+          });
+        });
+        localStorage.setItem('currentProvider', Provider.Browser);
+      }
     } catch {
       setIsWeb3Available(false);
+    }
+  };
+
+  const disconnectBrowserProvider = () => {
+    setWalletConnectedAddr('');
+    localStorage.removeItem('currentProvider');
+  };
+
+  useEffect(() => {
+    setIsWeb3Available(isBrowserProviderInstalled());
+    const providerType = localStorage.getItem('currentProvider');
+    if (providerType) {
+      switch (providerType) {
+        case Provider.Browser:
+          initBrowserProvider();
+          break;
+        case Provider.Hardware:
+          break;
+        default:
+          break;
+      }
     }
   }, []);
 
   return (
     <EthContext.Provider
       value={{
-        walletConnected,
-        setWalletConnected,
-        ethProvider,
-        setEthProvider,
+        walletConnectedAddr,
+        setWalletConnectedAddr,
+        browserProvider,
+        setBrowserProvider,
         isWeb3Available,
         setIsWeb3Available,
+        initBrowserProvider,
+        disconnectBrowserProvider,
       }}
     >
       {children}
@@ -43,4 +78,4 @@ const EthProvider: FC = ({ children }) => {
   );
 };
 
-export default EthProvider;
+export default EthContextProvider;

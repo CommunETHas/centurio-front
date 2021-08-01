@@ -34,10 +34,12 @@ export type InterfaceContextType = {
 };
 
 export type EthContextType = {
-  walletConnected: string;
-  setWalletConnected: (wallet: string) => void;
-  ethProvider: ethers.providers.Web3Provider;
-  setEthProvider: (provider: ethers.providers.Web3Provider) => void;
+  walletConnectedAddr: string;
+  setWalletConnectedAddr: (wallet: string) => void;
+  browserProvider: ethers.providers.Web3Provider;
+  setBrowserProvider: (provider: ethers.providers.Web3Provider) => void;
   isWeb3Available: boolean;
   setIsWeb3Available: (isWeb3Available: boolean) => void;
+  initBrowserProvider: () => void;
+  disconnectBrowserProvider: () => void;
 };

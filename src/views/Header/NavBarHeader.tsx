@@ -13,7 +13,7 @@ const formatWalletAddress = (addressString: string) =>
   )}`;
 
 export default function NavbarHeader(): ReactElement {
-  const { walletConnected } = useContext(EthContext) as EthContextType;
+  const { walletConnectedAddr } = useContext(EthContext) as EthContextType;
 
   const { popoverShow, setOpenModal, setPopoverShow } = useContext(
     InterfaceContext,
@@ -31,7 +31,7 @@ export default function NavbarHeader(): ReactElement {
             </span>
           </Link>
           <div className="h-7 w-40 mr-3">
-            {!walletConnected ? (
+            {!walletConnectedAddr ? (
               <>
                 <ShadowButton
                   label="Connect your wallet"
@@ -45,7 +45,8 @@ export default function NavbarHeader(): ReactElement {
               <>
                 <ShadowButton
                   label={
-                    walletConnected && formatWalletAddress(walletConnected)
+                    walletConnectedAddr &&
+                    formatWalletAddress(walletConnectedAddr)
                   }
                   color="ternary"
                   textColor="secondary"

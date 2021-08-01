@@ -2,8 +2,9 @@ import React, { useContext, ReactElement, RefObject } from 'react';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { InterfaceContext } from '../contexts/InterfaceContext';
-import { InterfaceContextType } from '../api/models/user';
+import { EthContextType, InterfaceContextType } from '../api/models/user';
 import ShadowButton from './Button/ShadowButton';
+import { EthContext } from '../contexts/EthContext';
 
 const variants = {
   open: {
@@ -35,6 +36,9 @@ const Popover = ({ btnRef }: PopoverProps) => {
   const { popoverShow, setPopoverShow, setOpenModalAuth } = useContext(
     InterfaceContext,
   ) as InterfaceContextType;
+  const { disconnectBrowserProvider } = useContext(
+    EthContext,
+  ) as EthContextType;
   const history = useHistory();
 
   const onClose = () => {
@@ -46,6 +50,11 @@ const Popover = ({ btnRef }: PopoverProps) => {
     setPopoverShow(false);
   };
 
+  const onDisconnect = () => {
+    disconnectBrowserProvider();
+    history.push('/');
+  };
+
   const menuItems: MenuItem[] = [
     { id: 1, text: 'Dashboard', onClick: () => onCloseRedirect('/dashboard') },
     {
@@ -53,7 +62,7 @@ const Popover = ({ btnRef }: PopoverProps) => {
       text: 'Notifications',
       onClick: () => [onCloseRedirect('/notification')],
     },
-    { id: 3, text: 'Disconnect Wallet', onClick: () => onClose() },
+    { id: 3, text: 'Disconnect Wallet', onClick: () => onDisconnect() },
   ];
 
   const Navigation = () => (
