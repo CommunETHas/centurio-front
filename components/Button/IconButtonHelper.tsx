@@ -1,7 +1,7 @@
-import React, { Fragment, PropsWithChildren, ReactElement } from "react";
-import Image from "next/image";
-import { Popover, Transition } from "@headlessui/react";
-import Help from "../../public/icons/help.svg";
+import React, { Fragment, PropsWithChildren, ReactElement } from 'react';
+import Image from 'next/image';
+import { Popover, Transition } from '@headlessui/react';
+import Help from '../../public/icons/help.svg';
 
 const IconButtonHelper: React.FC<IconButtonHelperProps> = ({
   textContent,
@@ -11,12 +11,14 @@ const IconButtonHelper: React.FC<IconButtonHelperProps> = ({
       <>
         <Popover.Button>
           <div className="relative h-7 w-7 cursor-pointer">
+            <div className="absolute h-6 w-6 bg-ternary border border-secondary rounded-full transform translate-x-1 translate-y-1" />
             <Image
-              className="z-10 absolute h-7 w-7 transition duration-500 ease-in-out transform hover:translate-y-0.5 hover:translate-x-0.5"
+              className="z-10 absolute transition duration-500 ease-in-out transform hover:translate-y-0.5 hover:translate-x-0.5"
               src={Help}
               alt="help"
+              layout="fill"
+              objectFit="contain"
             />
-            <div className="absolute h-6 w-6 bg-ternary border border-secondary rounded-full transform translate-x-1 translate-y-1" />
           </div>
         </Popover.Button>
         <Transition

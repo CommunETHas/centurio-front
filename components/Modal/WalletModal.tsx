@@ -1,31 +1,35 @@
 import React, {
-  Fragment,
-  useRef,
-  useContext,
-  ReactElement,
-  useState,
   ChangeEvent,
-} from "react";
-import Image from "next/image";
-import { Dialog, Transition } from "@headlessui/react";
-import { useRouter } from "next/router";
-import { InterfaceContext } from "../../contexts/InterfaceContext";
-import { InterfaceContextType } from "../../api/models/user";
-import Search from "../../public/icons/search.svg";
-import ShadowButton from "../Button/ShadowButton";
-import Wallet from "../Wallet";
+  Fragment,
+  ReactElement,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { Dialog, Transition } from '@headlessui/react';
+import { InterfaceContext } from '../../contexts/InterfaceContext';
+import { EthContextType, InterfaceContextType } from '../../api/models/user';
+import Search from '../../public/icons/search.svg';
+import ShadowButton from '../Button/ShadowButton';
+import { ConnectorNames, EthContext } from '../../contexts/EthContext';
 
 export default function WalletModal(): ReactElement {
   const { openModal, setOpenModal } = useContext(
-    InterfaceContext
+    InterfaceContext,
   ) as InterfaceContextType;
-  console.log("open", openModal);
-  const [walletAddress, setWalletAddress] = useState<string>("");
+  const { connectProvider, account } = useContext(EthContext) as EthContextType;
+  const [walletAddress, setWalletAddress] = useState<string>('');
   const [walletAddressError, setWalletAddressError] = useState<boolean>(false);
 
   const cancelButtonRef = useRef(null);
   const router = useRouter();
 
+  const connectWallet = async (connectorName: ConnectorNames) => {
+    await connectProvider(connectorName);
+  };
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setWalletAddress(event.target.value);
   };
@@ -37,12 +41,21 @@ export default function WalletModal(): ReactElement {
       setWalletAddressError(false);
       setOpenModal(false);
       router.push({
-        pathname: "dashboard-preview",
+        pathname: 'dashboard-preview',
         query: { address: walletAddress },
       });
-      setWalletAddress("");
+      setWalletAddress('');
     }
   };
+
+  useEffect(() => {
+    if (account && openModal) {
+      setOpenModal(false);
+      router.push({
+        pathname: 'dashboard',
+      });
+    }
+  }, [account]);
 
   return (
     <Transition.Root show={openModal} as={Fragment}>
@@ -94,11 +107,51 @@ export default function WalletModal(): ReactElement {
                       Select a Wallet
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-xl text-primary mb-10">
+                      <p className="text-xl text-primary mb-5">
                         Please select a wallet:
                       </p>
                     </div>
-                    <Wallet />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="w-full h-12">
+                        <ShadowButton
+                          onClick={() => connectWallet(ConnectorNames.Injected)}
+                          content={
+                            <div className="flex flex-row w-full h-full justify-center items-center gap-6">
+                              <div className="flex flex-col">
+                                <span>Browser Wallet</span>
+                                <span className="text-xs font-light">
+                                  (Metamask, TrustWallet...)
+                                </span>
+                              </div>
+                            </div>
+                          }
+                        />
+                      </div>
+                      <div className="w-full h-12">
+                        <ShadowButton
+                          onClick={() =>
+                            connectWallet(ConnectorNames.WalletLink)
+                          }
+                          content={
+                            <div className="flex flex-row w-full h-full justify-center items-center gap-6">
+                              <span>Coinbase</span>
+                            </div>
+                          }
+                        />
+                      </div>
+                      <div className="w-full h-12">
+                        <ShadowButton
+                          onClick={() =>
+                            connectWallet(ConnectorNames.WalletConnect)
+                          }
+                          content={
+                            <div className="flex flex-row w-full h-full justify-center items-center gap-6">
+                              <span>Wallet Connect</span>
+                            </div>
+                          }
+                        />
+                      </div>
+                    </div>
                     <div className="mt-10 w-full flex-row">
                       <div className="w-full h-0.1 bg-primary" />
                     </div>
@@ -118,11 +171,14 @@ export default function WalletModal(): ReactElement {
                             type="button"
                             onClick={redirectOnPreviewDashboard}
                           >
-                            <Image
-                              className="h-8 w-8 cursor-pointer"
-                              src={Search}
-                              alt="help"
-                            />
+                            <div className="h-8 w-8 cursor-pointer relative">
+                              <Image
+                                src={Search}
+                                alt="help"
+                                layout="fill"
+                                objectFit="contain"
+                              />
+                            </div>
                           </button>
                           <div className="z-20 absolute -left-1 h-full bg-primary w-1" />
                         </div>
@@ -131,7 +187,7 @@ export default function WalletModal(): ReactElement {
                     </div>
                     {walletAddressError ? (
                       <>
-                        <div className="relative h-10 flex flex-row w-full text-xs ml-4 text-negative">
+                        <div className="relative h-10 flex flex-row w-full text-xs ml-4 mt-1 text-negative">
                           Wallet address must contains 42 characters
                         </div>
                       </>

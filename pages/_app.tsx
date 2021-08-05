@@ -1,13 +1,14 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import { ethers } from "ethers";
-import { Web3ReactProvider } from "@web3-react/core";
-import Footer from "../components/Footer/Footer";
-import NavbarHeader from "../components/Header/NavBarHeader";
-import ModalWallet from "../components/Modal/WalletModal";
-import AuthenticationModal from "../components/Modal/AuthenticationModal";
-import InterfaceContext from "../contexts/InterfaceContext";
-import EthContext from "../contexts/EthContext";
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import { ethers } from 'ethers';
+import { Web3ReactProvider } from '@web3-react/core';
+import React from 'react';
+import Footer from '../components/Footer/Footer';
+import NavbarHeader from '../components/Header/NavBarHeader';
+import ModalWallet from '../components/Modal/WalletModal';
+import AuthenticationModal from '../components/Modal/AuthenticationModal';
+import InterfaceContext from '../contexts/InterfaceContext';
+import EthContext from '../contexts/EthContext';
 
 const getLibrary = (provider: any) => {
   const library = new ethers.providers.Web3Provider(provider);

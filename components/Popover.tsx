@@ -1,10 +1,10 @@
-import React, { useContext, ReactElement, RefObject } from "react";
-import { useRouter } from "next/router";
-import { motion } from "framer-motion";
-import { InterfaceContext } from "../contexts/InterfaceContext";
-import { EthContextType, InterfaceContextType } from "../api/models/user";
-import ShadowButton from "./Button/ShadowButton";
-import { EthContext } from "../contexts/EthContext";
+import React, { useContext, ReactElement, RefObject } from 'react';
+import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
+import { InterfaceContext } from '../contexts/InterfaceContext';
+import { EthContextType, InterfaceContextType } from '../api/models/user';
+import ShadowButton from './Button/ShadowButton';
+import { EthContext } from '../contexts/EthContext';
 
 const variants = {
   open: {
@@ -34,11 +34,9 @@ const variantsMenu = {
 
 const Popover = ({ btnRef }: PopoverProps) => {
   const { popoverShow, setPopoverShow, setOpenModalAuth } = useContext(
-    InterfaceContext
+    InterfaceContext,
   ) as InterfaceContextType;
-  const { disconnectBrowserProvider } = useContext(
-    EthContext
-  ) as EthContextType;
+  const { disconnectProvider } = useContext(EthContext) as EthContextType;
   const router = useRouter();
 
   const onClose = () => {
@@ -51,18 +49,18 @@ const Popover = ({ btnRef }: PopoverProps) => {
   };
 
   const onDisconnect = () => {
-    disconnectBrowserProvider();
-    router.push("/");
+    disconnectProvider();
+    router.push('/');
   };
 
   const menuItems: MenuItem[] = [
-    { id: 1, text: "Dashboard", onClick: () => onCloseRedirect("/dashboard") },
+    { id: 1, text: 'Dashboard', onClick: () => onCloseRedirect('/dashboard') },
     {
       id: 2,
-      text: "Notifications",
-      onClick: () => [onCloseRedirect("/notification")],
+      text: 'Notifications',
+      onClick: () => [onCloseRedirect('/notification')],
     },
-    { id: 3, text: "Disconnect Wallet", onClick: () => onDisconnect() },
+    { id: 3, text: 'Disconnect Wallet', onClick: () => onDisconnect() },
   ];
 
   const Navigation = () => (
@@ -90,7 +88,7 @@ const Popover = ({ btnRef }: PopoverProps) => {
     <>
       <motion.nav
         initial={false}
-        animate={popoverShow ? "open" : "closed"}
+        animate={popoverShow ? 'open' : 'closed'}
         // @ts-ignore
         ref={btnRef.current}
       >

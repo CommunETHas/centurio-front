@@ -1,23 +1,23 @@
-import React, { useContext, createRef, ReactElement } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { InterfaceContext } from "../../contexts/InterfaceContext";
-import { InterfaceContextType, EthContextType } from "../../api/models/user";
-import ShadowButton from "../Button/ShadowButton";
-import { EthContext } from "../../contexts/EthContext";
-import Popover from "../../components/Popover";
-import Logo from "../../public/logo.png";
+import React, { useContext, createRef, ReactElement } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { InterfaceContext } from '../../contexts/InterfaceContext';
+import { InterfaceContextType, EthContextType } from '../../api/models/user';
+import ShadowButton from '../Button/ShadowButton';
+import { EthContext } from '../../contexts/EthContext';
+import Popover from '../Popover';
+import Logo from '../../public/logo.png';
 
 const formatWalletAddress = (addressString: string) =>
   `${addressString.slice(0, 5)}......${addressString.slice(
-    Math.max(0, addressString.length - 5)
+    Math.max(0, addressString.length - 5),
   )}`;
 
 export default function NavbarHeader(): ReactElement {
-  const { walletConnectedAddr } = useContext(EthContext) as EthContextType;
+  const { account } = useContext(EthContext) as EthContextType;
 
   const { popoverShow, setOpenModal, setPopoverShow } = useContext(
-    InterfaceContext
+    InterfaceContext,
   ) as InterfaceContextType;
   const btnRef = createRef<HTMLButtonElement>();
 
@@ -36,7 +36,7 @@ export default function NavbarHeader(): ReactElement {
             </div>
           </Link>
           <div className="h-7 w-40 mr-3">
-            {!walletConnectedAddr ? (
+            {!account ? (
               <>
                 <ShadowButton
                   label="Connect your wallet"
@@ -49,10 +49,7 @@ export default function NavbarHeader(): ReactElement {
             ) : (
               <>
                 <ShadowButton
-                  label={
-                    walletConnectedAddr &&
-                    formatWalletAddress(walletConnectedAddr)
-                  }
+                  label={account && formatWalletAddress(account)}
                   color="ternary"
                   textColor="secondary"
                   fontSize="text-xs"

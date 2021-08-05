@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import { bool } from 'yup';
+import { ConnectorNames } from '../../contexts/EthContext';
 
 export class User {
   constructor() {
@@ -34,12 +35,8 @@ export type InterfaceContextType = {
 };
 
 export type EthContextType = {
-  walletConnectedAddr: string;
-  setWalletConnectedAddr: (wallet: string) => void;
-  browserProvider: ethers.providers.Web3Provider;
-  setBrowserProvider: (provider: ethers.providers.Web3Provider) => void;
-  isWeb3Available: boolean;
-  setIsWeb3Available: (isWeb3Available: boolean) => void;
-  initBrowserProvider: () => void;
-  disconnectBrowserProvider: () => void;
+  account: string;
+  active: boolean;
+  connectProvider: (provider: ConnectorNames) => void;
+  disconnectProvider: () => void;
 };
