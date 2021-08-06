@@ -35,3 +35,8 @@ button:focus {
   padding-bottom: 1px;
 }
 
+#__next{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

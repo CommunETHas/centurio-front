@@ -4,35 +4,99 @@ import React, {
   useContext,
   ReactElement,
   useState,
-} from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { useRouter } from "next/router";
-import { InterfaceContext } from "../../contexts/InterfaceContext";
-import { InterfaceContextType } from "../../api/models/user";
+} from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { useRouter } from 'next/router';
+import { useWeb3React } from '@web3-react/core';
+import { InterfaceContext } from '../../contexts/InterfaceContext';
+import {
+  EthContextType,
+  InterfaceContextType,
+  User,
+} from '../../api/models/user';
+import ShadowButton from '../Button/ShadowButton';
+import HttpRequest from '../../api/api';
+import { EthContext } from '../../contexts/EthContext';
 
 export default function AuthenticationModal(): ReactElement {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
   const { openModalAuth, setOpenModalAuth } = useContext(
-    InterfaceContext
+    InterfaceContext,
   ) as InterfaceContextType;
+  const { setRegistrationProcessed } = useContext(EthContext) as EthContextType;
   const router = useRouter();
+  const { account, library } = useWeb3React();
 
   const cancelButtonRef = useRef(null);
 
-  const onClickRedictNotification = () => {
+  const onCancelClose = () => {
     setOpenModalAuth(false);
-    router.push("/notification");
+    router.back();
+  };
+
+  const signMessage = (userNonce: string) => {
+    if (library && account) {
+      library
+        .getSigner(account)
+        .signMessage(
+          `Welcome to Centurio, sign this message to authenticate ! ${userNonce}`,
+        )
+        .then(async (signature: string) => {
+          const { data } = await HttpRequest.authenticate({
+            user: {
+              address: account,
+              nonce: userNonce,
+            },
+            signature,
+          });
+          localStorage.removeItem('bearer');
+          if (data.accessToken) {
+            localStorage.setItem('bearer', data.accessToken);
+            setRegistrationProcessed(true);
+            setOpenModalAuth(false);
+          }
+        })
+        .catch((error: any) => {
+          console.log(error && error.message);
+        });
+    }
+  };
+
+  const proccessRegistration = (alreadyTry = false) => {
+    if (account) {
+      HttpRequest.getUser(account)
+        .then(({ data }) => {
+          const user = data as User;
+          if (user.nonce) {
+            signMessage(user.nonce);
+          } else {
+            console.log('Registration error');
+          }
+        })
+        .catch(() => {
+          if (!alreadyTry) {
+            HttpRequest.insertUser(account)
+              .then(() => {
+                proccessRegistration(true);
+              })
+              .catch(() => {
+                console.log('Registration error');
+              });
+          } else {
+            console.log('Registration error');
+          }
+        });
+    }
   };
 
   return (
-    <Transition.Root show={false} as={Fragment}>
+    <Transition.Root show={openModalAuth} as={Fragment}>
       <Dialog
         as="div"
         static
         className="fixed z-50 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
         open={openModalAuth}
-        onClose={setOpenModalAuth}
+        onClose={onCancelClose}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -74,51 +138,30 @@ export default function AuthenticationModal(): ReactElement {
                       Notifications
                     </Dialog.Title>
 
-                    {isAuth ? (
-                      <>
-                        <div className="mt-2">
-                          <p className="text-xl text-primary mb-10">
-                            The signing has been successful.
-                          </p>
-                        </div>
-                        <button
-                          onClick={onClickRedictNotification}
-                          type="button"
-                          className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-secondary text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
-                        >
-                          Go to notification
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <div className="mt-2">
-                          <p className="text-xl text-primary mb-10">
-                            To have access to notification you must verify that
-                            your are the owner of the wallet by signing a
-                            message.
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          className="justify-center items-center flex absolute z-10 bg-primary focus:outline-none h-16 w-60 border border-secondary text-2xs text-secondary font-bold py-1 px-4 rounded-full transition duration-500 ease-in-out transform hover:translate-y-1 hover:translate-x-1"
-                        >
-                          Sign a message !
-                        </button>
-                        <div className=" bg-transparent focus:outline-none h-16 w-60 border border-primary rounded-full transform translate-x-1 translate-y-1" />
-                      </>
-                    )}
+                    <div className="mt-2">
+                      <p className="text-xl text-primary mb-10">
+                        To have access to notification you must verify that your
+                        are the owner of the wallet by signing a message.
+                      </p>
+                    </div>
+                    <div className="h-12 w-60">
+                      <ShadowButton
+                        label="Sign a message !"
+                        onClick={() => proccessRegistration()}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-secondary text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => setOpenModalAuth(false)}
-                  ref={cancelButtonRef}
-                >
-                  Cancel
-                </button>
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 flex flex-row justify-end">
+                <div className="w-40 h-10">
+                  <ShadowButton
+                    label="Cancel"
+                    filled={false}
+                    textColor="primary"
+                    onClick={() => onCancelClose()}
+                  />
+                </div>
               </div>
             </div>
           </Transition.Child>

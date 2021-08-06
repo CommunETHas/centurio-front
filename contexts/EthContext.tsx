@@ -8,6 +8,8 @@ import React, {
 import { useWeb3React } from '@web3-react/core';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import { injected, walletlink, walletconnect } from '../services/ethConnectors';
+import HttpRequest from '../api/api';
+import { User } from '../api/models/user';
 
 export const EthContext = createContext({});
 
@@ -34,6 +36,9 @@ const getConnectorByName = (
 
 const EthContextProvider: FC = ({ children }) => {
   const { account, activate, deactivate, active, error } = useWeb3React();
+  const [user, setUser] = useState<User>(new User());
+  const [registrationProcessed, setRegistrationProcessed] =
+    useState<boolean>(false);
   const [providerIsConnecting, setProviderIsConnecting] =
     useState<boolean>(false);
 
@@ -48,6 +53,7 @@ const EthContextProvider: FC = ({ children }) => {
 
   const disconnectProvider = () => {
     localStorage.removeItem('currentConnector');
+    localStorage.removeItem('bearer');
     deactivate();
   };
 
@@ -62,12 +68,31 @@ const EthContextProvider: FC = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const bearer = localStorage.getItem('bearer');
+    if (account && bearer) {
+      HttpRequest.getPrivateUser(account, bearer)
+        .then(({ data }) => {
+          setUser({ ...data, isRegister: true } as User);
+        })
+        .catch(() => {
+          setUser(new User());
+        });
+    } else {
+      setUser(new User());
+    }
+  }, [account, registrationProcessed]);
+
   return (
     <EthContext.Provider
       value={{
         account,
         active,
         providerIsConnecting,
+        user,
+        setUser,
+        registrationProcessed,
+        setRegistrationProcessed,
         connectProvider,
         disconnectProvider,
       }}

@@ -4,19 +4,21 @@ import React, {
   useContext,
   useEffect,
   useState,
-} from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { InterfaceContext } from "../contexts/InterfaceContext";
-import MoreInfoLogo from "../public/icons/more_info.png";
-import { InterfaceContextType } from "../api/models/user";
-import ShadowButton from "../components/Button/ShadowButton";
-import ShieldLogo from "../public/logo_shield_variant_ternary.png";
-import SocrateLogo from "../public/socrate.png";
-import BattleLogo from "../public/battle.png";
+} from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { InterfaceContext } from '../contexts/InterfaceContext';
+import MoreInfoLogo from '../public/icons/more_info.png';
+import { EthContextType, InterfaceContextType } from '../api/models/user';
+import ShadowButton from '../components/Button/ShadowButton';
+import ShieldLogo from '../public/logo_shield_variant_ternary.png';
+import SocrateLogo from '../public/socrate.png';
+import BattleLogo from '../public/battle.png';
+import { EthContext } from '../contexts/EthContext';
 
 export default function Home(): ReactElement {
   const { setOpenModal } = useContext(InterfaceContext) as InterfaceContextType;
+  const { account } = useContext(EthContext) as EthContextType;
   const sectionRef = createRef<HTMLElement>();
   const [windowWidth, setwindowWidth] = useState<number>(0);
 
@@ -36,55 +38,61 @@ export default function Home(): ReactElement {
         <section
           className={`${
             windowWidth > 700
-              ? "grid grid-cols-2"
-              : "flex flex-col justify-center"
+              ? 'grid grid-cols-2'
+              : 'flex flex-col justify-center'
           } relative content-landing w-full bg-primary`}
         >
           <div />
           <div className="flex flex-row justify-center">
             <div
               className={`${
-                windowWidth > 700 ? "justify-center" : "mb-20 w-full"
+                windowWidth > 700 ? 'justify-center' : 'mb-20 w-full'
               } flex flex-col px-50`}
             >
               <span
                 className={`${
-                  windowWidth > 700 ? "text-5xl" : "text-3xl"
+                  windowWidth > 700 ? 'text-5xl' : 'text-3xl'
                 } text-secondary font-bold`}
               >
                 Protect the assets
               </span>
               <span
                 className={`${
-                  windowWidth > 700 ? "text-5xl" : "text-3xl"
+                  windowWidth > 700 ? 'text-5xl' : 'text-3xl'
                 } text-secondary font-bold`}
               >
                 in your wallet.
               </span>
               <span
                 className={`${
-                  windowWidth > 700 ? "text-5xl" : "text-3xl"
+                  windowWidth > 700 ? 'text-5xl' : 'text-3xl'
                 } text-ternary mb-10`}
               >
                 Take the right cover.
               </span>
               <span
                 className={`${
-                  windowWidth > 700 ? "w-100 text-xl" : "w-full text-lg"
+                  windowWidth > 700 ? 'w-100 text-xl' : 'w-full text-lg'
                 } text-comment mb-10`}
               >
                 We help you find the right covers for your assets based on your
                 wallet.
               </span>
-              <div className={`${windowWidth > 700 ? "w-100" : "w-full"} h-16`}>
-                <ShadowButton
-                  label="Get started"
-                  color="secondary"
-                  textColor="primary"
-                  fontSize="text-4xl"
-                  onClick={() => setOpenModal(true)}
-                />
-              </div>
+              {!account ? (
+                <div
+                  className={`${windowWidth > 700 ? 'w-100' : 'w-full'} h-16`}
+                >
+                  <ShadowButton
+                    label="Get started"
+                    color="secondary"
+                    textColor="primary"
+                    fontSize="text-4xl"
+                    onClick={() => setOpenModal(true)}
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
             {windowWidth > 700 ? (
               <>
@@ -117,7 +125,7 @@ export default function Home(): ReactElement {
                 animate={{ scale: 1.1, opacity: 0 }}
                 transition={{
                   duration: 3,
-                  type: "spring",
+                  type: 'spring',
                   repeat: Number.POSITIVE_INFINITY,
                 }}
               />
@@ -135,8 +143,8 @@ export default function Home(): ReactElement {
               animate={{ translateY: 0 }}
               transition={{
                 duration: 1,
-                type: "spring",
-                repeatType: "reverse",
+                type: 'spring',
+                repeatType: 'reverse',
                 repeat: Number.POSITIVE_INFINITY,
               }}
             >
@@ -145,7 +153,7 @@ export default function Home(): ReactElement {
                 onClick={executeScroll}
                 className="focus:outline-none text-secondary font-bold text-xl flex flex-col items-center gap-y-1"
               >
-                <span>More info</span>{" "}
+                <span>More info</span>{' '}
                 <Image
                   className="m-auto mt-2"
                   src={MoreInfoLogo}
@@ -158,12 +166,12 @@ export default function Home(): ReactElement {
         <section
           ref={sectionRef}
           className={`${
-            windowWidth > 700 ? "content-landing" : ""
+            windowWidth > 700 ? 'content-landing' : ''
           } relative bg-primary grid md:grid-cols-2 sm:grid-cols-1 overflow-hidden`}
         >
           <div
             className={`${
-              windowWidth > 700 ? "absolute" : ""
+              windowWidth > 700 ? 'absolute' : ''
             } w-full flex fex-row justify-center pt-10`}
           >
             <div>
@@ -177,7 +185,7 @@ export default function Home(): ReactElement {
           </div>
           <div
             className={`${
-              windowWidth < 700 ? "w-screen" : ""
+              windowWidth < 700 ? 'w-screen' : ''
             } z-40 flex justify-center items-center`}
           >
             <div className="flex flex-col w-110">
@@ -204,7 +212,7 @@ export default function Home(): ReactElement {
           )}
           <div
             className={`${
-              windowWidth < 700 ? "w-screen" : ""
+              windowWidth < 700 ? 'w-screen' : ''
             } mt-10 z-40 flex justify-center items-center`}
           >
             <div className="flex flex-col w-110">
@@ -218,7 +226,7 @@ export default function Home(): ReactElement {
               <div className="w-full flex justify-center">
                 <div
                   className={`${
-                    windowWidth > 700 ? "absolute" : ""
+                    windowWidth > 700 ? 'absolute' : ''
                   } h-100 w-64 opacity-90 transform -translate-y-4`}
                 >
                   <Image
@@ -245,7 +253,7 @@ export default function Home(): ReactElement {
                 animate={{ scale: 1.1, opacity: 0 }}
                 transition={{
                   duration: 4,
-                  type: "spring",
+                  type: 'spring',
                   repeat: Number.POSITIVE_INFINITY,
                 }}
               />

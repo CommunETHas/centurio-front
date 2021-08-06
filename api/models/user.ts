@@ -1,20 +1,22 @@
-import { ethers } from 'ethers';
-import { bool } from 'yup';
 import { ConnectorNames } from '../../contexts/EthContext';
 
 export class User {
   constructor() {
     this.address = '';
     this.email = '';
+    this.frequency = '';
+    this.isRegister = false;
   }
 
   address: string;
   email: string;
   nonce?: string;
+  isRegister?: boolean;
+  frequency: string;
 }
 
 export interface UserAuthentication {
-  user: User;
+  user: UserAuthenticated;
   signature: string;
 }
 
@@ -37,6 +39,10 @@ export type InterfaceContextType = {
 export type EthContextType = {
   account: string;
   active: boolean;
+  setRegistrationProcessed: (status: boolean) => void;
+  registrationProcessed: boolean;
+  user: User;
+  setUser: (user: User) => void;
   connectProvider: (provider: ConnectorNames) => void;
   disconnectProvider: () => void;
 };

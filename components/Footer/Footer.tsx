@@ -1,21 +1,21 @@
-import React, { ReactElement } from "react";
-import { useRouter } from "next/router";
-import GitHubIcon from "@material-ui/icons/GitHub";
+import React, { ReactElement } from 'react';
+import { useRouter } from 'next/router';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 export default function Footer(): ReactElement {
   const router = useRouter();
   return (
-    <div className="relative w-full flex flex-row justify-end centurio-footer bg-primary items-center z-50">
+    <footer className="relative w-full flex flex-row justify-end centurio-footer bg-primary items-center z-50">
       <button
         type="button"
-        onClick={() => router.push("/privacy-policy")}
+        onClick={() => router.push('/privacy-policy')}
         className="text-secondary px-2"
       >
         Privacy policy
       </button>
       <button
         type="button"
-        onClick={() => router.push("/about-us")}
+        onClick={() => router.push('/about-us')}
         className="text-secondary px-2"
       >
         About us
@@ -26,6 +26,6 @@ export default function Footer(): ReactElement {
       >
         <GitHubIcon />
       </a>
-    </div>
+    </footer>
   );
 }

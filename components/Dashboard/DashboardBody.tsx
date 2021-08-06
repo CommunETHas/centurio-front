@@ -1,10 +1,17 @@
-import React, { BaseSyntheticEvent, Fragment, ReactElement } from "react";
-import { Transition } from "@headlessui/react";
-import Help from "../../public/icons/help.svg";
-import DashboardData from "../../api/models/cover";
-import QuoteCard from "../Card/QuoteCard";
-import QuoteCardFake from "../Card/QuoteCardFake";
-import IconButtonHelper from "../Button/IconButtonHelper";
+import React, {
+  BaseSyntheticEvent,
+  Fragment,
+  ReactElement,
+  useContext,
+} from 'react';
+import { Transition } from '@headlessui/react';
+import Help from '../../public/icons/help.svg';
+import DashboardData from '../../api/models/cover';
+import QuoteCard from '../Card/QuoteCard';
+import QuoteCardFake from '../Card/QuoteCardFake';
+import IconButtonHelper from '../Button/IconButtonHelper';
+import { EthContext } from '../../contexts/EthContext';
+import { EthContextType } from '../../api/models/user';
 
 export interface DashboardBodyProps {
   dashboardData: DashboardData | undefined;
@@ -13,6 +20,8 @@ export interface DashboardBodyProps {
 
 export default function DashboardBody(props: DashboardBodyProps): ReactElement {
   const { dashboardData, isLoading } = props;
+  const { account } = useContext(EthContext) as EthContextType;
+
   return (
     <main className="w-screen bg-primary flex-grow pb-8">
       <div className="w-screen flex justify-center my-10">
@@ -70,9 +79,9 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
               <div className="absolute right-0 transform translate-x-8">
                 <IconButtonHelper
                   textContent={
-                    "Here you can see which covers is recommended for your\n" +
+                    'Here you can see which covers is recommended for your\n' +
                     "                        wallet. Be aware that custodian placement can't be\n" +
-                    "                        detected."
+                    '                        detected.'
                   }
                 />
               </div>
@@ -105,7 +114,9 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
           ) : (
             <div className="w-full px-20">
               <span className="text-secondary">
-                Sorry ! We have no recommendations based on your assets.
+                {!account
+                  ? 'Please connect a wallet to see recommendations.'
+                  : 'Sorry ! We have no recommendations based on your assets.'}
               </span>
             </div>
           )}

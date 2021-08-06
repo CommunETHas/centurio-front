@@ -33,7 +33,7 @@ const variantsMenu = {
 };
 
 const Popover = ({ btnRef }: PopoverProps) => {
-  const { popoverShow, setPopoverShow, setOpenModalAuth } = useContext(
+  const { popoverShow, setPopoverShow } = useContext(
     InterfaceContext,
   ) as InterfaceContextType;
   const { disconnectProvider } = useContext(EthContext) as EthContextType;
