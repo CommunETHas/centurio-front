@@ -1,13 +1,7 @@
-import React, {
-  createContext,
-  FC,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, FC, useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { AbstractConnector } from '@web3-react/abstract-connector';
-import { injected, walletlink, walletconnect } from '../services/ethConnectors';
+import { injected, walletlink, walletconnect } from '../helpers/ethConnectors';
 import HttpRequest from '../api/api';
 import { User } from '../api/models/user';
 
@@ -34,8 +28,24 @@ const getConnectorByName = (
   }
 };
 
+const getConnectorNameByConnector = (
+  connector: AbstractConnector,
+): string | undefined => {
+  switch (connector) {
+    case injected:
+      return ConnectorNames.Injected;
+    case walletconnect:
+      return ConnectorNames.WalletConnect;
+    case walletlink:
+      return ConnectorNames.WalletLink;
+    default:
+      break;
+  }
+};
+
 const EthContextProvider: FC = ({ children }) => {
-  const { account, activate, deactivate, active, error } = useWeb3React();
+  const { account, activate, deactivate, active, error, connector, library } =
+    useWeb3React();
   const [user, setUser] = useState<User>(new User());
   const [registrationProcessed, setRegistrationProcessed] =
     useState<boolean>(false);
@@ -45,11 +55,23 @@ const EthContextProvider: FC = ({ children }) => {
   const connectProvider = async (connectorName: ConnectorNames) => {
     const newConnector = getConnectorByName(connectorName);
     if (newConnector) {
-      activate(newConnector).then(() => {
-        localStorage.setItem('currentConnector', connectorName);
-      });
+      return await activate(newConnector);
     }
+    return;
   };
+
+  useEffect(() => {
+    setProviderIsConnecting(false)
+  }, [error])
+
+  useEffect(() => {
+    if (connector) {
+      const connectorName = getConnectorNameByConnector(connector);
+      if (connectorName) {
+        localStorage.setItem('currentConnector', connectorName);
+      }
+    }
+  }, [active]);
 
   const disconnectProvider = () => {
     localStorage.removeItem('currentConnector');
@@ -89,6 +111,7 @@ const EthContextProvider: FC = ({ children }) => {
         account,
         active,
         providerIsConnecting,
+        setProviderIsConnecting,
         user,
         setUser,
         registrationProcessed,

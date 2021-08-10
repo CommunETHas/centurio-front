@@ -43,6 +43,8 @@ export type EthContextType = {
   registrationProcessed: boolean;
   user: User;
   setUser: (user: User) => void;
-  connectProvider: (provider: ConnectorNames) => void;
+  connectProvider: (provider: ConnectorNames) => Promise<any>;
   disconnectProvider: () => void;
+  providerIsConnecting: boolean
+  setProviderIsConnecting: (status:boolean) => void;
 };

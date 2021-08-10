@@ -13,14 +13,24 @@ import { Dialog, Transition } from '@headlessui/react';
 import { InterfaceContext } from '../../contexts/InterfaceContext';
 import { EthContextType, InterfaceContextType } from '../../api/models/user';
 import Search from '../../public/icons/search.svg';
+import Metamask from '../../public/wallets/logo_metamask.png';
+import CoinbaseWallet from '../../public/wallets/coinbase_wallet.png';
+import WalletConnect from '../../public/wallets/wallet_connect.png';
 import ShadowButton from '../Button/ShadowButton';
 import { ConnectorNames, EthContext } from '../../contexts/EthContext';
+import SpinLoader from '../Loader/SpinLoader';
 
 export default function WalletModal(): ReactElement {
   const { openModal, setOpenModal } = useContext(
     InterfaceContext,
   ) as InterfaceContextType;
-  const { connectProvider, account } = useContext(EthContext) as EthContextType;
+  const {
+    connectProvider,
+    account,
+    active,
+    providerIsConnecting,
+    setProviderIsConnecting,
+  } = useContext(EthContext) as EthContextType;
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [walletAddressError, setWalletAddressError] = useState<boolean>(false);
 
@@ -28,8 +38,10 @@ export default function WalletModal(): ReactElement {
   const router = useRouter();
 
   const connectWallet = async (connectorName: ConnectorNames) => {
+    setProviderIsConnecting(true);
     await connectProvider(connectorName);
   };
+
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setWalletAddress(event.target.value);
   };
@@ -48,6 +60,12 @@ export default function WalletModal(): ReactElement {
     }
   };
 
+  const closeModal = () => {
+    if (!providerIsConnecting) {
+      setOpenModal(false);
+    }
+  };
+
   useEffect(() => {
     if (account && openModal) {
       setOpenModal(false);
@@ -57,6 +75,12 @@ export default function WalletModal(): ReactElement {
     }
   }, [account]);
 
+  useEffect(() => {
+    if (active && providerIsConnecting) {
+      setProviderIsConnecting(false);
+    }
+  }, [active]);
+
   return (
     <Transition.Root show={openModal} as={Fragment}>
       <Dialog
@@ -65,7 +89,7 @@ export default function WalletModal(): ReactElement {
         className="fixed z-50 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
         open={openModal}
-        onClose={setOpenModal}
+        onClose={closeModal}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -100,113 +124,158 @@ export default function WalletModal(): ReactElement {
               <div className="bg-secondary px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="">
                   <div className="mt-3 text-center p-3 sm:mt-0 sm:text-left">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-3xl leading-6 text-primary mb-10"
-                    >
-                      Select a Wallet
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <p className="text-xl text-primary mb-5">
-                        Please select a wallet:
-                      </p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="w-full h-12">
-                        <ShadowButton
-                          onClick={() => connectWallet(ConnectorNames.Injected)}
-                          content={
-                            <div className="flex flex-row w-full h-full justify-center items-center gap-6">
-                              <div className="flex flex-col">
-                                <span>Browser Wallet</span>
-                                <span className="text-xs font-light">
-                                  (Metamask, TrustWallet...)
-                                </span>
-                              </div>
-                            </div>
-                          }
-                        />
-                      </div>
-                      <div className="w-full h-12">
-                        <ShadowButton
-                          onClick={() =>
-                            connectWallet(ConnectorNames.WalletLink)
-                          }
-                          content={
-                            <div className="flex flex-row w-full h-full justify-center items-center gap-6">
-                              <span>Coinbase</span>
-                            </div>
-                          }
-                        />
-                      </div>
-                      <div className="w-full h-12">
-                        <ShadowButton
-                          onClick={() =>
-                            connectWallet(ConnectorNames.WalletConnect)
-                          }
-                          content={
-                            <div className="flex flex-row w-full h-full justify-center items-center gap-6">
-                              <span>Wallet Connect</span>
-                            </div>
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="mt-10 w-full flex-row">
-                      <div className="w-full h-0.1 bg-primary" />
-                    </div>
-                    <div className="text-center p-3 text-xl">
-                      <span className="font-bold">OR</span> Use a wallet
-                      address:
-                    </div>
-                    <div className="relative h-10 flex flex-row w-full">
-                      <input
-                        placeholder="e.g 0xcb613........67a145"
-                        onChange={handleInput}
-                        className="w-11/12 h-full z-10 bg-primary focus:outline-none border border-secondary text-2xs text-secondary font-bold px-4 rounded-tl-full rounded-bl-full"
-                      />
-                      <div className="h-full w-1/12 padding-y-1 z-30">
-                        <div className="relative bg-primary h-full rounded-tr-full rounded-br-full flex flex-col justify-center">
-                          <button
-                            type="button"
-                            onClick={redirectOnPreviewDashboard}
-                          >
-                            <div className="h-8 w-8 cursor-pointer relative">
-                              <Image
-                                src={Search}
-                                alt="help"
-                                layout="fill"
-                                objectFit="contain"
-                              />
-                            </div>
-                          </button>
-                          <div className="z-20 absolute -left-1 h-full bg-primary w-1" />
-                        </div>
-                      </div>
-                      <div className="absolute bg-transparent border border-primary w-full h-full rounded-full transform translate-x-1 translate-y-1" />
-                    </div>
-                    {walletAddressError ? (
+                    {providerIsConnecting ? (
                       <>
-                        <div className="relative h-10 flex flex-row w-full text-xs ml-4 mt-1 text-negative">
-                          Wallet address must contains 42 characters
+                        <div className="flex flex-row justify-center items-center gap-5">
+                          <span className="text-3xl">Wallet is connecting</span>
+                          <div className="h-10 w-10">
+                            <SpinLoader />
+                          </div>
                         </div>
                       </>
                     ) : (
-                      <></>
+                      <>
+                        <Dialog.Title
+                          as="h3"
+                          className="text-3xl leading-6 text-primary mb-10"
+                        >
+                          Select a Wallet
+                        </Dialog.Title>
+                        <div className="mt-2">
+                          <p className="text-xl text-primary mb-5">
+                            Please select a wallet:
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="w-full h-14">
+                            <ShadowButton
+                              onClick={() =>
+                                connectWallet(ConnectorNames.Injected)
+                              }
+                              content={
+                                <div className="flex flex-row w-full h-full items-center gap-2 pl-3">
+                                  <div className="h-10 w-10 relative">
+                                    <Image
+                                      src={Metamask}
+                                      alt="Metamask"
+                                      layout="fill"
+                                      objectFit="contain"
+                                    />
+                                  </div>
+                                  <div className="flex flex-col">
+                                    <span>Browser Wallet</span>
+                                    <span className="text-xs font-light">
+                                      (Metamask, TrustWallet...)
+                                    </span>
+                                  </div>
+                                </div>
+                              }
+                            />
+                          </div>
+                          <div className="w-full h-14">
+                            <ShadowButton
+                              onClick={() =>
+                                connectWallet(ConnectorNames.WalletLink)
+                              }
+                              content={
+                                <div className="flex flex-row w-full h-full justify-center items-center gap-6">
+                                  <div className="h-10 w-10 relative">
+                                    <Image
+                                      src={CoinbaseWallet}
+                                      alt="CoinbaseWallet"
+                                      layout="fill"
+                                      objectFit="contain"
+                                    />
+                                  </div>
+                                  <span>Coinbase</span>
+                                </div>
+                              }
+                            />
+                          </div>
+                          <div className="w-full h-14">
+                            <ShadowButton
+                              onClick={() =>
+                                connectWallet(ConnectorNames.WalletConnect)
+                              }
+                              content={
+                                <div className="flex flex-row w-full h-full justify-center items-center gap-6">
+                                  <div className="h-10 w-10 relative">
+                                    <Image
+                                      src={WalletConnect}
+                                      alt="WalletConnect"
+                                      layout="fill"
+                                      objectFit="contain"
+                                    />
+                                  </div>
+                                  <span>Wallet Connect</span>
+                                </div>
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="mt-10 w-full flex-row">
+                          <div className="w-full h-0.1 bg-primary" />
+                        </div>
+                        <div className="text-center p-3 text-xl">
+                          <span className="font-bold">OR</span> Use a wallet
+                          address:
+                        </div>
+                        <div className="relative h-10 flex flex-row w-full">
+                          <input
+                            placeholder="e.g 0xcb613........67a145"
+                            onChange={handleInput}
+                            className="w-11/12 h-full z-10 bg-primary focus:outline-none border border-secondary text-2xs text-secondary font-bold px-4 rounded-tl-full rounded-bl-full"
+                          />
+                          <div className="h-full w-1/12 padding-y-1 z-30">
+                            <div className="relative bg-primary h-full rounded-tr-full rounded-br-full flex flex-col justify-center">
+                              <button
+                                type="button"
+                                onClick={redirectOnPreviewDashboard}
+                              >
+                                <div className="h-8 w-8 cursor-pointer relative">
+                                  <Image
+                                    src={Search}
+                                    alt="help"
+                                    layout="fill"
+                                    objectFit="contain"
+                                  />
+                                </div>
+                              </button>
+                              <div className="z-20 absolute -left-1 h-full bg-primary w-1" />
+                            </div>
+                          </div>
+                          <div className="absolute bg-transparent border border-primary w-full h-full rounded-full transform translate-x-1 translate-y-1" />
+                        </div>
+                        {walletAddressError ? (
+                          <>
+                            <div className="relative h-10 flex flex-row w-full text-xs ml-4 mt-1 text-negative">
+                              Wallet address must contains 42 characters
+                            </div>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
               </div>
-              <div className="flex flex-row justify-center p-3">
-                <div className="w-40 h-10">
-                  <ShadowButton
-                    label="Cancel"
-                    filled={false}
-                    textColor="primary"
-                    onClick={() => setOpenModal(false)}
-                  />
-                </div>
-              </div>
+              {!providerIsConnecting ? (
+                <>
+                  <div className="flex flex-row justify-center p-3">
+                    <div className="w-40 h-10">
+                      <ShadowButton
+                        label="Cancel"
+                        filled={false}
+                        textColor="primary"
+                        onClick={closeModal}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </Transition.Child>
         </div>
