@@ -1,11 +1,11 @@
-import React, { useContext, createRef, ReactElement } from 'react';
+import React, { useContext, ReactElement, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { InterfaceContext } from '../../contexts/InterfaceContext';
 import { InterfaceContextType, EthContextType } from '../../api/models/user';
-import ShadowButton from '../Button/ShadowButton';
 import { EthContext } from '../../contexts/EthContext';
-import Popover from '../Popover';
+import ShadowButton from '../Button/ShadowButton';
+import MenuHeader from './MenuHeader';
 import Logo from '../../public/logo.png';
 
 const formatWalletAddress = (addressString: string) =>
@@ -16,10 +16,29 @@ const formatWalletAddress = (addressString: string) =>
 export default function NavbarHeader(): ReactElement {
   const { account } = useContext(EthContext) as EthContextType;
 
-  const { popoverShow, setOpenModal, setPopoverShow } = useContext(
+  const { setOpenModal, openMenuHeader, setOpenMenuHeader } = useContext(
     InterfaceContext,
   ) as InterfaceContextType;
-  const btnRef = createRef<HTMLButtonElement>();
+  const menuHeaderRef = useRef(null);
+  const openButtonRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: Event) {
+      if (
+        menuHeaderRef.current &&
+        openButtonRef.current &&
+        !menuHeaderRef.current.contains(event.target) &&
+        !openButtonRef.current.contains(event.target) &&
+        openMenuHeader
+      ) {
+        setOpenMenuHeader(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [menuHeaderRef, openButtonRef, openMenuHeader]);
 
   return (
     <>
@@ -49,15 +68,14 @@ export default function NavbarHeader(): ReactElement {
             ) : (
               <>
                 <ShadowButton
+                  buttonRef={openButtonRef}
                   label={account && formatWalletAddress(account)}
                   color="ternary"
                   textColor="secondary"
                   fontSize="text-xs"
-                  onClick={() =>
-                    popoverShow ? setPopoverShow(false) : setPopoverShow(true)
-                  }
+                  onClick={() => setOpenMenuHeader(!openMenuHeader)}
                 />
-                <Popover btnRef={btnRef} />
+                <MenuHeader isOpen={openMenuHeader} menuRef={menuHeaderRef} />
               </>
             )}
           </div>

@@ -1,10 +1,10 @@
-import React, { useContext, ReactElement, RefObject } from 'react';
+import React, { useContext, ReactElement, RefObject, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
-import { InterfaceContext } from '../contexts/InterfaceContext';
-import { EthContextType, InterfaceContextType } from '../api/models/user';
-import ShadowButton from './Button/ShadowButton';
-import { EthContext } from '../contexts/EthContext';
+import { InterfaceContext } from '../../contexts/InterfaceContext';
+import { EthContextType, InterfaceContextType } from '../../api/models/user';
+import ShadowButton from '../Button/ShadowButton';
+import { EthContext } from '../../contexts/EthContext';
 
 const variants = {
   open: {
@@ -32,26 +32,22 @@ const variantsMenu = {
   },
 };
 
-const Popover = ({ btnRef }: PopoverProps) => {
-  const { popoverShow, setPopoverShow } = useContext(
-    InterfaceContext,
-  ) as InterfaceContextType;
+const MenuHeader = ({ menuRef, isOpen }: PopoverProps) => {
   const { disconnectProvider } = useContext(EthContext) as EthContextType;
+  const { setOpenMenuHeader } = useContext(
+    InterfaceContext
+  ) as InterfaceContextType;
   const router = useRouter();
 
-  const onClose = () => {
-    setPopoverShow(false);
-  };
-
   const onCloseRedirect = (path: string) => {
+    setOpenMenuHeader(false)
     router.push(path);
-    setPopoverShow(false);
-  };
+  }
 
   const onDisconnect = () => {
     disconnectProvider();
-    router.push('/');
-  };
+    onCloseRedirect('/');
+  }
 
   const menuItems: MenuItem[] = [
     { id: 1, text: 'Dashboard', onClick: () => onCloseRedirect('/dashboard') },
@@ -88,33 +84,35 @@ const Popover = ({ btnRef }: PopoverProps) => {
     <>
       <motion.nav
         initial={false}
-        animate={popoverShow ? 'open' : 'closed'}
-        // @ts-ignore
-        ref={btnRef.current}
+        animate={isOpen ? 'open' : 'closed'}
+        ref={menuRef}
       >
         <motion.div className="background" />
         <Navigation />
       </motion.nav>
     </>
   );
-};
+}
 
 export default function PopoverRender({
-  btnRef,
+  menuRef,
+  isOpen
 }: PopoverRenderProps): ReactElement {
   return (
     <>
-      <Popover btnRef={btnRef} />
+      <MenuHeader isOpen={isOpen} menuRef={menuRef} />
     </>
   );
 }
 
 type PopoverRenderProps = {
-  btnRef: RefObject<HTMLButtonElement>;
+  isOpen: boolean;
+  menuRef: RefObject<HTMLButtonElement>;
 };
 
 type PopoverProps = {
-  btnRef: RefObject<HTMLButtonElement>;
+  isOpen: boolean;
+  menuRef: RefObject<HTMLButtonElement>;
 };
 
 type MenuItem = {

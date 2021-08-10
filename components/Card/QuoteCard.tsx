@@ -1,16 +1,16 @@
-import React, { BaseSyntheticEvent, ReactElement, useRef } from "react";
-import Image from "next/image";
-import ReactTooltip from "react-tooltip";
-import { Recommandations } from "../../api/models/cover";
-import UnrecognizedAsset from "../../public/icons/unrecognized_asset.svg";
-import ShadowButton from "../Button/ShadowButton";
+import React, { BaseSyntheticEvent, ReactElement, useRef } from 'react'
+import Image from 'next/image'
+import ReactTooltip from 'react-tooltip'
+import { Recommandations } from '../../api/models/cover'
+import UnrecognizedAsset from '../../public/icons/unrecognized_asset.svg'
+import ShadowButton from '../Button/ShadowButton'
 
 const redirectOnNexus = (address: string) => {
   window.open(
     `https://app.nexusmutual.io/cover/buy/get-quote?address=${address}`,
-    "_blank"
+    '_blank'
   );
-};
+}
 
 export default function QuoteCard(props: Recommandations): ReactElement {
   const recommandation: Recommandations = props;
@@ -20,11 +20,11 @@ export default function QuoteCard(props: Recommandations): ReactElement {
       <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-secondary rounded-lg" />
       <div className="h-full p-7 relative rounded-lg bg-secondary">
         <div className="w-full flex flex-row">
-          {/*<Image*/}
-          {/*  src={recommandation.cover.logoUrl}*/}
-          {/*  className="w-16 h-16 rounded-md"*/}
-          {/*  alt="token"*/}
-          {/*/>*/}
+          {/* <Image */}
+          {/*  src={recommandation.cover.logoUrl} */}
+          {/*  className="w-16 h-16 rounded-md" */}
+          {/*  alt="token" */}
+          {/* /> */}
           <div className="-mt-2 flex flex-col ml-3">
             <span className="font-bold text-2xl">
               {recommandation.cover.name}
@@ -58,16 +58,16 @@ export default function QuoteCard(props: Recommandations): ReactElement {
                   }
                 }}
               >
-                {/*<img*/}
-                {/*  id={`assetImg${reason.token}`}*/}
-                {/*  data-tip={reason.token}*/}
-                {/*  src={reason.logoUrl}*/}
-                {/*  onError={(e: BaseSyntheticEvent) => {*/}
-                {/*    e.target.src = UnrecognizedAsset;*/}
-                {/*  }}*/}
-                {/*  className="ml-2 w-6 h-6 rounded-md"*/}
-                {/*  alt="assets"*/}
-                {/*/>*/}
+                {/* <img */}
+                {/*  id={`assetImg${reason.token}`} */}
+                {/*  data-tip={reason.token} */}
+                {/*  src={reason.logoUrl} */}
+                {/*  onError={(e: BaseSyntheticEvent) => { */}
+                {/*    e.target.src = UnrecognizedAsset; */}
+                {/*  }} */}
+                {/*  className="ml-2 w-6 h-6 rounded-md" */}
+                {/*  alt="assets" */}
+                {/* /> */}
                 <ReactTooltip />
               </div>
             </>
@@ -77,7 +77,7 @@ export default function QuoteCard(props: Recommandations): ReactElement {
           <span className="font-bold">Why this protocol appears ?</span>
         </div>
         <div className="w-full flex flex-row">
-          {recommandation.cover.type === "protocol" ? (
+          {recommandation.cover.type === 'protocol' ? (
             <span>
               The listed assets are related to this protocol and can be covered
               by this protocol cover. Note that with this cover, only the

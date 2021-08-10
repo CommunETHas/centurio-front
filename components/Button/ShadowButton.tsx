@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement } from 'react';
+import React, { PropsWithChildren, ReactElement, RefObject } from 'react';
 
 const ShadowButton: React.FC<ShadowButtonProps> = ({
   label,
@@ -8,11 +8,13 @@ const ShadowButton: React.FC<ShadowButtonProps> = ({
   filled,
   onClick,
   content,
+  buttonRef
 }: ShadowButtonProps) => {
   const backgroundColor = `bg-${color}`;
   return (
     <div className="relative w-full h-full">
       <button
+        ref={buttonRef}
         type="button"
         className={`${
           filled ? backgroundColor : ''
@@ -27,7 +29,7 @@ const ShadowButton: React.FC<ShadowButtonProps> = ({
       />
     </div>
   );
-};
+}
 
 interface ShadowButtonProps extends PropsWithChildren<any> {
   label?: string | undefined | null;
@@ -37,6 +39,7 @@ interface ShadowButtonProps extends PropsWithChildren<any> {
   filled?: boolean;
   onClick?: () => void;
   content?: ReactElement;
+  buttonRef?: RefObject<HTMLButtonElement>;
 }
 
 const defaultProps: ShadowButtonProps = {
