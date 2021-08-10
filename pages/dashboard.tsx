@@ -14,7 +14,7 @@ export default function Dashboard(): ReactElement {
     const { data } = await HttpRequest.getCoverRecommendations(accountAddr);
     setDashboardData(data);
     setIsLoading(false);
-  };
+  }
 
   useEffect(() => {
     if (account) {

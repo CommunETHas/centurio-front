@@ -30,7 +30,8 @@ export type InterfaceContextType = {
   setOpenModal: (boolean: boolean) => void;
   openModalAuth: boolean;
   setOpenModalAuth: (boolean: boolean) => void;
-  popoverShow: boolean;
+  setOpenMenuHeader: (boolean: boolean) => void;
+  openMenuHeader: boolean;
   setPopoverShow: (boolean: boolean) => void;
   noWeb3Modal: boolean;
   setNoWeb3Modal: (boolean: boolean) => void;

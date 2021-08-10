@@ -1,5 +1,4 @@
 import React, { createContext, useState, FC } from 'react';
-import { useCycle } from 'framer-motion';
 
 export const InterfaceContext = createContext({});
 
@@ -7,7 +6,7 @@ const InterfaceProvider: FC = ({ children }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [openModalAuth, setOpenModalAuth] = useState<boolean>(false);
   const [noWeb3Modal, setNoWeb3Modal] = useState<boolean>(false);
-  const [popoverShow, setPopoverShow] = useCycle(false, true);
+  const [openMenuHeader, setOpenMenuHeader] = useState<boolean>(false);
 
   return (
     <InterfaceContext.Provider
@@ -16,8 +15,8 @@ const InterfaceProvider: FC = ({ children }) => {
         setOpenModal,
         openModalAuth,
         setOpenModalAuth,
-        popoverShow,
-        setPopoverShow,
+        openMenuHeader,
+        setOpenMenuHeader,
         noWeb3Modal,
         setNoWeb3Modal,
       }}

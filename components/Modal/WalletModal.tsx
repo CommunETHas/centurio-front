@@ -224,9 +224,9 @@ export default function WalletModal(): ReactElement {
                           <input
                             placeholder="e.g 0xcb613........67a145"
                             onChange={handleInput}
-                            className="w-11/12 h-full z-10 bg-primary focus:outline-none border border-secondary text-2xs text-secondary font-bold px-4 rounded-tl-full rounded-bl-full"
+                            className="w-11/12 h-full z-10 bg-primary focus:outline-none text-2xs text-secondary font-bold px-4 rounded-tl-full rounded-bl-full"
                           />
-                          <div className="h-full w-1/12 padding-y-1 z-30">
+                          <div className="h-full w-1/12 z-30">
                             <div className="relative bg-primary h-full rounded-tr-full rounded-br-full flex flex-col justify-center">
                               <button
                                 type="button"

@@ -1,10 +1,4 @@
-import React, {
-  Fragment,
-  useRef,
-  useContext,
-  ReactElement,
-  useState,
-} from 'react';
+import React, { Fragment, useRef, useContext, ReactElement } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
 import { useWeb3React } from '@web3-react/core';
@@ -37,9 +31,7 @@ export default function AuthenticationModal(): ReactElement {
     if (library && account) {
       library
         .getSigner(account)
-        .signMessage(
-          `Welcome to Centurio, sign this message to authenticate ! ${userNonce}`,
-        )
+        .signMessage(`${process.env.NEXT_PUBLIC_SIGN_PASSPHRASE} ${userNonce}`)
         .then(async (signature: string) => {
           const { data } = await HttpRequest.authenticate({
             user: {

@@ -4,7 +4,7 @@ import DashboardData from './models/cover';
 import { UserAuthentication } from './models/user';
 
 const instance = axios.create({
-  baseURL: `https://pure-escarpment-71696.herokuapp.com/`,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 const HttpRequest = {

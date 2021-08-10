@@ -1,10 +1,4 @@
-import React, {
-  ReactElement,
-  useContext,
-  useState,
-  useEffect,
-  Fragment,
-} from 'react';
+import { ReactElement, useContext, useState, useEffect, Fragment } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
@@ -37,9 +31,7 @@ export default function Notification(): ReactElement {
   const { active } = useWeb3React();
   const [selected, setSelected] = useState(options[0]);
   const [email, setEmail] = useState('');
-  const { setOpenModalAuth } = useContext(
-    InterfaceContext,
-  ) as InterfaceContextType;
+  const { setOpenModalAuth } = useContext(InterfaceContext) as InterfaceContextType;
   const { user, setUser } = useContext(EthContext) as EthContextType;
 
   useEffect(() => {

@@ -44,7 +44,7 @@ const getConnectorNameByConnector = (
 };
 
 const EthContextProvider: FC = ({ children }) => {
-  const { account, activate, deactivate, active, error, connector, library } =
+  const { account, activate, deactivate, active, error, connector } =
     useWeb3React();
   const [user, setUser] = useState<User>(new User());
   const [registrationProcessed, setRegistrationProcessed] =

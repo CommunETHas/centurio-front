@@ -30,7 +30,7 @@ export default function Home(): ReactElement {
 
   useEffect(() => {
     setwindowWidth(window.innerWidth);
-  });
+  }, []);
 
   return (
     <main className="mb-auto w-screen">
@@ -136,18 +136,7 @@ export default function Home(): ReactElement {
           )}
 
           <div className="z-40 absolute bottom-10 w-full bg-transparent flex flex-row justify-center">
-            <motion.div
-              initial={{
-                translateY: -20,
-              }}
-              animate={{ translateY: 0 }}
-              transition={{
-                duration: 1,
-                type: 'spring',
-                repeatType: 'reverse',
-                repeat: Number.POSITIVE_INFINITY,
-              }}
-            >
+            <div className="animate-bounce">
               <button
                 type="button"
                 onClick={executeScroll}
@@ -160,7 +149,7 @@ export default function Home(): ReactElement {
                   alt="More infos"
                 />
               </button>
-            </motion.div>
+            </div>
           </div>
         </section>
         <section

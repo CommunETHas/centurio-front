@@ -1,9 +1,4 @@
-import React, {
-  Fragment,
-  ReactElement,
-  useContext,
-  useRef,
-} from 'react';
+import React, { Fragment, ReactElement, useContext, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { InterfaceContextType } from '../../api/models/user';
 import { InterfaceContext } from '../../contexts/InterfaceContext';
@@ -17,7 +12,7 @@ export default function NoWeb3Modal(): ReactElement {
 
   const closeModal = () => {
     setNoWeb3Modal(false);
-  };
+  }
 
   return (
     <Transition.Root show={false} as={Fragment}>

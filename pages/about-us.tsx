@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
+import Image from 'next/image';
 import Cordier from '../public/photo/cordier.jpg';
 import Croquelois from '../public/photo/croquelois.jpg';
 import Marino from '../public/photo/marino.jpg';
-import Image from 'next/image';
 
 interface Profil {
   name: string;
