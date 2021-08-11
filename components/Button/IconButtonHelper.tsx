@@ -31,7 +31,7 @@ const IconButtonHelper: React.FC<IconButtonHelperProps> = ({
           leaveTo="opacity-0 translate-y-1"
         >
           <Popover.Panel className="absolute">
-            <div className="overflow-hidden relative px-5 pt-2 pb-3 w-60 bg-secondary rounded-lg border border-ternary text-black">
+            <div className="overflow-hidden relative px-5 pt-2 pb-3 w-60 bg-secondary rounded-lg border border-ternary text-black z-50">
               <div className="flex flex-col">
                 <div className="flex flex-row justify-between">
                   <span className="font-bold">Info: </span>

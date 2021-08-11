@@ -1,9 +1,4 @@
-import React, {
-  BaseSyntheticEvent,
-  Fragment,
-  ReactElement,
-  useContext,
-} from 'react';
+import React, { Fragment, ReactElement, useContext } from 'react';
 import { Transition } from '@headlessui/react';
 import Help from '../../public/icons/help.svg';
 import DashboardData from '../../api/models/cover';
@@ -12,6 +7,7 @@ import QuoteCardFake from '../Card/QuoteCardFake';
 import IconButtonHelper from '../Button/IconButtonHelper';
 import { EthContext } from '../../contexts/EthContext';
 import { EthContextType } from '../../api/models/user';
+import ImageWithFallBack from '../Image/ImageWithFallBack';
 
 export interface DashboardBodyProps {
   dashboardData: DashboardData | undefined;
@@ -52,14 +48,13 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
                     <div className="mt-2 grid xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 gap-4">
                       {dashboardData.unsuportedTokens.map((token) => (
                         <div className="flex gap-x-2" key={token.address}>
-                          <img
-                            src={token.logoUrl}
-                            onError={(e: BaseSyntheticEvent) => {
-                              e.target.src = Help;
-                            }}
-                            className="ml-2 w-6 h-6 rounded-md"
-                            alt="unreconizedAssets"
-                          />
+                          <div className="ml-2 w-6 h-6 rounded-md relative">
+                            <ImageWithFallBack
+                              src={token.logoUrl}
+                              fallbackSrc={Help}
+                              alt="unreconizedAssets"
+                            />
+                          </div>
                           <span>{token.name}</span>
                         </div>
                       ))}

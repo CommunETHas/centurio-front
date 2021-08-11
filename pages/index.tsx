@@ -35,18 +35,12 @@ export default function Home(): ReactElement {
   return (
     <main className="mb-auto w-screen">
       <div className="overflow-hidden w-full">
-        <section
-          className={`${
-            windowWidth > 700
-              ? 'grid grid-cols-2'
-              : 'flex flex-col justify-center'
-          } relative content-landing w-full bg-primary`}
-        >
+        <section className="md:grid md:grid-cols-2 sm:flex sm:flex-col sm:justify-center relative content-landing w-full bg-primary">
           <div />
           <div className="flex flex-row justify-center">
             <div
               className={`${
-                windowWidth > 700 ? 'justify-center' : 'mb-20 w-full'
+                windowWidth > 700 ? 'md:justify-center' : 'sm:mb-20 sm:w-full'
               } flex flex-col px-50`}
             >
               <span
