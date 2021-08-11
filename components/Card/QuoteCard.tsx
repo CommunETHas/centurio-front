@@ -17,7 +17,7 @@ export default function QuoteCard(props: Recommandations): ReactElement {
 
   return (
     <div className="relative w-full">
-      <div className="absolute w-full h-full -right-2 -bottom-2 bg-transparent border border-secondary rounded-lg" />
+      <div className="absolute w-full h-full -right-1 -bottom-1 bg-secondaryShadow border border-secondary rounded-lg" />
       <div className="h-full p-7 relative rounded-lg bg-secondary">
         <div className="w-full flex flex-row">
           {/* <Image */}

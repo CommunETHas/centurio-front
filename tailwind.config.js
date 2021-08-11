@@ -9,7 +9,9 @@ module.exports = {
       base: '#1EAB89',
       primary: '#20252E',
       secondary: '#FFFFFF',
+      secondaryShadow: '#cdcdcd',
       ternary: '#BE7E7E',
+      ternaryShadow: '#a06b6b',
       shader: '#797979',
     },
     borderColor: {

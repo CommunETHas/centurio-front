@@ -38,7 +38,7 @@ export default function DashboardBody(props: DashboardBodyProps): ReactElement {
                 enterTo="opacity-100 scale-100"
               >
                 <div className="relative w-full rounded-lg">
-                  <div className="absolute rounded-lg w-full h-full -right-2 -bottom-2 bg-transparent border border-ternary" />
+                  <div className="absolute rounded-lg w-full h-full -right-1 -bottom-1 bg-ternaryShadow border border-ternary" />
                   <div className="relative p-4 rounded-lg bg-ternary z-10 text-secondary flex flex-col">
                     <div className="flex flex-row">
                       <div className="font-bold mr-1">

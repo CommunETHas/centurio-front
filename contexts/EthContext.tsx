@@ -49,6 +49,7 @@ const EthContextProvider: FC = ({ children }) => {
   const [user, setUser] = useState<User>(new User());
   const [registrationProcessed, setRegistrationProcessed] =
     useState<boolean>(false);
+  const [isUserConnected, setIsUserConnected] = useState<boolean>(false);
   const [providerIsConnecting, setProviderIsConnecting] =
     useState<boolean>(false);
 
@@ -61,8 +62,8 @@ const EthContextProvider: FC = ({ children }) => {
   };
 
   useEffect(() => {
-    setProviderIsConnecting(false)
-  }, [error])
+    setProviderIsConnecting(false);
+  }, [error]);
 
   useEffect(() => {
     if (connector) {
@@ -76,6 +77,7 @@ const EthContextProvider: FC = ({ children }) => {
   const disconnectProvider = () => {
     localStorage.removeItem('currentConnector');
     localStorage.removeItem('bearer');
+    setIsUserConnected(false);
     deactivate();
   };
 
@@ -95,7 +97,8 @@ const EthContextProvider: FC = ({ children }) => {
     if (account && bearer) {
       HttpRequest.getPrivateUser(account, bearer)
         .then(({ data }) => {
-          setUser({ ...data, isRegister: true } as User);
+          setUser(data);
+          setIsUserConnected(true);
         })
         .catch(() => {
           setUser(new User());
@@ -116,6 +119,8 @@ const EthContextProvider: FC = ({ children }) => {
         setUser,
         registrationProcessed,
         setRegistrationProcessed,
+        isUserConnected,
+        setIsUserConnected,
         connectProvider,
         disconnectProvider,
       }}

@@ -5,13 +5,11 @@ export class User {
     this.address = '';
     this.email = '';
     this.frequency = '';
-    this.isRegister = false;
   }
 
   address: string;
   email: string;
   nonce?: string;
-  isRegister?: boolean;
   frequency: string;
 }
 
@@ -42,6 +40,8 @@ export type EthContextType = {
   active: boolean;
   setRegistrationProcessed: (status: boolean) => void;
   registrationProcessed: boolean;
+  setIsUserConnected: (status: boolean) => void;
+  isUserConnected: boolean;
   user: User;
   setUser: (user: User) => void;
   connectProvider: (provider: ConnectorNames) => Promise<any>;
