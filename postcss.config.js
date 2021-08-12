@@ -1,6 +1,6 @@
-module.exports = (context) => ({
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: context.env === "production" ? {} : false,
-  },
-});
+module.exports = {
+    plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+    },
+}
