@@ -19,8 +19,8 @@ export default function NavbarHeader(): ReactElement {
   const { setOpenModal, openMenuHeader, setOpenMenuHeader } = useContext(
     InterfaceContext,
   ) as InterfaceContextType;
-  const menuHeaderRef = useRef<HTMLElement>(null);
-  const openButtonRef = useRef<HTMLElement>(null);
+  const menuHeaderRef = useRef<HTMLButtonElement>(null);
+  const openButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: Event) {
