@@ -19,16 +19,17 @@ export default function NavbarHeader(): ReactElement {
   const { setOpenModal, openMenuHeader, setOpenMenuHeader } = useContext(
     InterfaceContext,
   ) as InterfaceContextType;
-  const menuHeaderRef = useRef(null);
-  const openButtonRef = useRef(null);
+  const menuHeaderRef = useRef<HTMLElement>(null);
+  const openButtonRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: Event) {
+      const node = event.target as Node
       if (
         menuHeaderRef.current &&
         openButtonRef.current &&
-        !menuHeaderRef.current.contains(event.target) &&
-        !openButtonRef.current.contains(event.target) &&
+        !menuHeaderRef.current.contains(node) &&
+        !openButtonRef.current.contains(node) &&
         openMenuHeader
       ) {
         setOpenMenuHeader(false);
