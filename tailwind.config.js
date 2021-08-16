@@ -1,7 +1,7 @@
 const formsPlugin = require('@tailwindcss/forms');
 
 module.exports = {
-  purge: ['index.html', 'src/**/*.tsx'],
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'media',
   plugins: [formsPlugin],
   theme: {
