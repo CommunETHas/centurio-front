@@ -35,19 +35,19 @@ const variantsMenu = {
 const MenuHeader = ({ menuRef, isOpen }: PopoverProps) => {
   const { disconnectProvider } = useContext(EthContext) as EthContextType;
   const { setOpenMenuHeader } = useContext(
-    InterfaceContext
+    InterfaceContext,
   ) as InterfaceContextType;
   const router = useRouter();
 
   const onCloseRedirect = (path: string) => {
-    setOpenMenuHeader(false)
+    setOpenMenuHeader(false);
     router.push(path);
-  }
+  };
 
   const onDisconnect = () => {
     disconnectProvider();
     onCloseRedirect('/');
-  }
+  };
 
   const menuItems: MenuItem[] = [
     { id: 1, text: 'Dashboard', onClick: () => onCloseRedirect('/dashboard') },
@@ -56,7 +56,12 @@ const MenuHeader = ({ menuRef, isOpen }: PopoverProps) => {
       text: 'Notifications',
       onClick: () => [onCloseRedirect('/notification')],
     },
-    { id: 3, text: 'Disconnect Wallet', onClick: () => onDisconnect() },
+    {
+      id: 3,
+      text: 'Admin Panel',
+      onClick: () => [onCloseRedirect('/admin-panel')],
+    },
+    { id: 4, text: 'Disconnect Wallet', onClick: () => onDisconnect() },
   ];
 
   const Navigation = () => (
@@ -92,11 +97,11 @@ const MenuHeader = ({ menuRef, isOpen }: PopoverProps) => {
       </motion.nav>
     </>
   );
-}
+};
 
 export default function PopoverRender({
   menuRef,
-  isOpen
+  isOpen,
 }: PopoverRenderProps): ReactElement {
   return (
     <>
