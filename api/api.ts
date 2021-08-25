@@ -2,12 +2,15 @@ import axios, { AxiosResponse } from 'axios';
 import Quote from './models/quote';
 import DashboardData from './models/cover';
 import { UserAuthentication } from './models/user';
+import Token from './models/token';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 const HttpRequest = {
+  getTokens: (): Promise<AxiosResponse<Token[]>> =>
+    instance.get<Token[]>('token'),
   getCovers: (): Promise<AxiosResponse<Quote[]>> =>
     instance.get<Quote[]>('cover'),
   getCoverRecommendations: (
