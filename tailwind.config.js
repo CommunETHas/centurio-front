@@ -32,6 +32,10 @@ module.exports = {
       black: '#000000',
     },
     extend: {
+      height: {
+        '5%': '5%',
+        '95%': '95%',
+      },
       fontSize: {
         '5xl': [
           '2.5rem',

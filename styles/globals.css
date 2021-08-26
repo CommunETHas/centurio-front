@@ -22,6 +22,26 @@ body::-webkit-scrollbar-thumb {
   border-radius: 1rem;
 }
 
+.container-scroll {
+  scroll-behavior: smooth;
+}
+
+.container-scroll::-webkit-scrollbar {
+  width: 0.5em;
+  border-radius: 0.5rem;
+}
+
+.container-scroll::-webkit-scrollbar-track {
+  background: white;
+  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.container-scroll::-webkit-scrollbar-thumb {
+  background-color: #cdcdcd;
+  border-radius: 0.5rem;
+}
+
 button:focus {
   outline: none;
 }
