@@ -27,7 +27,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .container-scroll::-webkit-scrollbar {
-  width: 0.5em;
+  width: 18px;
   border-radius: 0.5rem;
 }
 
@@ -35,11 +35,13 @@ body::-webkit-scrollbar-thumb {
   background: white;
   border-bottom-right-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
+  border: solid 5px transparent;
 }
 
 .container-scroll::-webkit-scrollbar-thumb {
-  background-color: #cdcdcd;
-  border-radius: 0.5rem;
+  border-radius: 15px;
+  box-shadow: inset 0 0 10px 10px #cdcdcd;
+  border: solid 5px transparent;
 }
 
 button:focus {

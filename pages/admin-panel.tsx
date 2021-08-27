@@ -1,14 +1,7 @@
-import React, { ReactElement, useContext, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import ReactFlow, { Elements, FlowElement, addEdge } from 'react-flow-renderer';
-import {
-  assets,
-  protocols,
-  Protocol,
-  Assets,
-} from '../api/fakeData/fakeAdminPanelData';
+import { Protocol } from '../api/fakeData/fakeAdminPanelData';
 import HttpRequest from '../api/api';
-import { EthContext } from '../contexts/EthContext';
-import { EthContextType } from '../api/models/user';
 import Image from 'next/image';
 import Search from '../public/icons/search.svg';
 import Token from '../api/models/token';
@@ -96,7 +89,7 @@ export default function AdminPanel(): ReactElement {
     <div className="w-screen flex flex-grow bg-primary">
       <div className="h-full w-full relative">
         <div className="absolute left-0 z-10 h-full w-1/5 flex flex-col gap-3 pb-2">
-          <div className="w-full h-2/3 relative flex flex-col">
+          <div className="w-full h-2/3 relative flex flex-col overflow-hidden">
             <span className="ml-1 text-secondary font-semibold">
               {'Assets:'}
             </span>
@@ -145,12 +138,12 @@ export default function AdminPanel(): ReactElement {
             </div>
           </div>
         </div>
-        <div className="absolute right-0 h-full w-1/5 pb-2 z-10">
+        <div className="absolute right-0 h-full w-1/5 z-10">
           <div className="pb-2 w-full h-full flex flex-col relative">
             <span className="ml-1 text-secondary font-semibold">
               {'Protocols:'}
             </span>
-            <div className="flex flex-grow relative rounded-lg bg-secondary container-scroll overflow-auto">
+            <div className="flex flex-grow relative rounded-l-lg bg-secondary container-scroll overflow-auto">
               <div className="fixed z-10 w-1/5">
                 <div className="bg-secondary flex flex-row w-full items-center px-1 py-2 rounded-tl-lg">
                   <input
